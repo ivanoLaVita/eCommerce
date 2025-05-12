@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class UtenteBean implements Serializable {
+public class UserBean implements Serializable {
 	
 	
 	
@@ -15,7 +15,7 @@ public class UtenteBean implements Serializable {
 	private boolean admin;
 	
 	
-	public UtenteBean() {
+	public UserBean() {
 		
 		this.firstName = "null";
 		this.lastName = "null";
