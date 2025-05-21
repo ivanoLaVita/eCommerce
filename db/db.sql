@@ -13,3 +13,16 @@ admin        tinyint(1)      NOT NULL DEFAULT '0',
 PRIMARY KEY (email),
 UNIQUE (username)
 );
+
+DROP TABLE IF EXISTS indirizzo;
+CREATE TABLE indirizzo (
+id             int             NOT NULL AUTO_INCREMENT,
+citta          varchar(50)     NOT NULL,
+provincia      varchar(10)     NOT NULL,
+cap            varchar(10)     NOT NULL,
+via            varchar(50)     NOT NULL,
+civico         varchar(10)     NOT NULL,
+utenteEmail    varchar(50)     NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (utenteEmail) REFERENCES utente(email) ON UPDATE CASCADE ON DELETE CASCADE
+);
