@@ -54,7 +54,19 @@ nome varchar(50)     NOT NULL,
 PRIMARY KEY (nome)
 );
 
-
+DROP TABLE IF EXISTS prodotto;
+CREATE TABLE prodotto (
+id             int             NOT NULL,
+nome           varchar(100)    NOT NULL,
+descrizione    varchar(500)    NOT NULL,
+quantita       int             NOT NULL,
+costo          int             NOT NULL,
+sesso          enum('m','f')   NOT NULL,
+immagine       varchar(1000)   DEFAULT NULL,
+categoriaNome  varchar(50)     NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (categoriaNome) REFERENCES categoria(nome) ON UPDATE CASCADE ON DELETE CASCADE
+);
 
 
 
