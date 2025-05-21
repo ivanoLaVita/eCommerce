@@ -47,3 +47,16 @@ utenteEmail    varchar(50)     NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (utenteEmail) REFERENCES utente(email) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+DROP TABLE IF EXISTS categoria;
+CREATE TABLE categoria (
+nome varchar(50)     NOT NULL,
+PRIMARY KEY (nome)
+);
+
+
+
+
+
+
+
