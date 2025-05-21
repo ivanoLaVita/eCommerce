@@ -26,3 +26,14 @@ utenteEmail    varchar(50)     NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (utenteEmail) REFERENCES utente(email) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+DROP TABLE IF EXISTS metodoDiPagamento;
+CREATE TABLE metodoDiPagamento (
+id             int                     NOT NULL AUTO_INCREMENT,
+tipo           enum('carta','iban')    NOT NULL,
+iban           char(27)                DEFAULT NULL,
+numeroCarta    varchar(19)             DEFAULT NULL,
+utenteEmail    varchar(50)             NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (utenteEmail) REFERENCES utente(email) ON UPDATE CASCADE ON DELETE CASCADE
+);
