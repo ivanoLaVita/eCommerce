@@ -37,3 +37,26 @@ utenteEmail    varchar(50)             NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (utenteEmail) REFERENCES utente(email) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+DROP TABLE IF EXISTS ordine;
+CREATE TABLE ordine (
+id             int             NOT NULL AUTO_INCREMENT,
+data           date            NOT NULL,
+costoTotale    double          NOT NULL,
+utenteEmail    varchar(50)     NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (utenteEmail) REFERENCES utente(email) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS categoria;
+CREATE TABLE categoria (
+nome varchar(50)     NOT NULL,
+PRIMARY KEY (nome)
+);
+
+
+
+
+
+
+
