@@ -68,6 +68,18 @@ PRIMARY KEY (id),
 FOREIGN KEY (categoriaNome) REFERENCES categoria(nome) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS inserimento;
+CREATE TABLE inserimento (
+id				int				NOT NULL AUTO_INCREMENT,
+prodottoId     	int             NOT NULL,
+ordineId       	int             NOT NULL,
+quantita       	int             NOT NULL,
+immagine      	varchar(1000)   DEFAULT NULL,
+nome           	varchar(100)    NOT NULL,
+costo          	int             NOT NULL,
+PRIMARY KEY (id, ordineId),
+FOREIGN KEY (ordineId) REFERENCES ordine(id) ON UPDATE CASCADE ON DELETE CASCADE
+    );
 
 
 
