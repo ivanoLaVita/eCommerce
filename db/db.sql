@@ -32,7 +32,7 @@ CREATE TABLE product (
     description  VARCHAR(500)    NOT NULL,
     quantity     INT             NOT NULL,
     price        DOUBLE          NOT NULL,
-    gender       ENUM('m','f')   NOT NULL,
+    gender       ENUM('M','F')   NOT NULL,
     image        VARCHAR(1000)   DEFAULT NULL,
     categoryName VARCHAR(50)     NOT NULL,
     PRIMARY KEY (id),
