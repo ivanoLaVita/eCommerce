@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 public class ProductBean implements Serializable {
 	
-	
+    public enum ProductGender {
+        M,
+        W
+    }
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
@@ -12,7 +15,7 @@ public class ProductBean implements Serializable {
 	private String description;
 	private int quantity;
 	private double price;
-	private String gender;
+	private ProductGender gender;
 	private String image;
 	private String categoryName;
 	
@@ -24,7 +27,7 @@ public class ProductBean implements Serializable {
 		this.description = "";
 		this.quantity = -1;
 		this.price = 0.0;
-		this.gender = "";
+		this.gender = null;
 		this.image = "";
 		this.categoryName = "";
 		
@@ -81,12 +84,12 @@ public class ProductBean implements Serializable {
 	}
 
 
-	public String getGender() {
+	public ProductGender getGender() {
 		return gender;
 	}
 
 
-	public void setGender(String gender) {
+	public void setGender(ProductGender gender) {
 		this.gender = gender;
 	}
 
