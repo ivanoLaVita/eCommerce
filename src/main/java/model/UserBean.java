@@ -3,21 +3,20 @@ package model;
 import java.io.Serializable;
 
 public class UserBean implements Serializable {
-	
-	
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
-	private String firstName;
-	private String lastName;
 	private String email;
 	private String username;
 	private String password;
+	private String firstName;
+	private String lastName;
 	private boolean admin;
 	
 	
 	public UserBean() {
 		
+		this.id = -1;
 		this.firstName = "";
 		this.lastName = "";
 		this.email = "";
@@ -27,6 +26,7 @@ public class UserBean implements Serializable {
 		
 	}
 
+	//getter and setter
     public int getId() {
     	return id; 
     }

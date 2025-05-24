@@ -5,18 +5,19 @@ import java.io.Serializable;
 public class CategoryBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String nome;
+    private String name;
 
     public CategoryBean() {
-        this.nome = "";
+        this.name = "";
     }
-
+    
+    //getter and setter
     public String getNome() {
-        return nome;
+        return name;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.name = nome;
     }
 }
 
