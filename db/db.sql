@@ -2,90 +2,95 @@ DROP DATABASE IF EXISTS LaVitaJewelry;
 CREATE DATABASE LaVitaJewelry;
 USE LaVitaJewelry;
 
--- UTENTE
-DROP TABLE IF EXISTS utente;
-CREATE TABLE utente (
-    id        INT            NOT NULL AUTO_INCREMENT,
-    email     VARCHAR(100)   NOT NULL,
-    username  VARCHAR(50)    NOT NULL,
-    password  VARCHAR(64)    NOT NULL,
-    nome      VARCHAR(50)    NOT NULL,
-    cognome   VARCHAR(50)    DEFAULT NULL,
-    admin     TINYINT(1)     NOT NULL DEFAULT 0,
+-- USERS
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    id         INT            NOT NULL AUTO_INCREMENT,
+    email      VARCHAR(100)   NOT NULL,
+    username   VARCHAR(50)    NOT NULL,
+    password   VARCHAR(64)    NOT NULL,
+    firstName  VARCHAR(50)    NOT NULL,
+    lastName   VARCHAR(50)    DEFAULT NULL,
+    admin      TINYINT(1)     NOT NULL DEFAULT 0,
     PRIMARY KEY (id),
     UNIQUE (email),
     UNIQUE (username)
 );
 
--- CATEGORIA
-DROP TABLE IF EXISTS categoria;
-CREATE TABLE categoria (
-    nome VARCHAR(50) NOT NULL,
-    PRIMARY KEY (nome)
+-- CATEGORY
+DROP TABLE IF EXISTS category;
+CREATE TABLE category (
+    name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (name)
 );
 
--- PRODOTTO
-DROP TABLE IF EXISTS prodotto;
-CREATE TABLE prodotto (
-    id             INT             NOT NULL,
-    nome           VARCHAR(100)    NOT NULL,
-    descrizione    VARCHAR(500)    NOT NULL,
-    quantita       INT             NOT NULL,
-    costo          DOUBLE          NOT NULL,
-    sesso          ENUM('m','f')   NOT NULL,
-    immagine       VARCHAR(1000)   DEFAULT NULL,
-    categoriaNome  VARCHAR(50)     NOT NULL,
+-- PRODUCT
+DROP TABLE IF EXISTS product;
+CREATE TABLE product (
+    id           INT             NOT NULL,
+    name         VARCHAR(100)    NOT NULL,
+    description  VARCHAR(500)    NOT NULL,
+    quantity     INT             NOT NULL,
+    price        DOUBLE          NOT NULL,
+    gender       ENUM('m','f')   NOT NULL,
+    image        VARCHAR(1000)   DEFAULT NULL,
+    categoryName VARCHAR(50)     NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (categoriaNome) REFERENCES categoria(nome) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (categoryName) REFERENCES category(name)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- INDIRIZZO
-DROP TABLE IF EXISTS indirizzo;
-CREATE TABLE indirizzo (
-    id         INT           NOT NULL AUTO_INCREMENT,
-    citta      VARCHAR(50)   NOT NULL,
-    provincia  VARCHAR(10)   NOT NULL,
-    cap        VARCHAR(10)   NOT NULL,
-    via        VARCHAR(50)   NOT NULL,
-    civico     VARCHAR(10)   NOT NULL,
-    utenteId   INT           NOT NULL,
+-- ADDRESS
+DROP TABLE IF EXISTS address;
+CREATE TABLE address (
+    id            INT            NOT NULL AUTO_INCREMENT,
+    city          VARCHAR(50)    NOT NULL,
+    province      VARCHAR(10)    NOT NULL,
+    postalCode    VARCHAR(10)    NOT NULL,
+    street        VARCHAR(50)    NOT NULL,
+    streetNumber  VARCHAR(10)    NOT NULL,
+    userId        INT            NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (utenteId) REFERENCES utente(id) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (userId) REFERENCES users(id)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- METODO DI PAGAMENTO
-DROP TABLE IF EXISTS metodoDiPagamento;
-CREATE TABLE metodoDiPagamento (
+-- PAYMENT METHOD
+DROP TABLE IF EXISTS payment_method;
+CREATE TABLE payment_method (
     id           INT                  NOT NULL AUTO_INCREMENT,
-    tipo         ENUM('carta','iban') NOT NULL,
+    type         ENUM('card','iban')  NOT NULL,
     iban         CHAR(27)             DEFAULT NULL,
-    numeroCarta  VARCHAR(19)          DEFAULT NULL,
-    utenteId     INT                  NOT NULL,
+    cardNumber   VARCHAR(19)          DEFAULT NULL,
+    userId       INT                  NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (utenteId) REFERENCES utente(id) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (userId) REFERENCES users(id)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- ORDINE
-DROP TABLE IF EXISTS ordine;
-CREATE TABLE ordine (
-    id           INT          NOT NULL AUTO_INCREMENT,
-    data         DATE         NOT NULL,
-    costoTotale  DOUBLE       NOT NULL,
-    utenteId     INT          NOT NULL,
+-- ORDERS
+DROP TABLE IF EXISTS orders;
+CREATE TABLE orders (
+    id         INT          NOT NULL AUTO_INCREMENT,
+    date       DATE         NOT NULL,
+    totalCost  DOUBLE       NOT NULL,
+    userId     INT          NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (utenteId) REFERENCES utente(id) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (userId) REFERENCES users(id)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- INSERIMENTO (prodotti in un ordine)
-DROP TABLE IF EXISTS inserimento;
-CREATE TABLE inserimento (
+-- ORDER_ITEM
+DROP TABLE IF EXISTS order_item;
+CREATE TABLE order_item (
     id         INT           NOT NULL AUTO_INCREMENT,
-    prodottoId INT           NOT NULL,
-    ordineId   INT           NOT NULL,
-    quantita   INT           NOT NULL,
-    immagine   VARCHAR(1000) DEFAULT NULL,
-    nome       VARCHAR(100)  NOT NULL,
-    costo      DOUBLE        NOT NULL,
-    PRIMARY KEY (id, ordineId),
-    FOREIGN KEY (ordineId) REFERENCES ordine(id) ON UPDATE CASCADE ON DELETE CASCADE
+    productId  INT           NOT NULL,
+    orderId    INT           NOT NULL,
+    quantity   INT           NOT NULL,
+    image      VARCHAR(1000) DEFAULT NULL,
+    name       VARCHAR(100)  NOT NULL,
+    price      DOUBLE        NOT NULL,
+    PRIMARY KEY (id, orderId),
+    FOREIGN KEY (orderId) REFERENCES orders(id)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
