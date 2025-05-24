@@ -6,7 +6,7 @@ public class ProductBean implements Serializable {
 	
     public enum ProductGender {
         M,
-        W
+        F
     }
 	private static final long serialVersionUID = 1L;
 	
