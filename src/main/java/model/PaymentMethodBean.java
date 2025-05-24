@@ -18,7 +18,7 @@ public class PaymentMethodBean implements Serializable {
 
     public PaymentMethodBean() {
         this.id = -1;
-        this.type = null; // oppure PaymentType.CARD come default
+        this.type = null; 
         this.iban = "";
         this.cardNumber = "";
         this.userId = -1;
