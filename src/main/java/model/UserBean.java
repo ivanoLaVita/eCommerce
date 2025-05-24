@@ -6,6 +6,8 @@ public class UserBean implements Serializable {
 	
 	
 	private static final long serialVersionUID = 1L;
+	
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -16,16 +18,23 @@ public class UserBean implements Serializable {
 	
 	public UserBean() {
 		
-		this.firstName = "null";
-		this.lastName = "null";
-		this.email = "null";
-		this.username = "null";
-		this.password = "null";
+		this.firstName = "";
+		this.lastName = "";
+		this.email = "";
+		this.username = "";
+		this.password = "";
 		this.admin = false;
 		
 	}
 
-
+    public int getId() {
+    	return id; 
+    }
+    
+    public void setId(int id) { 
+    	this.id = id; 
+    }
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -85,11 +94,5 @@ public class UserBean implements Serializable {
 		this.admin = admin;
 	}
 
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	
 	
 }
