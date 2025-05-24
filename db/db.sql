@@ -59,7 +59,7 @@ CREATE TABLE address (
 DROP TABLE IF EXISTS payment_method;
 CREATE TABLE payment_method (
     id           INT                  NOT NULL AUTO_INCREMENT,
-    type         ENUM('card','iban')  NOT NULL,
+    type         ENUM('CARD','IBAN')  NOT NULL,
     iban         CHAR(27)             DEFAULT NULL,
     cardNumber   VARCHAR(19)          DEFAULT NULL,
     userId       INT                  NOT NULL,
