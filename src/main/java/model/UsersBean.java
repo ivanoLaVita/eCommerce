@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class UserBean implements Serializable {
+public class UsersBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
@@ -14,7 +14,7 @@ public class UserBean implements Serializable {
 	private boolean admin;
 	
 	
-	public UserBean() {
+	public UsersBean() {
 		
 		this.id = -1;
 		this.firstName = "";
@@ -65,12 +65,12 @@ public class UserBean implements Serializable {
 	}
 
 
-	public String getUsername() {
+	public String getUsersname() {
 		return username;
 	}
 
 
-	public void setUsername(String username) {
+	public void setUsersname(String username) {
 		this.username = username;
 	}
 
