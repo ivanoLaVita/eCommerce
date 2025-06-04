@@ -58,10 +58,10 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
 			if (rs.next()) {
 				user = new UsersBean();
 				user.setEmail(rs.getString("email"));
-				user.setEmail(rs.getString("username"));
-				user.setEmail(rs.getString("password"));
-				user.setEmail(rs.getString("firstname"));
-				user.setEmail(rs.getString("lastname"));
+				user.setUsersname(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setFirstName(rs.getString("firstname"));
+				user.setLastName(rs.getString("lastname"));
 			}
 		} finally {
 			if (ps != null) ps.close();
@@ -183,9 +183,10 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
 	/*
 	 * Elimina un utente dal database usando l'ID come chiave
 	 */
-	public synchronized void doDelete(int id) throws SQLException {
+	public synchronized boolean doDelete(int id) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
+		int result = 0;
 		
 		String query = "DELETE FROM users WHERE id = ?";
 		
@@ -200,6 +201,7 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
 			if (ps != null) ps.close();
 			DriverManagerConnectionPool.releaseConnection(con);
 		}
+		return result != 0;
 	}
 	/*
 	 * Recupera tutti gli utenti dal database con la possibilità di specificare un ordine
