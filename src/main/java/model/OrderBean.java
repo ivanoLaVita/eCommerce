@@ -2,19 +2,19 @@ package model;
 
 import java.io.Serializable;
 
-public class OrdersBean implements Serializable {
+public class OrderBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private int id;
     private String date;
     private double totalCost;
-    private int userID;
+    private int userId;
 
-    public OrdersBean() {
+    public OrderBean() {
         this.id = -1;
         this.date = "";
         this.totalCost = 0.0;
-        this.userID = -1;
+        this.userId = -1;
     }
 
     // Getter and setter
@@ -42,12 +42,12 @@ public class OrdersBean implements Serializable {
         this.totalCost = totalCost;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
 
