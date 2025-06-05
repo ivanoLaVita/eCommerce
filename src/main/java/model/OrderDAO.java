@@ -11,6 +11,9 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
 
     private static final String TABLE_NAME = "orders";
 
+    /*
+     * Salva un nuovo ordine nel database
+     */
     @Override
     public synchronized void doSave(OrderBean bean) throws SQLException {
         Connection con = null;
@@ -32,6 +35,9 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
         }
     }
 
+    /*
+     * Elimina un ordine dal database usando l'ID come chiave
+     */
     @Override
     public synchronized boolean doDelete(String key) throws SQLException {
         Connection con = null;
@@ -53,6 +59,9 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
         return result != 0;
     }
 
+    /*
+     * Recupera un ordine dal database utilizzando l'ID come chiave
+     */
     @Override
     public synchronized OrderBean doRetrieveByKey(String key) throws SQLException {
         Connection con = null;
@@ -82,6 +91,9 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
         return order;
     }
 
+    /*
+     * Recupera tutti gli ordini presenti nel database, con ordinamento opzionale
+     */
     @Override
     public synchronized List<OrderBean> doRetrieveAll(String order) throws SQLException {
         Connection con = null;
@@ -114,6 +126,9 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
         return orders;
     }
 
+    /*
+     * Aggiorna le informazioni di un ordine nel database
+     */
     @Override
     public synchronized boolean doUpdate(OrderBean bean) throws SQLException {
         Connection con = null;
@@ -139,6 +154,9 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
         return result != 0;
     }
 
+    /*
+     * Recupera tutti gli ordini compresi tra due date (inclusi)
+     */
     public synchronized List<OrderBean> doRetrieveByDateRange(String startDate, String endDate) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;

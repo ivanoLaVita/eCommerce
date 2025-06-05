@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsersDAO extends AbstractDAO<UsersBean> {
+
     private static final String TABLE_NAME = "users";
 
     /*
-     * Salva un nuovo utente nel database.
+     * Salva un nuovo utente nel database
      */
     @Override
     public synchronized void doSave(UsersBean users) throws SQLException {
@@ -39,8 +40,8 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
         }
     }
 
-    /*
-     * Elimina un utente dal database usando l'ID come chiave.
+    /* 
+     * Elimina un utente dal database usando l'ID come chiave 
      */
     @Override
     public synchronized boolean doDelete(String key) throws SQLException {
@@ -64,16 +65,16 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
         return result != 0;
     }
 
-    /*
-     * Recupera un utente dal database utilizzando l'ID come chiave.
+    /* 
+     * Recupera un utente dal database utilizzando l'ID come chiave
      */
     @Override
     public synchronized UsersBean doRetrieveByKey(String key) throws SQLException {
         return doRetrieveById(Integer.parseInt(key));
     }
 
-    /*
-     * Recupera tutti gli utenti dal database con la possibilità di specificare un ordine.
+    /* 
+     * Recupera tutti gli utenti dal database con la possibilità di specificare un ordine 
      */
     @Override
     public synchronized List<UsersBean> doRetrieveAll(String order) throws SQLException {
@@ -110,8 +111,8 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
         return users;
     }
 
-    /*
-     * Aggiorna le informazioni di un utente nel database.
+    /* 
+     * Aggiorna le informazioni di un utente nel database
      */
     @Override
     public synchronized boolean doUpdate(UsersBean user) throws SQLException {
@@ -142,8 +143,9 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
         return result != 0;
     }
 
-    // Metodi extra non obbligatori definiti fuori da AbstractDAO
-
+    /*
+     * Recupera un utente dal database utilizzando l'email 
+     */
     public synchronized UsersBean doRetrieveByEmail(String email) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
@@ -173,6 +175,9 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
         return user;
     }
 
+    /*
+     * Recupera un utente dal database utilizzando l'ID 
+     */
     public synchronized UsersBean doRetrieveById(int id) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
@@ -204,6 +209,9 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
         return user;
     }
 
+    /*
+     * Verifica se un'email è già presente nel database
+     */
     public synchronized boolean checkEmail(String email) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
@@ -225,6 +233,9 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
         return found;
     }
 
+    /*
+     * Verifica se uno username è già presente nel database
+     */
     public synchronized boolean checkUsername(String username) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
@@ -245,4 +256,4 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
         }
         return found;
     }
-} 
+}

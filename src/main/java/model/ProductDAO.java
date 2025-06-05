@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO extends AbstractDAO<ProductBean> {
+
     private static final String TABLE_NAME = "product";
 
     /*
@@ -67,7 +68,7 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
     }
 
     /*
-     * Recupera un prodotto dal database utilizzando l'ID come chiave primaria.
+     * Recupera un prodotto dal database utilizzando l'ID come chiave primaria
      */
     @Override
     public synchronized ProductBean doRetrieveByKey(String key) throws SQLException {
@@ -85,15 +86,7 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                product = new ProductBean();
-                product.setId(rs.getInt("id"));
-                product.setName(rs.getString("name"));
-                product.setDescription(rs.getString("description"));
-                product.setQuantity(rs.getInt("quantity"));
-                product.setPrice(rs.getDouble("price"));
-                product.setGender(ProductBean.ProductGender.valueOf(rs.getString("gender")));
-                product.setImage(rs.getString("image"));
-                product.setCategoryName(rs.getString("categoryName"));
+                product = extractProductFromResultSet(rs);
             }
         } finally {
             if (ps != null) ps.close();
@@ -104,7 +97,7 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
     }
 
     /*
-     * Recupera tutti i prodotti dal database, con ordinamento opzionale.
+     * Recupera tutti i prodotti dal database, con ordinamento opzionale
      */
     @Override
     public synchronized List<ProductBean> doRetrieveAll(String order) throws SQLException {
@@ -124,15 +117,7 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                ProductBean product = new ProductBean();
-                product.setId(rs.getInt("id"));
-                product.setName(rs.getString("name"));
-                product.setDescription(rs.getString("description"));
-                product.setQuantity(rs.getInt("quantity"));
-                product.setPrice(rs.getDouble("price"));
-                product.setGender(ProductBean.ProductGender.valueOf(rs.getString("gender")));
-                product.setImage(rs.getString("image"));
-                product.setCategoryName(rs.getString("categoryName"));
+                ProductBean product = extractProductFromResultSet(rs);
                 products.add(product);
             }
         } finally {
@@ -178,7 +163,7 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
     }
 
     /*
-     * Recupera tutti i prodotti di una specifica categoria.
+     * Recupera tutti i prodotti appartenenti a una specifica categoria (case-insensitive)
      */
     @Override
     public synchronized List<ProductBean> doRetrieveAllByKey(String category) throws SQLException {
@@ -186,7 +171,7 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
         Connection con = null;
         PreparedStatement ps = null;
 
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE categoryName = ?";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE LOWER(categoryName) = LOWER(?)";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
@@ -196,15 +181,7 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                ProductBean product = new ProductBean();
-                product.setId(rs.getInt("id"));
-                product.setName(rs.getString("name"));
-                product.setDescription(rs.getString("description"));
-                product.setQuantity(rs.getInt("quantity"));
-                product.setPrice(rs.getDouble("price"));
-                product.setGender(ProductBean.ProductGender.valueOf(rs.getString("gender")));
-                product.setImage(rs.getString("image"));
-                product.setCategoryName(rs.getString("categoryName"));
+                ProductBean product = extractProductFromResultSet(rs);
                 products.add(product);
             }
         } finally {
@@ -215,14 +192,15 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
         return products;
     }
 
-    // Metodi aggiuntivi personalizzati
-
+    /*
+     * Recupera un prodotto dal database utilizzando il nome (case-insensitive)
+     */
     public synchronized ProductBean doRetrieveByName(String name) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ProductBean product = null;
 
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE name = ?";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE LOWER(name) = LOWER(?)";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
@@ -232,15 +210,7 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                product = new ProductBean();
-                product.setId(rs.getInt("id"));
-                product.setName(rs.getString("name"));
-                product.setDescription(rs.getString("description"));
-                product.setQuantity(rs.getInt("quantity"));
-                product.setPrice(rs.getDouble("price"));
-                product.setGender(ProductBean.ProductGender.valueOf(rs.getString("gender")));
-                product.setImage(rs.getString("image"));
-                product.setCategoryName(rs.getString("categoryName"));
+                product = extractProductFromResultSet(rs);
             }
         } finally {
             if (ps != null) ps.close();
@@ -250,6 +220,9 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
         return product;
     }
 
+    /*
+     * Cerca prodotti per nome, categoria o genere (ricerca parziale e case-insensitive)
+     */
     public synchronized List<ProductBean> searchBy(String search) throws SQLException {
         List<ProductBean> productsFound = new ArrayList<>();
         Connection con = null;
@@ -269,15 +242,7 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                ProductBean product = new ProductBean();
-                product.setId(rs.getInt("id"));
-                product.setName(rs.getString("name"));
-                product.setDescription(rs.getString("description"));
-                product.setQuantity(rs.getInt("quantity"));
-                product.setPrice(rs.getDouble("price"));
-                product.setGender(ProductBean.ProductGender.valueOf(rs.getString("gender")));
-                product.setImage(rs.getString("image"));
-                product.setCategoryName(rs.getString("categoryName"));
+                ProductBean product = extractProductFromResultSet(rs);
                 productsFound.add(product);
             }
         } finally {
@@ -286,5 +251,21 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
         }
 
         return productsFound;
+    }
+
+    /*
+     * Estrae e costruisce un ProductBean da un ResultSet
+     */
+    private ProductBean extractProductFromResultSet(ResultSet rs) throws SQLException {
+        ProductBean product = new ProductBean();
+        product.setId(rs.getInt("id"));
+        product.setName(rs.getString("name"));
+        product.setDescription(rs.getString("description"));
+        product.setQuantity(rs.getInt("quantity"));
+        product.setPrice(rs.getDouble("price"));
+        product.setGender(ProductBean.ProductGender.valueOf(rs.getString("gender")));
+        product.setImage(rs.getString("image"));
+        product.setCategoryName(rs.getString("categoryName"));
+        return product;
     }
 }
