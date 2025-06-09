@@ -36,7 +36,6 @@ public class RegistrationServlet extends HttpServlet {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
             return;
         }
@@ -53,7 +52,6 @@ public class RegistrationServlet extends HttpServlet {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
             return;
         }
@@ -67,33 +65,28 @@ public class RegistrationServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
 
         try {
-            // Password match
             if (!password.equals(passwordConfirm)) {
                 request.setAttribute("error", "Passwords do not match.");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 return;
             }
 
-            // Email già registrata
             if (dao.checkEmail(email)) {
                 request.setAttribute("error", "Email already registered.");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 return;
             }
 
-            // Username già esistente
             if (dao.checkUsername(username)) {
                 request.setAttribute("error", "Username already taken.");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 return;
             }
 
-            // Hash della password
             String hashedPassword = PasswordUtils.hashPassword(password);
 
-            // Crea l'utente
             UsersBean user = new UsersBean();
-            user.setId(0); // sarà auto-incrementato dal DB
+            user.setId(0); // AUTO_INCREMENT
             user.setEmail(email);
             user.setUsersname(username);
             user.setPassword(hashedPassword);
@@ -101,16 +94,15 @@ public class RegistrationServlet extends HttpServlet {
             user.setLastName(lastName);
             user.setAdmin(false);
 
-            // Salva nel DB
             dao.doSave(user);
 
-            // Registrazione completata
             response.sendRedirect("index.jsp?registered=true");
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            request.setAttribute("error", "Database error: " + e.getMessage());
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            out.println("Database error: " + e.getMessage());
+            out.println("<br><a href='html/Login-Registration-Page.html'>Back to login</a>");
         }
     }
 }

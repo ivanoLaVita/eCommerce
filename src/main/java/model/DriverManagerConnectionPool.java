@@ -23,7 +23,7 @@ public class DriverManagerConnectionPool {
 		
 		String ip = "localhost";
 		String port = "3306";
-		String db = "LaVitaJewerly";
+		String db = "LaVitaJewelry";
 		String username = "root";
 		String password = "Lafhu782#";
 		
