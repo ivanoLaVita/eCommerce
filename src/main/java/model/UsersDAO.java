@@ -142,7 +142,40 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
         }
         return result != 0;
     }
+    /*
+     * Recupera un utente dal database utilizzando l username
+     */
+    public synchronized UsersBean doRetrieveByUsername(String username) throws SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        UsersBean user = null;
 
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE username = ?";
+
+        try {
+            con = DriverManagerConnectionPool.getConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user = new UsersBean();
+                user.setId(rs.getInt("id"));
+                user.setEmail(rs.getString("email"));
+                user.setUsersname(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setFirstName(rs.getString("firstname"));
+                user.setLastName(rs.getString("lastname"));
+                user.setAdmin(rs.getBoolean("admin"));
+            }
+        } finally {
+            if (ps != null) ps.close();
+            DriverManagerConnectionPool.releaseConnection(con);
+        }
+
+        return user;
+    }
     /*
      * Recupera un utente dal database utilizzando l'email 
      */
