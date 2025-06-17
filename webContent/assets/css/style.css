@@ -1,0 +1,239 @@
+/* Stili Generali */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #a37b4b; /* Tono dorato */
+}
+
+a:hover {
+    color: #8a663f;
+}
+
+.button {
+    display: inline-block;
+    background-color: #a37b4b;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #8a663f;
+}
+
+/* Header */
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    /* padding: 20px 0; */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    /* font-size: 28px;
+    font-weight: bold; */ 
+    color: #a37b4b;
+    text-transform: uppercase;
+}
+
+.logo .logo-img {
+    max-height: 160px; /* Imposta l'altezza massima desiderata per il tuo logo */
+    width: auto; /* Mantiene le proporzioni originali dell'immagine */
+     height: auto; /* Altrettanto importante per mantenere le proporzioni */
+    display: block; /* Assicura che l'immagine si comporti come un blocco per il ridimensionamento */ /* Aiuta ad allineare l'immagine con il resto del contenuto se presente */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    font-weight: bold;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #a37b4b;
+}
+
+.user-actions a {
+    margin-left: 20px;
+    color: #555;
+    font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+    background: url('https://via.placeholder.com/1500x500/F0F0F0/888888?text=LaVita+Jewels+Banner') no-repeat center center/cover;
+    color: #333; /* Colore testo scuro per contrasto con sfondo chiaro */
+    text-align: center;
+    padding: 100px 20px;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #a37b4b;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+/* Featured Products Section */
+.featured-products {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.featured-products h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: #a37b4b;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.product-item {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    text-align: left;
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+.product-item img {
+    max-width: 100%;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.product-item h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #a37b4b;
+}
+
+.product-item p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.product-item .price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* About Us Section */
+.about-us {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.about-us h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #a37b4b;
+}
+
+.about-us p {
+    font-size: 18px;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    color: #555;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 50px 0 20px 0;
+    font-size: 14px;
+}
+
+.footer-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.footer-col h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #a37b4b;
+}
+
+.footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #fff;
+}
+
+.copyright {
+    text-align: center;
+    border-top: 1px solid #555;
+    padding-top: 20px;
+    margin-top: 20px;
+}

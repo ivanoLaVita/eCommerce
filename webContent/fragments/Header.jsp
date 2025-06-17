@@ -1,12 +1,23 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <header>
-    <h1>LaVitaJewelry</h1>
-    <p>Eleganza senza tempo</p>
+    <div class="container">
+        <div class="logo">
+            <a href="HomePage.jsp">
+            <img src="assets/img/Logo.png" alt="LaVita Jewels logo" class="logo-img">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="HomePage.jsp">Home</a></li>
+                <li><a href="#">Collezione</a></li>
+                <li><a href="#">Novità</a></li>
+                <li><a href="#">Chi Siamo</a></li>
+                <li><a href="#">Contatti</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="#">Login</a>
+            <a href="#">Carrello</a>
+        </div>
+    </div>
 </header>
-
-<nav>
-    <a href="index.jsp">Home</a>
-    <a href="products.jsp">Prodotti</a>
-    <a href="about.jsp">Chi siamo</a>
-    <a href="contact.jsp">Contatti</a>
-</nav>

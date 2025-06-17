@@ -1,90 +1,56 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>LaVitaJewelry - Home</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fefefe;
-        }
-
-        header {
-            background-color: #d4af37;
-            padding: 20px;
-            color: white;
-            text-align: center;
-        }
-
-        nav {
-            background-color: #f5f5f5;
-            padding: 10px;
-            text-align: center;
-        }
-
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .hero {
-            background-image: url('images/jewelry-banner.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-shadow: 1px 1px 4px #000;
-            font-size: 2em;
-        }
-
-        main {
-            padding: 40px;
-            text-align: center;
-        }
-
-        footer {
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .cta-button {
-            background-color: #d4af37;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            text-decoration: none;
-            margin-top: 20px;
-            display: inline-block;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaVita Jewels - Home</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+    <jsp:include page="fragments/Header.jsp" />
 
-<jsp:include page="fragments/Header.jsp" />
+    <main>
+        <section class="hero">
+            <h1>Benvenuti a LaVita Jewels</h1>
+            <p>Scopri la nostra squisita collezione di gioielli che celebrano l'eleganza e la bellezza eterna.</p>
+            <a href="#" class="button">Esplora la Collezione</a>
+        </section>
 
-<div class="hero">
-    <div>Scopri la nuova collezione primavera</div>
-</div>
+        <section class="featured-products">
+            <h2>I Nostri Gioielli in Evidenza</h2>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="assets/img/AnelloSmeraldo.jpg" alt="Anello Smeraldo">
+                    <h3>Anello con Smeraldo</h3>
+                    <p>Eleganza senza tempo.</p>
+                    <span class="price">€ 499.99</span>
+                    <a href="#" class="button">Vedi Dettagli</a>
+                </div>
+                <div class="product-item">
+                    <img src="assets/img/Collana.jpg" alt="Collana Diamante">
+                    <h3>Collana con Diamante</h3>
+                    <p>Un tocco di lusso.</p>
+                    <span class="price">€ 799.99</span>
+                    <a href="#" class="button">Vedi Dettagli</a>
+                </div>
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/300x200" alt="Orecchini Perla">
+                    <h3>Orecchini di Perle</h3>
+                    <p>Classici e raffinati.</p>
+                    <span class="price">€ 249.99</span>
+                    <a href="#" class="button">Vedi Dettagli</a>
+                </div>
+            </div>
+        </section>
 
-<main>
-    <h2>Benvenuto su LaVitaJewelry</h2>
-    <p>Gioielli unici per ogni occasione. Realizzati con cura e passione.</p>
-    <a class="cta-button" href="products.jsp">Sfoglia i nostri prodotti</a>
-</main>
+        <section class="about-us">
+            <h2>La Nostra Storia</h2>
+            <p>LaVita Jewels nasce dalla passione per l'artigianato e il desiderio di creare gioielli che non solo adornano, ma raccontano storie. Ogni pezzo è realizzato con la massima cura e attenzione ai dettagli, utilizzando solo i materiali più pregiati.</p>
+            <a href="#" class="button">Scopri di Più</a>
+        </section>
+    </main>
 
-<jsp:include page="fragments/Footer.jsp" />
-
+    <jsp:include page="fragments/Footer.jsp" />
 </body>
 </html>
