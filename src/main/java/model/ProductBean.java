@@ -4,14 +4,18 @@ import java.io.Serializable;
 
 public class ProductBean implements Serializable {
 	
-	
+    public enum ProductGender {
+        M,
+        F
+    }
 	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private String name;
 	private String description;
 	private int quantity;
-	private int price;
-	private String gender;
+	private double price;
+	private ProductGender gender;
 	private String image;
 	private String categoryName;
 	
@@ -19,13 +23,13 @@ public class ProductBean implements Serializable {
 	public ProductBean() {
 		
 		this.id = -1;
-		this.name = "null";
-		this.description = "null";
+		this.name = "";
+		this.description = "";
 		this.quantity = -1;
-		this.price = -1;
-		this.gender = "null";
-		this.image = "null";
-		this.categoryName = "null";
+		this.price = 0.0;
+		this.gender = null;
+		this.image = "";
+		this.categoryName = "";
 		
 	}
 
@@ -70,22 +74,22 @@ public class ProductBean implements Serializable {
 	}
 
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
 
-	public String getGender() {
+	public ProductGender getGender() {
 		return gender;
 	}
 
 
-	public void setGender(String gender) {
+	public void setGender(ProductGender gender) {
 		this.gender = gender;
 	}
 
@@ -108,12 +112,6 @@ public class ProductBean implements Serializable {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 	
 	
 }

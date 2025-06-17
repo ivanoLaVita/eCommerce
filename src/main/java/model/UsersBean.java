@@ -2,30 +2,39 @@ package model;
 
 import java.io.Serializable;
 
-public class UserBean implements Serializable {
-	
-	
+public class UsersBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String firstName;
-	private String lastName;
+	
+	private int id;
 	private String email;
 	private String username;
 	private String password;
+	private String firstName;
+	private String lastName;
 	private boolean admin;
 	
 	
-	public UserBean() {
+	public UsersBean() {
 		
-		this.firstName = "null";
-		this.lastName = "null";
-		this.email = "null";
-		this.username = "null";
-		this.password = "null";
+		this.id = -1;
+		this.firstName = "";
+		this.lastName = "";
+		this.email = "";
+		this.username = "";
+		this.password = "";
 		this.admin = false;
 		
 	}
 
-
+	//getter and setter
+    public int getId() {
+    	return id; 
+    }
+    
+    public void setId(int id) { 
+    	this.id = id; 
+    }
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -56,12 +65,12 @@ public class UserBean implements Serializable {
 	}
 
 
-	public String getUsername() {
+	public String getUsersname() {
 		return username;
 	}
 
 
-	public void setUsername(String username) {
+	public void setUsersname(String username) {
 		this.username = username;
 	}
 
@@ -85,11 +94,5 @@ public class UserBean implements Serializable {
 		this.admin = admin;
 	}
 
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	
 	
 }
