@@ -11,7 +11,7 @@ import model.UsersDAO;
 import utils.PasswordUtils;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 import java.sql.SQLException;
 
 @WebServlet("/LoginServlet")
