@@ -1,143 +1,178 @@
-/* Stili Generali */
+/* Base Styles */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #f9f9f9;
     color: #333;
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
 }
 
 a {
     text-decoration: none;
-    color: #a37b4b; /* Tono dorato */
+    color: #5a3c3c;
 }
 
 a:hover {
-    color: #8a663f;
+    color: #7b5f5f;
 }
 
-.button {
+.button-primary, .button-secondary, .button-outline {
     display: inline-block;
-    background-color: #a37b4b;
-    color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-.button:hover {
-    background-color: #8a663f;
+.button-primary {
+    background-color: #A0522D; /* Sienna */
+    color: white;
+    border: 1px solid #A0522D;
 }
 
-/* Header */
-header {
-    background-color: #fff;
-    border-bottom: 1px solid #eee;
-    /* padding: 20px 0; */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+.button-primary:hover {
+    background-color: #8B4513; /* SaddleBrown */
 }
 
-header .container {
+.button-secondary {
+    background-color: #D2B48C; /* Tan */
+    color: #333;
+    border: 1px solid #D2B48C;
+}
+
+.button-secondary:hover {
+    background-color: #BC8F8F; /* RosyBrown */
+}
+
+.button-outline {
+    background-color: transparent;
+    color: #A0522D;
+    border: 1px solid #A0522D;
+}
+
+.button-outline:hover {
+    background-color: #A0522D;
+    color: white;
+}
+
+/* Header Styles */
+.main-header {
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 20px;
 }
 
-.logo a {
-    /* font-size: 28px;
-    font-weight: bold; */ 
-    color: #a37b4b;
-    text-transform: uppercase;
+.logo img {
+    height: 50px; /* Adjust as needed */
 }
 
-.logo .logo-img {
-    max-height: 160px; /* Imposta l'altezza massima desiderata per il tuo logo */
-    width: auto; /* Mantiene le proporzioni originali dell'immagine */
-     height: auto; /* Altrettanto importante per mantenere le proporzioni */
-    display: block; /* Assicura che l'immagine si comporti come un blocco per il ridimensionamento */ /* Aiuta ad allineare l'immagine con il resto del contenuto se presente */
-}
-
-nav ul {
+.main-nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
 }
 
-nav ul li {
+.main-nav li {
     margin-left: 30px;
 }
 
-nav ul li a {
+.main-nav a {
     font-weight: bold;
-    color: #555;
-    transition: color 0.3s ease;
+    color: #333;
 }
 
-nav ul li a:hover {
-    color: #a37b4b;
+.header-actions {
+    display: flex;
+    align-items: center;
 }
 
-.user-actions a {
-    margin-left: 20px;
-    color: #555;
-    font-weight: bold;
+.header-actions .button-secondary {
+    margin-right: 15px;
+    padding: 8px 15px;
+    font-size: 0.9em;
 }
 
-/* Hero Section */
-.hero {
-    background: url('https://via.placeholder.com/1500x500/F0F0F0/888888?text=LaVita+Jewels+Banner') no-repeat center center/cover;
-    color: #333; /* Colore testo scuro per contrasto con sfondo chiaro */
+.cart-icon {
+    font-size: 1.5em;
+    color: #333;
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #A0522D;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 0.7em;
+}
+
+/* Homepage Styles */
+.homepage-content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.hero-section {
+    background-color: #FAEBD7; /* AntiqueWhite */
     text-align: center;
-    padding: 100px 20px;
+    padding: 80px 20px;
     margin-bottom: 40px;
+    border-radius: 8px;
 }
 
-.hero h1 {
-    font-size: 48px;
+.hero-section h1 {
+    font-size: 3em;
+    color: #A0522D;
     margin-bottom: 20px;
-    color: #a37b4b;
 }
 
-.hero p {
-    font-size: 20px;
+.hero-section p {
+    font-size: 1.2em;
     margin-bottom: 30px;
+    color: #555;
 }
 
-/* Featured Products Section */
 .featured-products {
-    padding: 40px 0;
-    text-align: center;
+    margin-bottom: 40px;
 }
 
-.featured-products h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
-    color: #a37b4b;
+.featured-products h2, .about-us-preview h2 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #A0522D;
+    margin-bottom: 30px;
 }
 
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    margin-top: 30px;
 }
 
 .product-item {
-    background-color: #fff;
-    border: 1px solid #eee;
+    background-color: white;
+    border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    text-align: left;
-    transition: transform 0.3s ease;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
 }
 
 .product-item:hover {
@@ -146,94 +181,299 @@ nav ul li a:hover {
 
 .product-item img {
     max-width: 100%;
-    border-radius: 4px;
+    height: 200px; /* Fixed height for consistency */
+    object-fit: contain; /* Ensures the image fits without cropping */
     margin-bottom: 15px;
+    border-radius: 5px;
 }
 
 .product-item h3 {
-    font-size: 22px;
+    font-size: 1.4em;
+    color: #A0522D;
     margin-bottom: 10px;
-    color: #a37b4b;
 }
 
 .product-item p {
-    font-size: 16px;
+    font-size: 0.9em;
     color: #666;
     margin-bottom: 15px;
 }
 
 .product-item .price {
-    font-size: 20px;
+    font-size: 1.3em;
     font-weight: bold;
-    color: #333;
+    color: #A0522D;
     display: block;
     margin-bottom: 15px;
 }
 
-/* About Us Section */
-.about-us {
-    background-color: #f9f9f9;
-    padding: 60px 20px;
+.about-us-preview {
     text-align: center;
-    margin-top: 40px;
+    padding: 60px 20px;
+    background-color: #F8F8FF; /* GhostWhite */
+    border-radius: 8px;
 }
 
-.about-us h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-    color: #a37b4b;
-}
-
-.about-us p {
-    font-size: 18px;
+.about-us-preview p {
+    font-size: 1.1em;
+    line-height: 1.6;
     max-width: 800px;
     margin: 0 auto 30px auto;
-    color: #555;
 }
 
-/* Footer */
-footer {
+/* Footer Styles */
+.main-footer {
     background-color: #333;
-    color: #fff;
-    padding: 50px 0 20px 0;
-    font-size: 14px;
+    color: white;
+    padding: 40px 0;
+    margin-top: 50px;
 }
 
-.footer-columns {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 20px;
 }
 
-.footer-col h3 {
-    font-size: 18px;
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin: 20px;
+}
+
+.footer-section h3 {
+    color: #D2B48C;
     margin-bottom: 20px;
-    color: #a37b4b;
+    font-size: 1.3em;
 }
 
-.footer-col ul {
+.footer-section p, .footer-section li {
+    font-size: 0.9em;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.footer-section ul {
     list-style: none;
-    margin: 0;
     padding: 0;
+    margin: 0;
 }
 
-.footer-col ul li {
+.footer-section ul li {
     margin-bottom: 10px;
 }
 
-.footer-col ul li a {
+.footer-section a {
     color: #ccc;
-    transition: color 0.3s ease;
 }
 
-.footer-col ul li a:hover {
-    color: #fff;
+.footer-section a:hover {
+    color: #D2B48C;
 }
 
-.copyright {
+.social-icons img {
+    height: 30px;
+    margin-right: 15px;
+    /*filter: invert(100%); /* Make social icons white */
+    transition: filter 0.3s ease;
+}
+
+/* .social-icons img:hover {
+    filter: invert(70%) sepia(20%) saturate(1000%) hue-rotate(300deg) brightness(120%) contrast(100%); /* A light gold/brown tint 
+} */
+
+
+/* Login Page Styles */
+.login-page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 180px); /* Adjust based on header/footer height */
+    padding: 20px;
+}
+
+.login-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
     text-align: center;
-    border-top: 1px solid #555;
-    padding-top: 20px;
+}
+
+.login-container h2 {
+    font-size: 2em;
+    color: #A0522D;
+    margin-bottom: 30px;
+}
+
+.login-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.login-form .button-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
     margin-top: 20px;
+}
+
+.form-links {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.form-links a {
+    color: #A0522D;
+    font-weight: bold;
+}
+
+.form-links span {
+    color: #777;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        margin-top: 15px;
+    }
+
+    .main-nav li {
+        margin: 10px 0;
+    }
+
+    .header-actions {
+        margin-top: 15px;
+    }
+
+    .hero-section h1 {
+        font-size: 2.2em;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section {
+        margin: 15px 0;
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+        display: flex;
+    }
+}
+
+/* Register Page Styles (add to style.css) */
+.register-page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 180px); /* Adjust based on header/footer height */
+    padding: 20px;
+}
+
+.register-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Slightly wider than login for more fields */
+    text-align: center;
+}
+
+.register-container h2 {
+    font-size: 2em;
+    color: #A0522D;
+    margin-bottom: 30px;
+}
+
+.register-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.register-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="password"] {
+    width: calc(100% - 20px); /* Account for padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.register-form .password-note {
+    font-size: 0.8em;
+    color: #777;
+    margin-top: 5px;
+}
+
+.register-form .button-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+    margin-top: 20px;
+}
+
+.register-container .form-links {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.register-container .form-links a {
+    color: #A0522D;
+    font-weight: bold;
+}
+
+.register-container .form-links span {
+    color: #777;
+}
+
+/* Add or update Responsive Design for form containers if needed */
+@media (max-width: 600px) {
+    .login-container, .register-container {
+        padding: 30px 20px;
+    }
 }
