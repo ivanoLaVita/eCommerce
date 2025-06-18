@@ -477,3 +477,126 @@ a:hover {
         padding: 30px 20px;
     }
 }
+
+/* Member Area Styles (add to style.css) */
+.member-area-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align at the top */
+    min-height: calc(100vh - 180px); /* Adjust based on header/footer height */
+    padding: 20px;
+    background-color: #f8f8f8; /* Light background for the area */
+}
+
+.member-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px; /* Wider container for content */
+    text-align: center;
+}
+
+.member-container h2 {
+    font-size: 2.2em;
+    color: #A0522D;
+    margin-bottom: 30px;
+}
+
+.member-container section {
+    margin-bottom: 40px;
+    text-align: left; /* Align text within sections */
+}
+
+.member-container h3 {
+    font-size: 1.6em;
+    color: #A0522D;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.user-info-section p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.user-info-section .button-secondary {
+    margin-top: 20px;
+    display: inline-block; /* Per allineamento */
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.orders-table th, .orders-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.orders-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+.orders-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.orders-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.orders-table .button-small {
+    padding: 6px 12px;
+    font-size: 0.9em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .member-container {
+        padding: 20px;
+    }
+    .orders-table, .orders-table thead, .orders-table tbody, .orders-table th, .orders-table td, .orders-table tr {
+        display: block;
+    }
+    .orders-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    .orders-table tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    .orders-table td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+    .orders-table td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #555;
+    }
+    .orders-table td:nth-of-type(1):before { content: "ID Ordine:"; }
+    .orders-table td:nth-of-type(2):before { content: "Data:"; }
+    .orders-table td:nth-of-type(3):before { content: "Costo Totale:"; }
+    .orders-table td:nth-of-type(4):before { content: "Dettagli:"; }
+}
