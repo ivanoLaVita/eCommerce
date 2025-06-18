@@ -67,19 +67,19 @@ public class RegistrationServlet extends HttpServlet {
         try {
             if (!password.equals(passwordConfirm)) {
                 request.setAttribute("error", "Passwords do not match.");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                request.getRequestDispatcher("HomePage.jsp").forward(request, response);
                 return;
             }
 
             if (dao.checkEmail(email)) {
                 request.setAttribute("error", "Email already registered.");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                request.getRequestDispatcher("HomePage.jsp").forward(request, response);
                 return;
             }
 
             if (dao.checkUsername(username)) {
                 request.setAttribute("error", "Username already taken.");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                request.getRequestDispatcher("HomePage.jsp").forward(request, response);
                 return;
             }
 
@@ -96,7 +96,7 @@ public class RegistrationServlet extends HttpServlet {
 
             dao.doSave(user);
 
-            response.sendRedirect("index.jsp?registered=true");
+            response.sendRedirect("HomePage.jsp?registered=true");
 
         } catch (SQLException e) {
             response.setContentType("text/html");

@@ -25,7 +25,7 @@ public class DriverManagerConnectionPool {
 		String port = "3306";
 		String db = "LaVitaJewelry";
 		String username = "root";
-		String password = "Lafhu782#";
+		String password = "admin";
 		
 
         String url = "jdbc:mysql://" + ip + ":" + port + "/" + db +
