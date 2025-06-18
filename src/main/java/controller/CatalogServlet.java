@@ -34,7 +34,10 @@ public class CatalogServlet extends HttpServlet {
         try {
             products = dao.doRetrieveAll("");
 
-            randomProducts = getRandomProducts(products, 3);
+            if (products != null && !products.isEmpty()) {
+            	randomProducts = getRandomProducts(products,3);
+            }
+            //randomProducts = getRandomProducts(products, 3);
 
             request.getSession().setAttribute("products", products);
             request.getSession().setAttribute("randomProducts", randomProducts);
@@ -53,16 +56,44 @@ public class CatalogServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
+        String search = request.getParameter("search");
+        String category = request.getParameter("category");
 
+        ProductDAO dao = new ProductDAO();
+        List<ProductBean> filteredProducts = new ArrayList<>();
+
+        try {
+            filteredProducts = dao.doRetrieveFiltered(search, category);
+            request.setAttribute("products", filteredProducts);
+
+            // Se la richiesta è AJAX (fetch o XMLHttpRequest), restituiamo solo il frammento HTML
+            if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("fragments/ProductList.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                // Altrimenti restituiamo la pagina intera
+                RequestDispatcher dispatcher = request.getRequestDispatcher("catalog.jsp");
+                dispatcher.forward(request, response);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore durante il filtraggio dei prodotti.");
+        }
+    }
+    
+    
+    
+    
     private List<ProductBean> getRandomProducts(List<ProductBean> products, int count) {
         List<ProductBean> randomProducts = new ArrayList<>();
         Set<Integer> selectedIndexes = new HashSet<>();
         Random random = new Random();
 
         if (products.size() <= count) {
+            // Se ci sono meno o esattamente il numero di prodotti richiesti, restituisci tutti i prodotti
             return new ArrayList<>(products);
         }
 
@@ -76,4 +107,5 @@ public class CatalogServlet extends HttpServlet {
 
         return randomProducts;
     }
+
 }

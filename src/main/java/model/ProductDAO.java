@@ -268,4 +268,39 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
         product.setCategoryName(rs.getString("categoryName"));
         return product;
     }
+    
+    public synchronized List<ProductBean> doRetrieveFiltered(String search, String category) throws SQLException {
+        List<ProductBean> products = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        StringBuilder query = new StringBuilder("SELECT * FROM " + TABLE_NAME + " WHERE LOWER(categoryName) = LOWER(?)");
+
+        if (search != null && !search.isEmpty()) {
+            query.append(" AND LOWER(name) LIKE LOWER(?)");
+        }
+
+        try {
+            con = DriverManagerConnectionPool.getConnection();
+            ps = con.prepareStatement(query.toString());
+
+            int index = 1;
+            ps.setString(index++, category);
+            if (search != null && !search.isEmpty()) {
+                ps.setString(index, "%" + search + "%");
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductBean product = extractProductFromResultSet(rs);
+                products.add(product);
+            }
+        } finally {
+            if (ps != null) ps.close();
+            DriverManagerConnectionPool.releaseConnection(con);
+        }
+
+        return products;
+    }
+
 }
