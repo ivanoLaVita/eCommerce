@@ -186,4 +186,35 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
 
         return orders;
     }
+    
+    public synchronized List<OrderBean> doRetrieveByUserId(int userId) throws SQLException {
+        List<OrderBean> orders = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        String query = "SELECT * FROM orders WHERE userId = ? ORDER BY id";
+
+        try {
+            con = DriverManagerConnectionPool.getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, userId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                OrderBean order = new OrderBean();
+                order.setId(rs.getInt("id"));
+                order.setUserId(rs.getInt("userId"));
+                order.setDate(rs.getString("orderDate"));
+                order.setTotalCost(rs.getDouble("totalCost"));
+                orders.add(order);
+            }
+        } finally {
+            if (ps != null) ps.close();
+            DriverManagerConnectionPool.releaseConnection(con);
+        }
+
+        return orders;
+    }
+
 }
