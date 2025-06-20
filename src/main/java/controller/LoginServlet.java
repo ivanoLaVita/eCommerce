@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
         if (user != null && PasswordUtils.checkPassword(password, user.getPassword())) { // Usa checkPassword per confrontare
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            session.setAttribute("username", user.getUsersname());
+            session.setAttribute("username", user.getUsername());
             session.setAttribute("firstName", user.getFirstName());
             session.setAttribute("lastName", user.getLastName());
             session.setAttribute("email", user.getEmail());

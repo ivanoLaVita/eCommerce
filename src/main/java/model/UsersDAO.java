@@ -26,7 +26,7 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
 
             ps.setInt(1, users.getId());
             ps.setString(2, users.getEmail());
-            ps.setString(3, users.getUsersname());
+            ps.setString(3, users.getUsername());
             ps.setString(4, users.getPassword());
             ps.setString(5, users.getFirstName());
             ps.setString(6, users.getLastName());
@@ -97,7 +97,7 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
                 UsersBean user = new UsersBean();
                 user.setId(rs.getInt("id"));
                 user.setEmail(rs.getString("email"));
-                user.setUsersname(rs.getString("username"));
+                user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setFirstName(rs.getString("firstname"));
                 user.setLastName(rs.getString("lastname"));
@@ -114,34 +114,39 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
     /* 
      * Aggiorna le informazioni di un utente nel database
      */
-    @Override
-    public synchronized boolean doUpdate(UsersBean user) throws SQLException {
-        Connection con = null;
-        PreparedStatement ps = null;
-        int result = 0;
-
-        String query = "UPDATE " + TABLE_NAME + " SET email = ?, username = ?, password = ?, firstname = ?, lastname = ?, admin = ? WHERE id = ?";
-
-        try {
-            con = DriverManagerConnectionPool.getConnection();
-            ps = con.prepareStatement(query);
-
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getUsersname());
-            ps.setString(3, user.getPassword());
-            ps.setString(4, user.getFirstName());
-            ps.setString(5, user.getLastName());
-            ps.setBoolean(6, user.isAdmin());
-            ps.setInt(7, user.getId());
-
-            result = ps.executeUpdate();
-            con.commit();
-        } finally {
-            if (ps != null) ps.close();
-            DriverManagerConnectionPool.releaseConnection(con);
-        }
-        return result != 0;
-    }
+	public synchronized boolean doUpdate(UsersBean bean, String key) throws SQLException {
+	    Connection con = null;
+	    PreparedStatement statement = null;
+	    int result = 0;
+	    
+	    String query = "UPDATE " + UsersDAO.TABLE_NAME + " SET email = ?, username = ?, password = ?, nome = ?, cognome = ?, admin = ? WHERE email = ?";
+	    
+	    try {
+	        con = DriverManagerConnectionPool.getConnection();
+	        statement = con.prepareStatement(query);
+	        
+	        statement.setString(1, bean.getEmail());
+	        statement.setString(2, bean.getUsername());
+	        statement.setString(3, bean.getPassword());
+	        statement.setString(4, bean.getFirstName());
+	        statement.setString(5, bean.getLastName());
+	        statement.setBoolean(6, bean.isAdmin());
+	        statement.setString(7, key); // key should be the original email for WHERE clause
+	        
+	        result = statement.executeUpdate();
+	        
+	        con.commit();
+	    } finally {
+	        try {
+	            if (statement != null) {
+	                statement.close();
+	            }
+	        } finally {
+	            DriverManagerConnectionPool.releaseConnection(con);
+	        }
+	    }
+	    return result != 0;
+	}
     /*
      * Recupera un utente dal database utilizzando l username
      */
@@ -163,7 +168,7 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
                 user = new UsersBean();
                 user.setId(rs.getInt("id"));
                 user.setEmail(rs.getString("email"));
-                user.setUsersname(rs.getString("username"));
+                user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setFirstName(rs.getString("firstname"));
                 user.setLastName(rs.getString("lastname"));
@@ -196,7 +201,7 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
             if (rs.next()) {
                 user = new UsersBean();
                 user.setEmail(rs.getString("email"));
-                user.setUsersname(rs.getString("username"));
+                user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setFirstName(rs.getString("firstname"));
                 user.setLastName(rs.getString("lastname"));
@@ -229,7 +234,7 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
                 user = new UsersBean();
                 user.setId(rs.getInt("id"));
                 user.setEmail(rs.getString("email"));
-                user.setUsersname(rs.getString("username"));
+                user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setFirstName(rs.getString("firstname"));
                 user.setLastName(rs.getString("lastname"));

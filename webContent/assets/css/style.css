@@ -27,33 +27,33 @@ a:hover {
 }
 
 .button-primary {
-    background-color: #A0522D; /* Sienna */
+    background-color: #bfa046; /* Sienna */
     color: white;
-    border: 1px solid #A0522D;
+    border: 1px solid #bfa046;
 }
 
 .button-primary:hover {
-    background-color: #8B4513; /* SaddleBrown */
+    background-color: #a98e36; /* SaddleBrown */
 }
 
 .button-secondary {
-    background-color: #D2B48C; /* Tan */
+    background-color: #d1b77f; /* Tan */
     color: #333;
-    border: 1px solid #D2B48C;
+    border: 1px solid #d1b77f;
 }
 
 .button-secondary:hover {
-    background-color: #BC8F8F; /* RosyBrown */
+    background-color: #cfc8bc; /* RosyBrown */
 }
 
 .button-outline {
     background-color: transparent;
-    color: #A0522D;
-    border: 1px solid #A0522D;
+    color: #bfa046;
+    border: 1px solid #bfa046;
 }
 
 .button-outline:hover {
-    background-color: #A0522D;
+    background-color: #bfa046;
     color: white;
 }
 
@@ -114,7 +114,7 @@ a:hover {
     position: absolute;
     top: -8px;
     right: -8px;
-    background-color: #A0522D;
+    background-color: #bfa046;
     color: white;
     border-radius: 50%;
     padding: 3px 6px;
@@ -138,7 +138,7 @@ a:hover {
 
 .hero-section h1 {
     font-size: 3em;
-    color: #A0522D;
+    color: #bfa046;
     margin-bottom: 20px;
 }
 
@@ -155,7 +155,7 @@ a:hover {
 .featured-products h2, .about-us-preview h2 {
     text-align: center;
     font-size: 2.5em;
-    color: #A0522D;
+    color: #bfa046;
     margin-bottom: 30px;
 }
 
@@ -189,7 +189,7 @@ a:hover {
 
 .product-item h3 {
     font-size: 1.4em;
-    color: #A0522D;
+    color: #bfa046;
     margin-bottom: 10px;
 }
 
@@ -202,7 +202,7 @@ a:hover {
 .product-item .price {
     font-size: 1.3em;
     font-weight: bold;
-    color: #A0522D;
+    color: #bfa046;
     display: block;
     margin-bottom: 15px;
 }
@@ -245,7 +245,7 @@ a:hover {
 }
 
 .footer-section h3 {
-    color: #D2B48C;
+    color: #d1b77f;
     margin-bottom: 20px;
     font-size: 1.3em;
 }
@@ -271,7 +271,7 @@ a:hover {
 }
 
 .footer-section a:hover {
-    color: #D2B48C;
+    color: #d1b77f;
 }
 
 .social-icons img {
@@ -307,7 +307,7 @@ a:hover {
 
 .login-container h2 {
     font-size: 2em;
-    color: #A0522D;
+    color: #bfa046;
     margin-bottom: 30px;
 }
 
@@ -345,7 +345,7 @@ a:hover {
 }
 
 .form-links a {
-    color: #A0522D;
+    color: #bfa046;
     font-weight: bold;
 }
 
@@ -418,7 +418,7 @@ a:hover {
 
 .register-container h2 {
     font-size: 2em;
-    color: #A0522D;
+    color: #bfa046;
     margin-bottom: 30px;
 }
 
@@ -463,7 +463,7 @@ a:hover {
 }
 
 .register-container .form-links a {
-    color: #A0522D;
+    color: #bfa046;
     font-weight: bold;
 }
 
@@ -500,7 +500,7 @@ a:hover {
 
 .member-container h2 {
     font-size: 2.2em;
-    color: #A0522D;
+    color: #bfa046;
     margin-bottom: 30px;
 }
 
@@ -511,7 +511,7 @@ a:hover {
 
 .member-container h3 {
     font-size: 1.6em;
-    color: #A0522D;
+    color: #bfa046;
     margin-bottom: 20px;
     border-bottom: 2px solid #eee;
     padding-bottom: 10px;
@@ -599,4 +599,420 @@ a:hover {
     .orders-table td:nth-of-type(2):before { content: "Data:"; }
     .orders-table td:nth-of-type(3):before { content: "Costo Totale:"; }
     .orders-table td:nth-of-type(4):before { content: "Dettagli:"; }
+}
+
+/* memberAreaCustom.css */
+
+/* --- Layout Generale e Contenitori --- */
+#page-content-wrapper {
+    background-color: #f8f9fa; /* Sfondo leggero per l'area di contenuto */
+    padding: 50px 0; /* Spaziatura verticale */
+}
+
+.myaccount-page-wrapper {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05); /* Ombra più morbida */
+    overflow: hidden; /* Assicura che i bordi arrotondati non vengano tagliati */
+    display: flex; /* Utilizza Flexbox per allineare menu e contenuto */
+    flex-wrap: wrap; /* Permette il wrapping su schermi piccoli */
+}
+
+/* --- Menu di Navigazione (Sidebar) --- */
+.myaccount-tab-menu {
+    background-color: #bfa046; /* Blu profondo per lo sfondo del menu */
+    padding: 20px 0;
+    flex: 0 0 250px; /* Larghezza fissa per il menu */
+    max-width: 250px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Ombra a destra */
+}
+
+.myaccount-tab-menu a {
+    display: block;
+    padding: 15px 20px;
+    color: #f0f0f0; /* Testo chiaro */
+    text-decoration: none;
+    font-size: 1.1em;
+    border-left: 5px solid transparent; /* Indicatore di selezione */
+    transition: all 0.3s ease;
+}
+
+.myaccount-tab-menu a:hover,
+.myaccount-tab-menu a.active {
+    background-color: #4CAF50; /* Verde brillante all'hover/attivo */
+    color: #fff;
+    border-left-color: #fff; /* Colore dell'indicatore attivo */
+    padding-left: 25px; /* Spostamento leggero all'hover/attivo */
+}
+
+.myaccount-tab-menu a i {
+    margin-right: 10px; /* Spazio tra icona e testo */
+    font-size: 1.2em;
+}
+
+/* --- Contenuto delle Sezioni (Tab Content) --- */
+.tab-content {
+    flex-grow: 1; /* Permette al contenuto di riempire lo spazio rimanente */
+    padding: 30px;
+    background-color: #fff;
+}
+
+.myaccount-content {
+    background-color: #fff;
+    border: 1px solid #e0e0e0; /* Bordi leggeri per il contenuto */
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 30px; /* Spazio sotto ogni sezione di contenuto */
+}
+
+.myaccount-content h3 {
+    color: #bfa046;
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #bfa046; /* Sottolineatura per i titoli */
+}
+
+.myaccount-content h4 {
+    color: #555;
+    font-size: 1.5em;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.myaccount-content .welcome p {
+    font-size: 1.1em;
+    color: #444;
+}
+
+.myaccount-content .welcome a {
+    color: #bfa046;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.myaccount-content .welcome a:hover {
+    text-decoration: underline;
+}
+
+
+/* --- Form e Input --- */
+.single-input-item {
+    margin-bottom: 20px;
+}
+
+.single-input-item label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.single-input-item input[type="text"],
+.single-input-item input[type="email"],
+.single-input-item input[type="password"],
+.single-input-item input[type="number"],
+.single-input-item select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Include padding e border nella larghezza */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.single-input-item input:focus,
+.single-input-item select:focus {
+    border-color: #bfa046;
+    box-shadow: 0 0 8px rgba(63, 81, 181, 0.2);
+    outline: none;
+}
+
+/* Stili specifici per i messaggi di errore sotto gli input */
+p.errors {
+    color: #dc3545; /* Rosso per gli errori */
+    font-size: 0.9em;
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+/* Fieldset per cambio password */
+fieldset {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #fefefe;
+}
+
+legend {
+    width: auto; /* Adatta la larghezza al testo */
+    padding: 0 10px;
+    font-size: 1.2em;
+    color: #bfa046;
+    font-weight: bold;
+    margin-bottom: 0; /* Rimuove lo spazio extra sopra la legenda */
+    border-bottom: none; /* Rimuove la linea di Bootstrap se presente */
+}
+
+fieldset p {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* --- Bottoni --- */
+.btn-add-to-cart { /* Questo sembra essere il tuo bottone personalizzato */
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #4CAF50; /* Verde per l'azione principale */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* In caso sia un <a> */
+}
+
+.btn-add-to-cart:hover {
+    background-color: #388E3C; /* Verde più scuro all'hover */
+    transform: translateY(-2px);
+    color: #fff; /* Assicura che il testo rimanga bianco */
+}
+
+/* Bottoni Bootstrap override (se vuoi un look coerente) */
+.btn-primary {
+    background-color: #bfa046;
+    border-color: #bfa046;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #a98e36;
+    border-color: #a98e36;
+}
+
+/* --- Tabelle --- */
+.myaccount-table.table-responsive {
+    margin-top: 20px;
+}
+
+.myaccount-table table.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0; /* Rimuove il margine inferiore di default di Bootstrap */
+}
+
+.myaccount-table .table th,
+.myaccount-table .table td {
+    padding: 15px;
+    vertical-align: middle;
+    border: 1px solid #e9ecef; /* Colore del bordo della tabella */
+    font-size: 0.95em;
+}
+
+.myaccount-table .table thead.thead-light th {
+    background-color: #fdf8f0; /* Sfondo per l'intestazione */
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.myaccount-table .table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Sfondo alternato per le righe */
+}
+
+.myaccount-table .table tbody tr:hover {
+    background-color: #f0f0f0; /* Sfondo all'hover della riga */
+}
+
+/* Link/Bottoni all'interno delle celle della tabella */
+.myaccount-table .btn-add-to-cart {
+    padding: 8px 15px; /* Bottoni più piccoli per le tabelle */
+    font-size: 0.9em;
+}
+
+
+/* --- Messaggi di Stato (Successo/Errore) --- */
+.alert {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.alert.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.alert.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+
+/* --- Responsive Design --- */
+@media (max-width: 991px) {
+    .myaccount-page-wrapper {
+        flex-direction: column; /* Impila il menu sopra il contenuto su schermi più piccoli */
+    }
+
+    .myaccount-tab-menu {
+        flex: 0 0 auto; /* Larghezza automatica */
+        max-width: 100%; /* Occupa tutta la larghezza */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex; /* Rende il menu orizzontale/scrollabile */
+        overflow-x: auto; /* Permette lo scroll orizzontale se troppe voci */
+        -webkit-overflow-scrolling: touch; /* Migliora lo scrolling su iOS */
+    }
+
+    .myaccount-tab-menu a {
+        flex-shrink: 0; /* Impedisce alle voci di restringersi troppo */
+        border-left: none; /* Rimuove il bordo laterale */
+        border-bottom: 5px solid transparent; /* Sposta l'indicatore in basso */
+        padding: 15px 15px;
+        text-align: center;
+    }
+
+    .myaccount-tab-menu a:hover,
+    .myaccount-tab-menu a.active {
+        border-left-color: transparent;
+        border-bottom-color: #fff;
+        padding-left: 15px; /* Rimuove lo spostamento laterale */
+    }
+
+    .myaccount-tab-menu a i {
+        display: block; /* Mette l'icona sopra il testo */
+        margin-bottom: 5px;
+        margin-right: 0;
+    }
+
+    .tab-content {
+        padding: 20px;
+    }
+
+    .myaccount-content {
+        padding: 20px;
+    }
+
+    .myaccount-content h3 {
+        font-size: 1.8em;
+    }
+
+    .myaccount-content h4 {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 767px) {
+    #page-content-wrapper {
+        padding: 30px 0;
+    }
+
+    .myaccount-content {
+        padding: 15px;
+    }
+
+    .myaccount-content h3 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+
+    .myaccount-content h4 {
+        font-size: 1.2em;
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+}
+
+/* Member Area & Modifica Info Styles - tema gioielli */
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 2.2em;
+    color: #bfa046; /* oro */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border-left: 6px solid #bfa046;
+    background-color: #fdf8f0;
+    border-radius: 8px;
+}
+
+form.form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+form.form input[type="text"],
+form.form input[type="email"],
+form.form input[type="password"],
+form.form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+form.form input[type="submit"],
+.button {
+    background: linear-gradient(to right, #bfa046, #d1b77f); /* oro sfumato */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+form.form input[type="submit"]:hover,
+.button:hover {
+    background: linear-gradient(to right, #d1b77f, #bfa046);
+}
+
+.button.remove {
+    background: linear-gradient(to right, #999, #ccc); /* argento */
+    color: #000;
+}
+
+.button.remove:hover {
+    background: linear-gradient(to right, #ccc, #999);
 }

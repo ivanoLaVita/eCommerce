@@ -18,16 +18,19 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
     public synchronized void doSave(OrderBean bean) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
+        
+        int rs = 0;
 
-        String query = "INSERT INTO " + TABLE_NAME + " (date, totalCost, userId) VALUES (?, ?, ?)";
+        String query = "INSERT INTO " + TABLE_NAME + " (date, totalCost, userId, utenteEmail) VALUES (?, ?, ?, ?)";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, bean.getDate());
             ps.setDouble(2, bean.getTotalCost());
+            ps.setString(3, bean.getUtenteEmail());
             ps.setInt(3, bean.getUserId());
-            ps.executeUpdate();
+            rs = ps.executeUpdate();
             con.commit();
         } finally {
             if (ps != null) ps.close();
@@ -153,6 +156,44 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
 
         return result != 0;
     }
+    
+	public synchronized List<OrderBean> doRetrieveByEmail(String key) throws SQLException {
+		Connection con = null;
+		PreparedStatement statement = null;
+		
+		List<OrderBean> ordini = new ArrayList<>();
+		
+		String query = "SELECT * FROM " + OrderDAO.TABLE_NAME + " WHERE utenteEmail = ?";
+		
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			statement = con.prepareStatement(query);
+			statement.setString(1, key);
+			
+			ResultSet result = statement.executeQuery();
+			
+			while(result.next()) {
+				OrderBean ordine = new OrderBean();
+				
+				ordine.setId(result.getInt("id"));
+				ordine.setDate(result.getString("data"));
+				ordine.setTotalCost(result.getDouble("costoTotale"));
+				ordine.setUtenteEmail(result.getString("utenteEmail"));
+
+				ordini.add(ordine);
+			}
+		} finally {
+			try {
+				if(statement != null) {
+					statement.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		
+		return ordini;
+	}
 
     /*
      * Recupera tutti gli ordini compresi tra due date (inclusi)

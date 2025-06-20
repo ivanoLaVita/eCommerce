@@ -65,12 +65,12 @@ public class UsersBean implements Serializable {
 	}
 
 
-	public String getUsersname() {
+	public String getUsername() {
 		return username;
 	}
 
 
-	public void setUsersname(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
