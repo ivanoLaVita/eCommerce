@@ -3,8 +3,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="model.UsersBean, model.AddressBean, model.PaymentMethodBean" %>
 <%@ include file="fragments/Header.jsp" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, model.OrderBean, model.OrderItemBean, model.ProductBean" %>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display">
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
