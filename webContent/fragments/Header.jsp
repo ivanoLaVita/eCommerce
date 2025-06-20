@@ -5,6 +5,8 @@
     if (cartSize == null) {
         cartSize = 0;
     }
+
+    Object user = session.getAttribute("user"); // Controlla se l'utente è loggato
 %>
 
 <header class="main-header">
@@ -24,8 +26,18 @@
             </ul>
         </nav>
         <div class="header-actions">
-            <a href="<%= request.getContextPath() %>/login.jsp" class="button-secondary">Accedi</a>
-            <a href="<%= request.getContextPath() %>/register.jsp" class="button-secondary">Registrati</a>
+            <%
+                if (user != null) {
+            %>
+                <a href="<%= request.getContextPath() %>/logout" class="button-secondary">Logout</a>
+            <%
+                } else {
+            %>
+                <a href="<%= request.getContextPath() %>/login.jsp" class="button-secondary">Accedi</a>
+                <a href="<%= request.getContextPath() %>/register.jsp" class="button-secondary">Registrati</a>
+            <%
+                }
+            %>
             <a href="<%= request.getContextPath() %>/cart.jsp" class="cart-icon">
                 🛒 <span class="cart-count"><%= cartSize %></span>
             </a>

@@ -1,30 +1,32 @@
 <!-- memberArea.jsp -->
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="model.UsersBean, model.AddressBean, model.PaymentMethodBean" %>
-<%@ include file="fragments/Header.jsp" %>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display">
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 <%
-    UsersBean user = (UsersBean) session.getAttribute("user");
-    if (user == null) {
+    // Recupera l'utente dalla sessione
+    UsersBean userBean = (UsersBean) session.getAttribute("user");
+    if (userBean == null) {
         response.sendRedirect("login.jsp");
         return;
     }
+
     AddressBean address = (AddressBean) request.getAttribute("address");
     PaymentMethodBean payment = (PaymentMethodBean) request.getAttribute("payment");
 %>
+
+<%@ include file="fragments/Header.jsp" %>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display">
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 <div class="container">
     <h1 class="title">Area Personale</h1>
 
     <div class="section">
         <h2>Informazioni Utente</h2>
-        <p><strong>Nome:</strong> <%= user.getFirstName() %></p>
-        <p><strong>Cognome:</strong> <%= user.getLastName() != null ? user.getLastName() : "Non fornito" %></p>
-        <p><strong>Email:</strong> <%= user.getEmail() %> (non modificabile)</p>
-        <p><strong>Username:</strong> <%= user.getUsername() %></p>
+        <p><strong>Nome:</strong> <%= userBean.getFirstName() %></p>
+        <p><strong>Cognome:</strong> <%= userBean.getLastName() != null ? userBean.getLastName() : "Non fornito" %></p>
+        <p><strong>Email:</strong> <%= userBean.getEmail() %> (non modificabile)</p>
+        <p><strong>Username:</strong> <%= userBean.getUsername() %></p>
         <a href="modificaInfo.jsp" class="button">Modifica informazioni</a>
     </div>
 
