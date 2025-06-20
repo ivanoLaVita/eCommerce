@@ -1,12 +1,8 @@
 package controller;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
+import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 import model.ProductBean;
 import model.ProductDAO;
 
@@ -38,61 +34,98 @@ public class CartServlet extends HttpServlet {
         ProductDAO productDAO = new ProductDAO();
 
         try {
-            if ("add".equalsIgnoreCase(mode)) {
-                int productId = Integer.parseInt(request.getParameter("productId"));
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
+            switch (mode != null ? mode.toLowerCase() : "") {
 
-                cart.merge(productId, quantity, Integer::sum);
-                session.setAttribute("cart", cart);
+                case "add": {
+                    int productId = Integer.parseInt(request.getParameter("productId"));
+                    int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-            } else if ("update".equalsIgnoreCase(mode)) {
-                int productId = Integer.parseInt(request.getParameter("productId"));
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
-
-                if (quantity <= 0) {
-                    cart.remove(productId);
-                } else {
-                    cart.put(productId, quantity);
-                }
-
-                if (cart.isEmpty()) {
-                    session.removeAttribute("cart");
-                } else {
+                    cart.merge(productId, quantity, Integer::sum);
                     session.setAttribute("cart", cart);
+
+                    // ✅ Messaggio e redirect
+                    session.setAttribute("message", "Prodotto aggiunto al carrello!");
+                    break;
                 }
 
-                response.getWriter().print("reload");
+                case "update": {
+                    int productId = Integer.parseInt(request.getParameter("productId"));
+                    int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-            } else if ("remove".equalsIgnoreCase(mode)) {
-                int productId = Integer.parseInt(request.getParameter("productId"));
-                cart.remove(productId);
-
-                if (cart.isEmpty()) {
-                    session.removeAttribute("cart");
-                }
-
-                RequestDispatcher view = request.getRequestDispatcher("cart.jsp");
-                view.forward(request, response);
-
-            } else if ("reset".equalsIgnoreCase(mode)) {
-                session.removeAttribute("cart");
-                RequestDispatcher view = request.getRequestDispatcher("cart.jsp");
-                view.forward(request, response);
-
-            } else if ("getTotal".equalsIgnoreCase(mode)) {
-                double total = 0.0;
-
-                for (Map.Entry<Integer, Integer> entry : cart.entrySet()) {
-                    int productId = entry.getKey();
-                    int quantity = entry.getValue();
-
-                    ProductBean product = productDAO.doRetrieveByKey(String.valueOf(productId));
-                    if (product != null) {
-                        total += product.getPrice() * quantity;
+                    if (quantity <= 0) {
+                        cart.remove(productId);
+                    } else {
+                        cart.put(productId, quantity);
                     }
+
+                    if (cart.isEmpty()) {
+                        session.removeAttribute("cart");
+                        session.setAttribute("cartSize", 0);
+                    } else {
+                        session.setAttribute("cart", cart);
+                        session.setAttribute("cartSize", cart.values().stream().mapToInt(Integer::intValue).sum());
+                    }
+
+                    response.getWriter().print("reload");
+                    return; // 🔁 evita doppio aggiornamento cartSize sotto
                 }
 
-                response.getWriter().print(String.format("%.2f", total));
+                case "remove": {
+                    int productId = Integer.parseInt(request.getParameter("productId"));
+                    cart.remove(productId);
+
+                    if (cart.isEmpty()) {
+                        session.removeAttribute("cart");
+                        session.setAttribute("cartSize", 0);
+                    } else {
+                        session.setAttribute("cart", cart);
+                    }
+
+                    RequestDispatcher view = request.getRequestDispatcher("cart.jsp");
+                    view.forward(request, response);
+                    return;
+                }
+
+                case "reset": {
+                    session.removeAttribute("cart");
+                    session.setAttribute("cartSize", 0);
+                    RequestDispatcher view = request.getRequestDispatcher("cart.jsp");
+                    view.forward(request, response);
+                    return;
+                }
+
+                case "gettotal": {
+                    double total = 0.0;
+
+                    for (Map.Entry<Integer, Integer> entry : cart.entrySet()) {
+                        int productId = entry.getKey();
+                        int quantity = entry.getValue();
+
+                        ProductBean product = productDAO.doRetrieveByKey(String.valueOf(productId));
+                        if (product != null) {
+                            total += product.getPrice() * quantity;
+                        }
+                    }
+
+                    response.getWriter().print(String.format("%.2f", total));
+                    return;
+                }
+
+                default:
+                    // Nessuna modalità o modalità sconosciuta: ignora
+                    break;
+            }
+
+            // ✅ CartSize aggiornato dopo ogni modifica utile
+            int cartSize = 0;
+            if (cart != null) {
+                cartSize = cart.values().stream().mapToInt(Integer::intValue).sum();
+            }
+            session.setAttribute("cartSize", cartSize);
+
+            // Solo l'aggiunta esegue il redirect
+            if ("add".equalsIgnoreCase(mode)) {
+                response.sendRedirect(request.getContextPath() + "/HomePage.jsp");
             }
 
         } catch (SQLException | NumberFormatException e) {
