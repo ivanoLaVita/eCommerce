@@ -11,6 +11,7 @@ public class AddressBean implements Serializable {
     private String postalCode;
     private String street;
     private String streetNumber;
+    private String utenteEmail;
     private int userId;
 
     public AddressBean() {
@@ -79,5 +80,17 @@ public class AddressBean implements Serializable {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+    
+    public String getUtenteEmail() {
+		return utenteEmail;
+	}
+
+	public void setUtenteEmail(String utenteEmail) {
+		this.utenteEmail = utenteEmail;
+	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }
 

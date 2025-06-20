@@ -80,7 +80,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
             if (rs.next()) {
                 method = new PaymentMethodBean();
                 method.setId(rs.getInt("id"));
-                method.setType(PaymentMethodBean.PaymentType.valueOf(rs.getString("type")));
+                method.setType(rs.getString("type"));
                 method.setIban(rs.getString("iban"));
                 method.setCardNumber(rs.getString("cardNumber"));
                 method.setUserId(rs.getInt("userId"));
@@ -115,7 +115,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
             while (rs.next()) {
                 PaymentMethodBean method = new PaymentMethodBean();
                 method.setId(rs.getInt("id"));
-                method.setType(PaymentMethodBean.PaymentType.valueOf(rs.getString("type")));
+                method.setType(rs.getString("type"));
                 method.setIban(rs.getString("iban"));
                 method.setCardNumber(rs.getString("cardNumber"));
                 method.setUserId(rs.getInt("userId"));
@@ -177,7 +177,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
             while (rs.next()) {
                 PaymentMethodBean method = new PaymentMethodBean();
                 method.setId(rs.getInt("id"));
-                method.setType(PaymentMethodBean.PaymentType.valueOf(rs.getString("type")));
+                method.setType(rs.getString("type"));
                 method.setIban(rs.getString("iban"));
                 method.setCardNumber(rs.getString("cardNumber"));
                 method.setUserId(rs.getInt("userId"));
@@ -192,6 +192,45 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
 
         return methods;
     }
+    
+	public synchronized List<PaymentMethodBean> doRetrieveByEmail(String key) throws SQLException {
+		Connection con = null;
+		PreparedStatement statement = null;
+		
+		List<PaymentMethodBean> metodiPagamento = new ArrayList<>();
+		
+		String query = "SELECT * FROM " + PaymentMethodDAO.TABLE_NAME + " WHERE utenteEmail = ?;";
+		
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			statement = con.prepareStatement(query);
+			
+			statement.setString(1, key);
+			
+			ResultSet result = statement.executeQuery();
+			
+			while(result.next()) {
+				PaymentMethodBean pagamento = new PaymentMethodBean();
+				
+				pagamento.setId(result.getInt("id"));
+				pagamento.setType(result.getString("tipo"));
+				pagamento.setIban(result.getString("iban"));
+				pagamento.setCardNumber(result.getString("numeroCarta"));
+				pagamento.setUtenteEmail(result.getString("utenteEmail"));
 
+				metodiPagamento.add(pagamento);
+			}
+		} finally {
+			try {
+				if(statement != null) {
+					statement.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		
+		return metodiPagamento;
+	}
 }
 

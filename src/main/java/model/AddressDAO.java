@@ -130,6 +130,7 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
                 address.setStreet(rs.getString("street"));
                 address.setStreetNumber(rs.getString("streetNumber"));
                 address.setUserId(rs.getInt("userId"));
+                address.setUtenteEmail(rs.getString("utenteEmail"));
                 addresses.add(address);
             }
         } finally {
@@ -207,6 +208,49 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
 
         return addresses;
     }
+    
+    // Recupera tutti gli indirizzi associati a un utente specifico
+    public synchronized List<AddressBean> doRetrieveByEmail(String key) throws SQLException {
+        Connection con = null;
+        PreparedStatement statement = null;
+        List<AddressBean> indirizzi = new ArrayList<>();
 
+        // Query SQL per selezionare gli indirizzi di un utente specifico
+        String query = "SELECT * FROM " + AddressDAO.TABLE_NAME + " WHERE utenteEmail = ?;";
+
+        try {
+            // Ottieni una connessione dal pool
+            con = DriverManagerConnectionPool.getConnection();
+            statement = con.prepareStatement(query);
+            statement.setString(1, key);
+
+            // Esegui la query
+            ResultSet result = statement.executeQuery();
+
+            // Recupera i dati dal ResultSet
+            while (result.next()) {
+            	AddressBean indirizzo = new AddressBean();
+                indirizzo.setId(result.getInt("id"));
+                indirizzo.setCity(result.getString("citta"));
+                indirizzo.setProvince(result.getString("provincia"));
+                indirizzo.setPostalCode(result.getString("cap"));
+                indirizzo.setStreet(result.getString("via"));
+                indirizzo.setStreetNumber(result.getString("civico"));
+                indirizzo.setUtenteEmail(result.getString("utenteEmail"));
+
+                indirizzi.add(indirizzo);
+            }
+        } finally {
+            // Chiudi lo statement e rilascia la connessione
+            try {
+                if (statement != null)
+                    statement.close();
+            } finally {
+                DriverManagerConnectionPool.releaseConnection(con);
+            }
+        }
+
+        return indirizzi;
+    }
 }
 

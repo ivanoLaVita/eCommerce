@@ -252,6 +252,35 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
 
         return productsFound;
     }
+    
+    public ProductBean doRetrieveById(int id) {
+        ProductBean product = null;
+        try (Connection con = DriverManagerConnectionPool.getConnection()) {
+            String sql = "SELECT * FROM product WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                product = new ProductBean();
+                product.setId(rs.getInt("id"));
+                product.setName(rs.getString("name"));
+                product.setDescription(rs.getString("description"));
+                product.setPrice(rs.getDouble("price"));
+                
+                // Solo se il campo gender esiste ed è usato correttamente come enum
+                product.setGender(ProductBean.ProductGender.valueOf(rs.getString("gender")));
+
+                // NON chiamiamo setCategoryId perché non esiste
+                // Se vuoi mostrare anche la categoria, serve un altro metodo
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
+
+
 
     /*
      * Estrae e costruisce un ProductBean da un ResultSet

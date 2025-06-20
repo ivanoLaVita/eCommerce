@@ -5,20 +5,16 @@ import java.io.Serializable;
 public class PaymentMethodBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public enum PaymentType {
-        CARD,
-        IBAN
-    }
-
     private int id;
-    private PaymentType type;
+    private String type;
     private String iban;
     private String cardNumber;
     private int userId;
+    private String utenteEmail;
 
     public PaymentMethodBean() {
         this.id = -1;
-        this.type = null; 
+        this.type = "null"; 
         this.iban = "";
         this.cardNumber = "";
         this.userId = -1;
@@ -33,11 +29,11 @@ public class PaymentMethodBean implements Serializable {
         this.id = id;
     }
 
-    public PaymentType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(PaymentType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -56,6 +52,18 @@ public class PaymentMethodBean implements Serializable {
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
+    
+    public String getUtenteEmail() {
+		return utenteEmail;
+	}
+
+	public void setUtenteEmail(String utenteEmail) {
+		this.utenteEmail = utenteEmail;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
     public int getUserId() {
         return userId;
