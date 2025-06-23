@@ -22,7 +22,7 @@
 <div class="container">
     <h1 class="title">Modifica Informazioni</h1>
 
-    <form action="ModificaInfoServlet" method="post" class="form">
+    <form action="info" method="post" class="form">
         <!-- Sezione Utente -->
         <div class="section">
             <h2>Informazioni Utente</h2>
