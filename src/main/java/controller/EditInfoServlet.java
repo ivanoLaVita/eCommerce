@@ -12,7 +12,7 @@ import model.AddressDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/edit/info")
+@WebServlet("/info")
 public class EditInfoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
