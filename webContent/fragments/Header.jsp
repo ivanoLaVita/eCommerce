@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     Integer cartSize = (Integer) session.getAttribute("cartSize");
     if (cartSize == null) {
         cartSize = 0;
     }
-
-    Object user = session.getAttribute("user"); // Controlla se l'utente è loggato
+    boolean isLogged = session.getAttribute("user") != null;
 %>
 
 <header class="main-header">
@@ -26,18 +24,12 @@
             </ul>
         </nav>
         <div class="header-actions">
-            <%
-                if (user != null) {
-            %>
-                <a href="<%= request.getContextPath() %>/logout" class="button-secondary">Logout</a>
-            <%
-                } else {
-            %>
+            <% if (!isLogged) { %>
                 <a href="<%= request.getContextPath() %>/login.jsp" class="button-secondary">Accedi</a>
                 <a href="<%= request.getContextPath() %>/register.jsp" class="button-secondary">Registrati</a>
-            <%
-                }
-            %>
+            <% } else { %>
+                <a href="<%= request.getContextPath() %>/logout" class="button-secondary">Logout</a>
+            <% } %>
             <a href="<%= request.getContextPath() %>/cart.jsp" class="cart-icon">
                 🛒 <span class="cart-count"><%= cartSize %></span>
             </a>
