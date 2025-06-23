@@ -19,7 +19,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
         Connection con = null;
         PreparedStatement ps = null;
 
-        String query = "INSERT INTO " + TABLE_NAME + " (type, iban, cardNumber, userId) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO " + TABLE_NAME + " (type, iban, cardNumber, userEmail) VALUES (?, ?, ?, ?)";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
@@ -27,7 +27,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
             ps.setString(1, method.getType().toString());
             ps.setString(2, method.getIban());
             ps.setString(3, method.getCardNumber());
-            ps.setInt(4, method.getUserId());
+            ps.setString(4, method.getUserEmail());
             ps.executeUpdate();
             con.commit();
         } finally {
@@ -83,7 +83,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
                 method.setType(rs.getString("type"));
                 method.setIban(rs.getString("iban"));
                 method.setCardNumber(rs.getString("cardNumber"));
-                method.setUserId(rs.getInt("userId"));
+                method.setUserEmail(rs.getString("userEmail"));
             }
         } finally {
             if (ps != null) ps.close();
@@ -118,7 +118,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
                 method.setType(rs.getString("type"));
                 method.setIban(rs.getString("iban"));
                 method.setCardNumber(rs.getString("cardNumber"));
-                method.setUserId(rs.getInt("userId"));
+                method.setUserEmail(rs.getString("userEmail"));
                 methods.add(method);
             }
         } finally {
@@ -138,7 +138,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
         PreparedStatement ps = null;
         int result = 0;
 
-        String query = "UPDATE " + TABLE_NAME + " SET type = ?, iban = ?, cardNumber = ?, userId = ? WHERE id = ?";
+        String query = "UPDATE " + TABLE_NAME + " SET type = ?, iban = ?, cardNumber = ?, userEmail = ? WHERE id = ?";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
@@ -146,7 +146,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
             ps.setString(1, method.getType().toString());
             ps.setString(2, method.getIban());
             ps.setString(3, method.getCardNumber());
-            ps.setInt(4, method.getUserId());
+            ps.setString(4, method.getUserEmail());
             ps.setInt(5, method.getId());
             result = ps.executeUpdate();
             con.commit();
@@ -180,7 +180,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
                 method.setType(rs.getString("type"));
                 method.setIban(rs.getString("iban"));
                 method.setCardNumber(rs.getString("cardNumber"));
-                method.setUserId(rs.getInt("userId"));
+                method.setUserEmail(rs.getString("userEmail"));
 
                 methods.add(method);
             }
@@ -216,7 +216,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
 				pagamento.setType(result.getString("tipo"));
 				pagamento.setIban(result.getString("iban"));
 				pagamento.setCardNumber(result.getString("numeroCarta"));
-				pagamento.setUtenteEmail(result.getString("utenteEmail"));
+				pagamento.setUserEmail(result.getString("utenteEmail"));
 
 				metodiPagamento.add(pagamento);
 			}

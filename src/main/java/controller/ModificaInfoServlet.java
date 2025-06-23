@@ -49,12 +49,12 @@ public class ModificaInfoServlet extends HttpServlet {
             String streetNumber = request.getParameter("streetNumber");
 
             AddressDAO addressDAO = new AddressDAO();
-            List<AddressBean> addresses = addressDAO.doRetrieveByUserId(user.getId());
+            List<AddressBean> addresses = addressDAO.doRetrieveByEmail(user.getEmail());
             AddressBean address = addresses.isEmpty() ? null : addresses.get(0);
 
             if (address == null) {
                 address = new AddressBean();
-                address.setUserId(user.getId());
+                address.setUserEmail(user.getEmail());
             }
 
             address.setCity(city);
@@ -75,12 +75,12 @@ public class ModificaInfoServlet extends HttpServlet {
             String iban = request.getParameter("iban");
 
             PaymentMethodDAO paymentDAO = new PaymentMethodDAO();
-            List<PaymentMethodBean> payments = paymentDAO.doRetrieveByUserId(user.getId());
+            List<PaymentMethodBean> payments = paymentDAO.doRetrieveByEmail(user.getEmail());
             PaymentMethodBean payment = payments.isEmpty() ? null : payments.get(0);
 
             if (payment == null) {
                 payment = new PaymentMethodBean();
-                payment.setUserId(user.getId());
+                payment.setUserEmail(user.getEmail());
             }
 
             payment.setType(type);

@@ -21,15 +21,14 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
         
         int rs = 0;
 
-        String query = "INSERT INTO " + TABLE_NAME + " (date, totalCost, userId, utenteEmail) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO " + TABLE_NAME + " (date, totalCost, userEmail) VALUES (?, ?, ?)";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, bean.getDate());
             ps.setDouble(2, bean.getTotalCost());
-            ps.setString(3, bean.getUtenteEmail());
-            ps.setInt(3, bean.getUserId());
+            ps.setString(3, bean.getUserEmail());
             rs = ps.executeUpdate();
             con.commit();
         } finally {
@@ -84,7 +83,7 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
                 order.setId(rs.getInt("id"));
                 order.setDate(rs.getString("date"));
                 order.setTotalCost(rs.getDouble("totalCost"));
-                order.setUserId(rs.getInt("userId"));
+                order.setUserEmail(rs.getString("userEmail"));
             }
         } finally {
             if (ps != null) ps.close();
@@ -118,7 +117,7 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
                 orderBean.setId(rs.getInt("id"));
                 orderBean.setDate(rs.getString("date"));
                 orderBean.setTotalCost(rs.getDouble("totalCost"));
-                orderBean.setUserId(rs.getInt("userId"));
+                orderBean.setUserEmail(rs.getString("userEmail"));
                 orders.add(orderBean);
             }
         } finally {
@@ -138,14 +137,14 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
         PreparedStatement ps = null;
         int result = 0;
 
-        String query = "UPDATE " + TABLE_NAME + " SET date = ?, totalCost = ?, userId = ? WHERE id = ?";
+        String query = "UPDATE " + TABLE_NAME + " SET date = ?, totalCost = ?, userEmail = ? WHERE id = ?";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, bean.getDate());
             ps.setDouble(2, bean.getTotalCost());
-            ps.setInt(3, bean.getUserId());
+            ps.setString(3, bean.getUserEmail());
             ps.setInt(4, bean.getId());
             result = ps.executeUpdate();
             con.commit();
@@ -163,7 +162,7 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
 		
 		List<OrderBean> ordini = new ArrayList<>();
 		
-		String query = "SELECT * FROM " + OrderDAO.TABLE_NAME + " WHERE utenteEmail = ?";
+		String query = "SELECT * FROM " + OrderDAO.TABLE_NAME + " WHERE userEmail = ?";
 		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
@@ -176,9 +175,9 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
 				OrderBean ordine = new OrderBean();
 				
 				ordine.setId(result.getInt("id"));
-				ordine.setDate(result.getString("data"));
-				ordine.setTotalCost(result.getDouble("costoTotale"));
-				ordine.setUtenteEmail(result.getString("utenteEmail"));
+				ordine.setDate(result.getString("date"));
+				ordine.setTotalCost(result.getDouble("totalCost"));
+				ordine.setUserEmail(result.getString("userEmail"));
 
 				ordini.add(ordine);
 			}
@@ -217,7 +216,7 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
                 order.setId(rs.getInt("id"));
                 order.setDate(rs.getString("date"));
                 order.setTotalCost(rs.getDouble("totalCost"));
-                order.setUserId(rs.getInt("userId"));
+                order.setUserEmail(rs.getString("userId"));
                 orders.add(order);
             }
         } finally {
@@ -245,7 +244,7 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
             while (rs.next()) {
                 OrderBean order = new OrderBean();
                 order.setId(rs.getInt("id"));
-                order.setUserId(rs.getInt("userId"));
+                order.setUserEmail(rs.getString("userEmail"));
                 order.setDate(rs.getString("orderDate"));
                 order.setTotalCost(rs.getDouble("totalCost"));
                 orders.add(order);

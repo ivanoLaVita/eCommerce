@@ -8,15 +8,13 @@ public class OrderBean implements Serializable {
     private int id;
     private String date;
     private double totalCost;
-    private int userId;
-    private String utenteEmail;
+    private String userEmail;
 
     public OrderBean() {
         this.id = -1;
         this.date = "";
         this.totalCost = 0.0;
-        this.userId = -1;
-        this.utenteEmail = "null";
+        this.userEmail = "null";
     }
 
     // Getter and setter
@@ -43,21 +41,13 @@ public class OrderBean implements Serializable {
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
     
-    public String getUtenteEmail() {
-        return utenteEmail;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUtenteEmail(String utenteEmail) {
-        this.utenteEmail = utenteEmail;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }
 

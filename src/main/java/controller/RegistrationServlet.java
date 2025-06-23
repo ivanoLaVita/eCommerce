@@ -86,7 +86,6 @@ public class RegistrationServlet extends HttpServlet {
             String hashedPassword = PasswordUtils.hashPassword(password);
 
             UsersBean user = new UsersBean();
-            user.setId(0); // AUTO_INCREMENT
             user.setEmail(email);
             user.setUsername(username);
             user.setPassword(hashedPassword);

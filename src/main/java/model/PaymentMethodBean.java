@@ -9,15 +9,14 @@ public class PaymentMethodBean implements Serializable {
     private String type;
     private String iban;
     private String cardNumber;
-    private int userId;
-    private String utenteEmail;
+    private String userEmail;
 
     public PaymentMethodBean() {
         this.id = -1;
         this.type = "null"; 
         this.iban = "";
         this.cardNumber = "";
-        this.userId = -1;
+        this.userEmail = "";
     }
 
     // Getter and setter
@@ -53,23 +52,16 @@ public class PaymentMethodBean implements Serializable {
         this.cardNumber = cardNumber;
     }
     
-    public String getUtenteEmail() {
-		return utenteEmail;
+    public String getUserEmail() {
+		return userEmail;
 	}
 
-	public void setUtenteEmail(String utenteEmail) {
-		this.utenteEmail = utenteEmail;
+	public void setUserEmail(String utenteEmail) {
+		this.userEmail = utenteEmail;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 }

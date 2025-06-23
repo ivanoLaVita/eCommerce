@@ -53,7 +53,7 @@ public class OrderServlet extends HttpServlet {
         if (request.getSession().getAttribute("logged") == null) {
             redirectPath = "login.jsp";
         } else {
-            int userId = (int) request.getSession().getAttribute("userId");
+            String userEmail = (String) request.getSession().getAttribute("userEmail");
             String costString = (String) request.getSession().getAttribute("totalCost");
             if (costString == null) costString = "0";
             costString = costString.replace(",", ".");
@@ -66,13 +66,13 @@ public class OrderServlet extends HttpServlet {
             try {
                 // Salva l'ordine
                 OrderBean order = new OrderBean();
-                order.setUserId(userId);
+                order.setUserEmail(userEmail);
                 order.setTotalCost(totalCost);
                 order.setDate(LocalDate.now().toString());
                 orderDAO.doSave(order);
 
                 // Recupera l'ultimo ordine per l'utente (potresti usare getGeneratedKeys)
-                List<OrderBean> userOrders = orderDAO.doRetrieveByUserId(userId);
+                List<OrderBean> userOrders = orderDAO.doRetrieveByEmail(userEmail);
                 int orderId = userOrders.get(userOrders.size() - 1).getId();
 
                 // Salva i dettagli degli item dell’ordine

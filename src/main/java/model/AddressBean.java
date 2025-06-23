@@ -11,26 +11,15 @@ public class AddressBean implements Serializable {
     private String postalCode;
     private String street;
     private String streetNumber;
-    private String utenteEmail;
-    private int userId;
+    private String userEmail;
 
     public AddressBean() {
-        this.id = -1;
         this.city = "";
         this.province = "";
         this.postalCode = "";
         this.street = "";
         this.streetNumber = "";
-        this.userId = -1;
-    }
-
-    // Getter e setter
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.userEmail = "";
     }
 
     public String getCity() {
@@ -73,20 +62,20 @@ public class AddressBean implements Serializable {
         this.streetNumber = streetNumber;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
     
-    public String getUtenteEmail() {
-		return utenteEmail;
+    public String getUserEmail() {
+		return userEmail;
 	}
 
-	public void setUtenteEmail(String utenteEmail) {
-		this.utenteEmail = utenteEmail;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 	
 	public static long getSerialversionuid() {

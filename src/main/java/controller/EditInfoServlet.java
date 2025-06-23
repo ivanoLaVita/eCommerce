@@ -45,13 +45,13 @@ public class EditInfoServlet extends HttpServlet {
                 address.setStreetNumber(request.getParameter("streetNumber"));
 
                 // Recupera l'id utente dalla sessione
-                Integer userId = (Integer) request.getSession().getAttribute("userId");
-                if (userId == null) {
+                String userEmail = (String) request.getSession().getAttribute("userEmail");
+                if (userEmail == null) {
                     request.getSession().setAttribute("error", "Devi essere loggato per aggiungere un indirizzo.");
                     response.sendRedirect("login.jsp");
                     return;
                 }
-                address.setUserId(userId);
+                address.setUserEmail(userEmail);
 
                 addressDAO.doSave(address);
                 request.getSession().setAttribute("message", "Indirizzo aggiunto con successo.");

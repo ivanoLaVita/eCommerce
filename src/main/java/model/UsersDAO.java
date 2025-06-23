@@ -18,13 +18,12 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
     public synchronized void doSave(UsersBean users) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
-        String query = "INSERT INTO " + TABLE_NAME + " (id, email, username, password, firstname, lastname, admin) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO " + TABLE_NAME + " (email, username, password, firstname, lastname, admin) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(query);
 
-            ps.setInt(1, users.getId());
             ps.setString(2, users.getEmail());
             ps.setString(3, users.getUsername());
             ps.setString(4, users.getPassword());
@@ -70,7 +69,7 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
      */
     @Override
     public synchronized UsersBean doRetrieveByKey(String key) throws SQLException {
-        return doRetrieveById(Integer.parseInt(key));
+        return doRetrieveByEmail(key);
     }
 
     /* 
@@ -95,7 +94,6 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
 
             while (rs.next()) {
                 UsersBean user = new UsersBean();
-                user.setId(rs.getInt("id"));
                 user.setEmail(rs.getString("email"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
@@ -166,7 +164,6 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
 
             if (rs.next()) {
                 user = new UsersBean();
-                user.setId(rs.getInt("id"));
                 user.setEmail(rs.getString("email"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
@@ -213,9 +210,9 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
         return user;
     }
 
-    /*
-     * Recupera un utente dal database utilizzando l'ID 
-     */
+    /* 
+     Recupera un utente dal database utilizzando l'ID 
+    
     public synchronized UsersBean doRetrieveById(int id) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
@@ -246,6 +243,7 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
         }
         return user;
     }
+    */
 
     /*
      * Verifica se un'email è già presente nel database

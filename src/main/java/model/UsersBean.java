@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class UsersBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private int id;
 	private String email;
 	private String username;
 	private String password;
@@ -16,7 +15,6 @@ public class UsersBean implements Serializable {
 	
 	public UsersBean() {
 		
-		this.id = -1;
 		this.firstName = "";
 		this.lastName = "";
 		this.email = "";
@@ -27,14 +25,6 @@ public class UsersBean implements Serializable {
 	}
 
 	//getter and setter
-    public int getId() {
-    	return id; 
-    }
-    
-    public void setId(int id) { 
-    	this.id = id; 
-    }
-	
 	public String getFirstName() {
 		return firstName;
 	}

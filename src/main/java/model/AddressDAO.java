@@ -19,7 +19,7 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
         Connection con = null;
         PreparedStatement ps = null;
 
-        String query = "INSERT INTO " + TABLE_NAME + " (city, province, postalCode, street, streetNumber, userId) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO " + TABLE_NAME + " (city, province, postalCode, street, streetNumber, userEmail) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
@@ -30,7 +30,7 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
             ps.setString(3, address.getPostalCode());
             ps.setString(4, address.getStreet());
             ps.setString(5, address.getStreetNumber());
-            ps.setInt(6, address.getUserId());
+            ps.setString(6, address.getUserEmail());
 
             ps.executeUpdate();
             con.commit();
@@ -49,7 +49,7 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
         PreparedStatement ps = null;
         int result = 0;
 
-        String query = "DELETE FROM " + TABLE_NAME + " WHERE id = ?";
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE userEmail = ?";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
@@ -75,7 +75,7 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
         PreparedStatement ps = null;
         AddressBean address = null;
 
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE userEmail = ?";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
@@ -86,13 +86,12 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
 
             if (rs.next()) {
                 address = new AddressBean();
-                address.setId(rs.getInt("id"));
                 address.setCity(rs.getString("city"));
                 address.setProvince(rs.getString("province"));
                 address.setPostalCode(rs.getString("postalCode"));
                 address.setStreet(rs.getString("street"));
                 address.setStreetNumber(rs.getString("streetNumber"));
-                address.setUserId(rs.getInt("userId"));
+                address.setUserEmail(rs.getString("userEmail"));
             }
         } finally {
             if (ps != null) ps.close();
@@ -123,14 +122,12 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
 
             while (rs.next()) {
                 AddressBean address = new AddressBean();
-                address.setId(rs.getInt("id"));
                 address.setCity(rs.getString("city"));
                 address.setProvince(rs.getString("province"));
                 address.setPostalCode(rs.getString("postalCode"));
                 address.setStreet(rs.getString("street"));
                 address.setStreetNumber(rs.getString("streetNumber"));
-                address.setUserId(rs.getInt("userId"));
-                address.setUtenteEmail(rs.getString("utenteEmail"));
+                address.setUserEmail(rs.getString("userEmail"));
                 addresses.add(address);
             }
         } finally {
@@ -150,7 +147,7 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
         PreparedStatement ps = null;
         int result = 0;
 
-        String query = "UPDATE " + TABLE_NAME + " SET city = ?, province = ?, postalCode = ?, street = ?, streetNumber = ?, userId = ? WHERE id = ?";
+        String query = "UPDATE " + TABLE_NAME + " SET city = ?, province = ?, postalCode = ?, street = ?, streetNumber = ?, userEmail = ? WHERE id = ?";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
@@ -161,8 +158,7 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
             ps.setString(3, address.getPostalCode());
             ps.setString(4, address.getStreet());
             ps.setString(5, address.getStreetNumber());
-            ps.setInt(6, address.getUserId());
-            ps.setInt(7, address.getId());
+            ps.setString(6, address.getUserEmail());
 
             result = ps.executeUpdate();
             con.commit();
@@ -192,13 +188,12 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
 
             while (rs.next()) {
                 AddressBean address = new AddressBean();
-                address.setId(rs.getInt("id"));
                 address.setCity(rs.getString("city"));
                 address.setProvince(rs.getString("province"));
                 address.setPostalCode(rs.getString("postalCode"));
                 address.setStreet(rs.getString("street"));
                 address.setStreetNumber(rs.getString("streetNumber"));
-                address.setUserId(rs.getInt("userId"));
+                address.setUserEmail(rs.getString("userEmail"));
                 addresses.add(address);
             }
         } finally {
@@ -216,7 +211,7 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
         List<AddressBean> indirizzi = new ArrayList<>();
 
         // Query SQL per selezionare gli indirizzi di un utente specifico
-        String query = "SELECT * FROM " + AddressDAO.TABLE_NAME + " WHERE utenteEmail = ?;";
+        String query = "SELECT * FROM " + AddressDAO.TABLE_NAME + " WHERE userEmail = ?;";
 
         try {
             // Ottieni una connessione dal pool
@@ -236,7 +231,7 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
                 indirizzo.setPostalCode(result.getString("cap"));
                 indirizzo.setStreet(result.getString("via"));
                 indirizzo.setStreetNumber(result.getString("civico"));
-                indirizzo.setUtenteEmail(result.getString("utenteEmail"));
+                indirizzo.setUserEmail(result.getString("utenteEmail"));
 
                 indirizzi.add(indirizzo);
             }
