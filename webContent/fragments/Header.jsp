@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    Integer cartSize = (Integer) session.getAttribute("cartSize");
+    if (cartSize == null) {
+        cartSize = 0;
+    }
+
+    Boolean logged = (Boolean) session.getAttribute("logged");
+    if (logged == null) logged = false;
+%>
+
 <header class="main-header">
     <div class="header-container">
         <div class="logo">
@@ -17,9 +27,16 @@
             </ul>
         </nav>
         <div class="header-actions">
-            <a href="<%= request.getContextPath() %>/login.jsp" class="button-secondary">Accedi</a>
-            <a href="<%= request.getContextPath() %>/register.jsp" class="button-secondary">Registrati</a> <%-- Nuovo link --%>
-            <a href="#" class="cart-icon">🛒 <span class="cart-count">0</span></a>
+            <% if (!logged) { %>
+                <a href="<%= request.getContextPath() %>/login.jsp" class="button-secondary">Accedi</a>
+                <a href="<%= request.getContextPath() %>/register.jsp" class="button-secondary">Registrati</a>
+            <% } else { %>
+                <a href="<%= request.getContextPath() %>/memberArea.jsp" class="button-secondary">Area Personale</a>
+                <a href="<%= request.getContextPath() %>/LogoutServlet" class="button-secondary">Logout</a>
+            <% } %>
+            <a href="<%= request.getContextPath() %>/cart.jsp" class="cart-icon">
+                🛒 <span class="cart-count"><%= cartSize %></span>
+            </a>
         </div>
     </div>
 </header>

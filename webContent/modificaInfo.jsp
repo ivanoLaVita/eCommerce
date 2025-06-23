@@ -1,11 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="model.UsersBean" %>
-<%@ include file="fragments/Header.jsp" %>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display">
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
-
 <%
     UsersBean user = (UsersBean) session.getAttribute("user");
     if (user == null) {
@@ -14,37 +8,80 @@
     }
 %>
 
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifica Informazioni</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<jsp:include page="fragments/Header.jsp" />
+
 <div class="container">
     <h1 class="title">Modifica Informazioni</h1>
 
-    <form action="ModificaInfoServlet" method="post" class="form">
+    <form action="info" method="post" class="form">
+        <!-- Sezione Utente -->
+        <div class="section">
+            <h2>Informazioni Utente</h2>
 
-        <h2>Dati personali</h2>
-        <label>Nome: <input type="text" name="firstName" value="<%= user.getFirstName() %>" required></label>
-        <%String lastNameValue = (user.getLastName() != null) ? user.getLastName() : "";%>
-		<label>Cognome: <input type="text" name="lastName" value="<%= lastNameValue %>"></label>
+            <label for="firstName">Nome:</label>
+            <input type="text" id="firstName" name="firstName" value="<%= user.getFirstName() %>" required>
 
-        <label>Username: <input type="text" name="username" value="<%= user.getUsername() %>" required></label>
+            <label for="lastName">Cognome:</label>
+            <input type="text" id="lastName" name="lastName" value="<%= user.getLastName() != null ? user.getLastName() : "" %>" required>
 
-        <h2>Indirizzo di Fatturazione</h2>
-        <label>Città: <input type="text" name="city" required></label>
-        <label>Provincia: <input type="text" name="province" required></label>
-        <label>CAP: <input type="text" name="postalCode" required></label>
-        <label>Via: <input type="text" name="street" required></label>
-        <label>Numero civico: <input type="text" name="streetNumber" required></label>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="<%= user.getEmail() %>" readonly>
 
-        <h2>Metodo di Pagamento</h2>
-        <label>Tipo:
-            <select name="paymentType" required>
+            <label for="usersname">Username:</label>
+            <input type="text" id="usersname" name="usersname" value="<%= user.getUsername() %>" readonly>
+        </div>
+
+        <!-- Sezione Indirizzo -->
+        <div class="section">
+            <h2>Indirizzo</h2>
+
+            <label for="city">Città:</label>
+            <input type="text" id="city" name="city" value="<%= request.getAttribute("city") != null ? request.getAttribute("city") : "" %>">
+
+            <label for="province">Provincia:</label>
+            <input type="text" id="province" name="province" value="<%= request.getAttribute("province") != null ? request.getAttribute("province") : "" %>">
+
+            <label for="zip">CAP:</label>
+            <input type="text" id="zip" name="zip" value="<%= request.getAttribute("zip") != null ? request.getAttribute("zip") : "" %>">
+
+            <label for="street">Via:</label>
+            <input type="text" id="street" name="street" value="<%= request.getAttribute("street") != null ? request.getAttribute("street") : "" %>">
+
+            <label for="civic">Numero Civico:</label>
+            <input type="text" id="civic" name="civic" value="<%= request.getAttribute("civic") != null ? request.getAttribute("civic") : "" %>">
+        </div>
+
+        <!-- Sezione Metodo di Pagamento -->
+        <div class="section">
+            <h2>Metodo di Pagamento</h2>
+
+            <label for="paymentType">Tipo:</label>
+            <select id="paymentType" name="paymentType">
+                <option value="">-- Seleziona --</option>
                 <option value="CARD">Carta</option>
                 <option value="IBAN">IBAN</option>
             </select>
-        </label>
-        <label>Numero Carta: <input type="text" name="cardNumber"></label>
-        <label>IBAN: <input type="text" name="iban"></label>
 
-        <input type="submit" value="Salva modifiche" class="button">
+            <label for="cardNumber">Numero Carta:</label>
+            <input type="text" id="cardNumber" name="cardNumber">
+
+            <label for="iban">IBAN:</label>
+            <input type="text" id="iban" name="iban">
+        </div>
+
+        <input type="submit" value="Salva modifiche">
     </form>
 </div>
 
-<%@ include file="fragments/Footer.jsp" %>
+<jsp:include page="fragments/Footer.jsp" />
+</body>
+</html>
