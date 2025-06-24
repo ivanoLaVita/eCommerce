@@ -211,7 +211,7 @@
 						<div class="single-input-item">
 							<label for="nome">Nome</label>
 							<input type="text" id="nomeNuovo" name="nomeNuovo"
-								placeholder="Nome" value="<%= request.getSession().getAttribute("firstName") %>"/>
+								placeholder="Nome" value="<%= userBean.getFirstName() %>"/>
 							<p class="errors" style="color:red;" id="error-name"></p>
 						</div>
 					</div>
@@ -220,7 +220,7 @@
 						<div class="single-input-item">
 							<label for="cognome">Cognome</label>
 							<input type="text" id="cognomeNuovo" name="cognomeNuovo"
-								placeholder="Cognome" value="<%= request.getSession().getAttribute("lastName") %>"/>
+								placeholder="Cognome" value="<%= userBean.getLastName() %>"/>
 							<p class="errors" style="color:red;" id="error-surname"></p>
 						</div>
 					</div>
@@ -229,7 +229,7 @@
 				<div class="single-input-item">
 					<label for="username">Username</label>
 					<input type="text" id="usernameNuovo" name="usernameNuovo"
-						placeholder="Username" value="<%= request.getSession().getAttribute("username") %>"/>
+						placeholder="Username" value="<%= userBean.getUsername() %>"/>
 					<p class="errors" style="color:red;" id="error-username"></p>
 				</div>
 

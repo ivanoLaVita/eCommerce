@@ -42,7 +42,46 @@
 
 <!--== Page Content Wrapper Start ==-->
 
-
+<div id="page-content-wrapper" class="p-9">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 m-auto">
+                <div class="login-register-wrapper">
+                    <div class="tab-content" id="login-reg-tabcontent">
+                        <div class="tab-pane fade show active" id="register" role="tabpanel">
+                            <div class="login-reg-form-wrap">
+                                <form action="modificaInfo" method="post">
+                                <input type="hidden" name="utente" value="<%= request.getSession().getAttribute("email")%>">
+								<input type="hidden" name="target" value="indirizzo">
+								<input type="hidden" name="mode" value="add">
+	                                <div class="single-input-item">
+	                                    <input type="text" placeholder="Via" id="via" name="via" required>
+	                                </div>
+                                    <div class="single-input-item">
+                                        <input type="text" placeholder="Città" id="citta" name="citta" required>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <input type="text" placeholder="CAP" id="CAP" name="CAP" required></input>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <input type="text" placeholder="Civico" id="civico" name="civico" required>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <input type="text" placeholder="Provincia" id="provincia" name="provincia" required>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <button class="btn-login" type="submit">Aggiungi Indirizzo</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--== Page Content Wrapper End ==-->
 
 <!--== Page Content Wrapper End ==-->
 <%}%>

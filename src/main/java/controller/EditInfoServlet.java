@@ -1,78 +1,75 @@
 package controller;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import model.AddressBean;
-import model.AddressDAO;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import model.UsersBean;
+import model.UsersDAO;
+import utils.PasswordUtils;
 
 @WebServlet("/info")
 public class EditInfoServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public EditInfoServlet() {
-        super();
-    }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String mode = request.getParameter("mode");
+		String target = request.getParameter("target");
 
-        String mode = request.getParameter("mode");
-        String target = request.getParameter("target");
-        String path = null;
+		if (!"update".equals(mode) || !"utente".equals(target)) {
+			session.setAttribute("error", "Richiesta non valida.");
+			response.sendRedirect("memberArea.jsp");
+			return;
+		}
 
-        if (mode == null || target == null) {
-            response.sendRedirect("error.jsp");
-            return;
-        }
+		try {
+			String email = request.getParameter("utente");
+			String firstName = request.getParameter("nomeNuovo");
+			String lastName = request.getParameter("cognomeNuovo");
+			String username = request.getParameter("usernameNuovo");
+			String password = request.getParameter("password");
+			String passwordCheck = request.getParameter("passwordCheck");
 
-        if (mode.equalsIgnoreCase("add") && target.equalsIgnoreCase("address")) {
-            AddressDAO addressDAO = new AddressDAO();
-            AddressBean address = new AddressBean();
+			UsersDAO dao = new UsersDAO();
+			UsersBean user = dao.doRetrieveByEmail(email);
+			if (user == null) {
+				session.setAttribute("error", "Utente non trovato.");
+				response.sendRedirect("memberArea.jsp");
+				return;
+			}
 
-            try {
-                address.setCity(request.getParameter("city"));
-                address.setProvince(request.getParameter("province"));
-                address.setPostalCode(request.getParameter("postalCode"));
-                address.setStreet(request.getParameter("street"));
-                address.setStreetNumber(request.getParameter("streetNumber"));
+			user.setFirstName(firstName);
+			user.setLastName(lastName);
+			user.setUsername(username);
 
-                // Recupera l'id utente dalla sessione
-                String userEmail = (String) request.getSession().getAttribute("userEmail");
-                if (userEmail == null) {
-                    request.getSession().setAttribute("error", "Devi essere loggato per aggiungere un indirizzo.");
-                    response.sendRedirect("login.jsp");
-                    return;
-                }
-                address.setUserEmail(userEmail);
+			if (password != null && !password.isEmpty()) {
+				if (!password.equals(passwordCheck)) {
+					session.setAttribute("error", "Le password non coincidono.");
+					response.sendRedirect("memberArea.jsp");
+					return;
+				}
+				user.setPassword(PasswordUtils.hashPassword(password));
+			}
 
-                addressDAO.doSave(address);
-                request.getSession().setAttribute("message", "Indirizzo aggiunto con successo.");
-                path = "./memberArea.jsp";
+			boolean updated = dao.doUpdate(user);
+			if (updated) {
+				// Recupera l'utente aggiornato dal DB e aggiorna la sessione
+				UsersBean updatedUser = dao.doRetrieveByEmail(email);
+				session.setAttribute("user", updatedUser);
+				session.removeAttribute("error");
+				response.sendRedirect("memberArea.jsp");
+			} else {
+				session.setAttribute("error", "Errore durante l'aggiornamento.");
+				response.sendRedirect("memberArea.jsp");
+			}
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-                request.getSession().setAttribute("error", "Errore durante l'aggiunta dell'indirizzo.");
-                path = "./memberArea.jsp";
-            }
-
-            RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-            dispatcher.forward(request, response);
-        } else {
-            response.sendRedirect("error.jsp");
-        }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.sendRedirect("memberArea.jsp");
-    }
+		} catch (Exception e) {
+			session.setAttribute("error", "Eccezione: " + e.getMessage());
+			response.sendRedirect("memberArea.jsp");
+		}
+	}
 }

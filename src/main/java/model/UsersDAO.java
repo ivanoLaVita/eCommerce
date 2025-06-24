@@ -112,39 +112,37 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
     /* 
      * Aggiorna le informazioni di un utente nel database
      */
-	public synchronized boolean doUpdate(UsersBean bean, String key) throws SQLException {
-	    Connection con = null;
-	    PreparedStatement statement = null;
-	    int result = 0;
-	    
-	    String query = "UPDATE " + UsersDAO.TABLE_NAME + " SET email = ?, username = ?, password = ?, nome = ?, cognome = ?, admin = ? WHERE email = ?";
-	    
-	    try {
-	        con = DriverManagerConnectionPool.getConnection();
-	        statement = con.prepareStatement(query);
-	        
-	        statement.setString(1, bean.getEmail());
-	        statement.setString(2, bean.getUsername());
-	        statement.setString(3, bean.getPassword());
-	        statement.setString(4, bean.getFirstName());
-	        statement.setString(5, bean.getLastName());
-	        statement.setBoolean(6, bean.isAdmin());
-	        statement.setString(7, key); // key should be the original email for WHERE clause
-	        
-	        result = statement.executeUpdate();
-	        
-	        con.commit();
-	    } finally {
-	        try {
-	            if (statement != null) {
-	                statement.close();
-	            }
-	        } finally {
-	            DriverManagerConnectionPool.releaseConnection(con);
-	        }
-	    }
-	    return result != 0;
-	}
+    public synchronized boolean doUpdate(UsersBean bean) throws SQLException {
+        Connection con = null;
+        PreparedStatement statement = null;
+        int result = 0;
+
+        // Update base: senza cambiare l'email (che è PK)
+        String query = "UPDATE " + TABLE_NAME +
+                       " SET username = ?, password = ?, firstName = ?, lastName = ?, admin = ? " +
+                       "WHERE email = ?";
+
+        try {
+            con = DriverManagerConnectionPool.getConnection();
+            statement = con.prepareStatement(query);
+
+            statement.setString(1, bean.getUsername());
+            statement.setString(2, bean.getPassword());
+            statement.setString(3, bean.getFirstName());
+            statement.setString(4, bean.getLastName());
+            statement.setBoolean(5, bean.isAdmin());
+            statement.setString(6, bean.getEmail()); // WHERE email = ?
+
+            result = statement.executeUpdate();
+            con.commit();
+        } finally {
+            if (statement != null) statement.close();
+            DriverManagerConnectionPool.releaseConnection(con);
+        }
+
+        return result != 0;
+    }
+
     /*
      * Recupera un utente dal database utilizzando l username
      */
