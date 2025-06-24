@@ -101,5 +101,6 @@
 </main>
 
 <jsp:include page="fragments/Footer.jsp" />
+
 </body>
 </html>
