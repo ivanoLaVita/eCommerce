@@ -1,14 +1,16 @@
-<!-- memberArea.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="model.UsersBean, model.AddressBean, model.PaymentMethodBean" %>
+<%@ page import="java.util.Base64, java.util.Base64.Decoder" %>
+<%@ page import="model.UsersBean, model.AddressBean, model.AddressDAO, model.PaymentMethodBean, model.PaymentMethodDAO, model.OrderDAO, model.OrderBean" %>
+<%@ page import="java.util.List, java.sql.SQLException" %>
 
 <%
-    // Recupera l'utente dalla sessione
     UsersBean userBean = (UsersBean) session.getAttribute("user");
     if (userBean == null) {
         response.sendRedirect("login.jsp");
         return;
     }
+
+    String userEmail = userBean.getEmail();
 
     AddressBean address = (AddressBean) request.getAttribute("address");
     PaymentMethodBean payment = (PaymentMethodBean) request.getAttribute("payment");
@@ -29,42 +31,160 @@
         <p><strong>Username:</strong> <%= userBean.getUsername() %></p>
         <a href="modificaInfo.jsp" class="button">Modifica informazioni</a>
     </div>
-
-    <div class="section">
-        <h2>Indirizzo di Fatturazione</h2>
-        <% if (address != null) { %>
-            <p><strong>Città:</strong> <%= address.getCity() %></p>
-            <p><strong>Provincia:</strong> <%= address.getProvince() %></p>
-            <p><strong>CAP:</strong> <%= address.getPostalCode() %></p>
-            <p><strong>Via:</strong> <%= address.getStreet() %> <%= address.getStreetNumber() %></p>
-            <form action="RemoveAddressServlet" method="post">
-                <input type="submit" value="Rimuovi Indirizzo" class="button remove">
-            </form>
-        <% } else { %>
-            <p>Nessun indirizzo salvato.</p>
-            <a href="modificaInfo.jsp" class="button">Aggiungi Indirizzo</a>
-        <% } %>
-    </div>
-
+    
     <div class="section">
         <h2>Metodo di Pagamento</h2>
-        <% if (payment != null) {
-            String type = payment.getType();
-            if ("CARD".equals(type)) { %>
-                <p><strong>Tipo:</strong> Carta</p>
-                <p><strong>Numero Carta:</strong> <%= payment.getCardNumber() %></p>
-        <%  } else if ("IBAN".equals(type)) { %>
-                <p><strong>Tipo:</strong> IBAN</p>
-                <p><strong>IBAN:</strong> <%= payment.getIban() %></p>
-        <%  } %>
-            <form action="RemovePaymentServlet" method="post">
-                <input type="submit" value="Rimuovi Metodo di Pagamento" class="button remove">
-            </form>
-        <% } else { %>
-            <p>Nessun metodo di pagamento salvato.</p>
-            <a href="modificaInfo.jsp" class="button">Aggiungi Metodo di Pagamento</a>
-        <% } %>
+        <form action="info" method="get">
+            <input type="hidden" name="mode" value="add">
+            <input type="hidden" name="target" value="metodoPagamento">
+            <button class="button">Aggiungi Metodo di Pagamento</button>
+        </form>
+
+        <div class="myaccount-table table-responsive text-center">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Numero carta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        PaymentMethodDAO metodoDiPagamentoDAO = new PaymentMethodDAO();
+                        List<PaymentMethodBean> metodiDiPagamento = null;
+
+                        try {
+                            metodiDiPagamento = metodoDiPagamentoDAO.doRetrieveByEmail(userEmail);
+                        } catch (Exception e) {
+                            out.println("Errore: " + e.getMessage());
+                        }
+
+                        if (metodiDiPagamento != null && !metodiDiPagamento.isEmpty()) {
+                            for (PaymentMethodBean metodo : metodiDiPagamento) {
+                                if (metodo.getType().equals("IBAN")) {
+                                    continue; // ignora IBAN
+                                }
+                    %>
+                    <tr>
+                        <td><%= metodo.getType() %></td>
+                        <td><%= metodo.getCardNumber() %></td>
+                    </tr>
+                    <%       }
+                        } else { %>
+                    <tr>
+                        <td colspan="2">Nessun metodo di pagamento trovato per l'email <%= userEmail %>.</td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <div class="tab-pane fade" id="orders" role="tabpanel">
+        <div class="myaccount-content">
+            <h3>I tuoi Ordini</h3>
+            <div class="myaccount-table table-responsive text-center">
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Data</th>
+                            <th>Costo Totale</th>
+                            <th>Dettagli</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            OrderDAO ordineDAO = new OrderDAO();
+                            List<OrderBean> ordini = null;
+
+                            try {
+                                ordini = ordineDAO.doRetrieveByEmail(userEmail);
+                            } catch (Exception e) {
+                                out.println("Errore: " + e.getMessage());
+                            }
+
+                            if (ordini != null && !ordini.isEmpty()) {
+                                for (OrderBean ordine : ordini) {
+                        %>
+                        <tr>
+                            <td><%= ordine.getDate() %></td>
+                            <td><%= ordine.getTotalCost() %></td>
+                            <td><a href="visualizzaOrdine.jsp?id=<%= ordine.getId() %>" class="button">Visualizza</a></td>
+                        </tr>
+                        <%   }
+                            } else { %>
+                        <tr>
+                            <td colspan="3">Nessun ordine trovato per l'email <%= userEmail %>.</td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+                                <!-- Single Tab Content Start -->
+                                <!-- Single Tab Content Start -->
+<div class="tab-pane fade" id="address" role="tabpanel">
+    <div class="myaccount-content">
+        <h3>I tuoi Indirizzi di Spedizione</h3>
+		<form action="info" method="get">
+	  		<input type="hidden" value="<% out.print(request.getSession().getAttribute("utente"));%>" name="utente">
+	  		<input type="hidden" name="mode" value="add">
+	  		<input type="hidden" name="target" value="indirizzo">
+	        <button class="button">Aggiungi Indirizzo</button>
+        </form>
+        <div class="myaccount-table table-responsive text-center">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Città</th>
+                        <th>Provincia</th>
+                        <th>CAP</th>
+                        <th>Via</th>
+                        <th>Civico</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%-- Recupero gli indirizzi di spedizione dell'utente loggato --%>
+                    <%
+                        AddressDAO indirizzoDAO = new AddressDAO();
+                        List<AddressBean> indirizzi = null;
+
+                        if (userEmail != null && !userEmail.isEmpty()) {
+                            try {
+                                indirizzi = indirizzoDAO.doRetrieveByEmail(userEmail);
+                            } catch (Exception e) {
+                                out.println("Errore: " + e.getMessage());
+                            }
+                        }
+
+                        if (indirizzi != null && !indirizzi.isEmpty()) {
+                            for (AddressBean indirizzo : indirizzi) {
+                    %>
+                    <tr>
+                        <td><%= indirizzo.getCity() %></td>
+                        <td><%= indirizzo.getProvince() %></td>
+                        <td><%= indirizzo.getPostalCode() %></td>
+                        <td><%= indirizzo.getStreet() %></td>
+                        <td><%= indirizzo.getStreetNumber() %></td>
+                    </tr>
+                    <%
+                            }
+                        } else {
+                    %>
+                    <tr>
+                        <td colspan="6">Nessun indirizzo trovato per l'email <%= userEmail %>.</td>
+                    </tr>
+                    <%
+                        }
+                    %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 </div>
 
 <%@ include file="fragments/Footer.jsp" %>

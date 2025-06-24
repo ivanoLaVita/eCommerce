@@ -199,7 +199,7 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
 		
 		List<PaymentMethodBean> metodiPagamento = new ArrayList<>();
 		
-		String query = "SELECT * FROM " + PaymentMethodDAO.TABLE_NAME + " WHERE utenteEmail = ?;";
+		String query = "SELECT * FROM " + PaymentMethodDAO.TABLE_NAME + " WHERE userEmail = ?;";
 		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
@@ -213,10 +213,10 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
 				PaymentMethodBean pagamento = new PaymentMethodBean();
 				
 				pagamento.setId(result.getInt("id"));
-				pagamento.setType(result.getString("tipo"));
+				pagamento.setType(result.getString("type"));
 				pagamento.setIban(result.getString("iban"));
-				pagamento.setCardNumber(result.getString("numeroCarta"));
-				pagamento.setUserEmail(result.getString("utenteEmail"));
+				pagamento.setCardNumber(result.getString("cardNumber"));
+				pagamento.setUserEmail(result.getString("userEmail"));
 
 				metodiPagamento.add(pagamento);
 			}
