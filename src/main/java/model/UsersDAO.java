@@ -24,12 +24,12 @@ public class UsersDAO extends AbstractDAO<UsersBean> {
             con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(query);
 
-            ps.setString(2, users.getEmail());
-            ps.setString(3, users.getUsername());
-            ps.setString(4, users.getPassword());
-            ps.setString(5, users.getFirstName());
-            ps.setString(6, users.getLastName());
-            ps.setBoolean(7, users.isAdmin());
+            ps.setString(1, users.getEmail());
+            ps.setString(2, users.getUsername());
+            ps.setString(3, users.getPassword());
+            ps.setString(4, users.getFirstName());
+            ps.setString(5, users.getLastName());
+            ps.setBoolean(6, users.isAdmin());
 
             ps.executeUpdate();
             con.commit();

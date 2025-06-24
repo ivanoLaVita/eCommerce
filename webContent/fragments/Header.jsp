@@ -32,7 +32,7 @@
                 <a href="<%= request.getContextPath() %>/register.jsp" class="button-secondary">Registrati</a>
             <% } else { %>
                 <a href="<%= request.getContextPath() %>/memberArea.jsp" class="button-secondary">Area Personale</a>
-                <a href="<%= request.getContextPath() %>/LogoutServlet" class="button-secondary">Logout</a>
+                <a href="<%= request.getContextPath() %>/logout" class="button-secondary">Logout</a>
             <% } %>
             <a href="<%= request.getContextPath() %>/cart.jsp" class="cart-icon">
                 🛒 <span class="cart-count"><%= cartSize %></span>

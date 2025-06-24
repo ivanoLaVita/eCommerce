@@ -220,18 +220,18 @@ public class AddressDAO extends AbstractDAO<AddressBean> {
             statement.setString(1, key);
 
             // Esegui la query
-            ResultSet result = statement.executeQuery();
+            ResultSet rs = statement.executeQuery();
 
             // Recupera i dati dal ResultSet
-            while (result.next()) {
+            while (rs.next()) {
             	AddressBean indirizzo = new AddressBean();
-                indirizzo.setId(result.getInt("id"));
-                indirizzo.setCity(result.getString("citta"));
-                indirizzo.setProvince(result.getString("provincia"));
-                indirizzo.setPostalCode(result.getString("cap"));
-                indirizzo.setStreet(result.getString("via"));
-                indirizzo.setStreetNumber(result.getString("civico"));
-                indirizzo.setUserEmail(result.getString("utenteEmail"));
+                indirizzo.setId(rs.getInt("id"));
+                indirizzo.setCity(rs.getString("city"));
+                indirizzo.setProvince(rs.getString("province"));
+                indirizzo.setPostalCode(rs.getString("postalCode"));
+                indirizzo.setStreet(rs.getString("street"));
+                indirizzo.setStreetNumber(rs.getString("streetNumber"));
+                indirizzo.setUserEmail(rs.getString("userEmail"));
 
                 indirizzi.add(indirizzo);
             }
