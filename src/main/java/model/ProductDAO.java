@@ -267,6 +267,8 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
                 product.setName(rs.getString("name"));
                 product.setDescription(rs.getString("description"));
                 product.setPrice(rs.getDouble("price"));
+                product.setImage(rs.getString("image")); 
+                product.setCategoryName(rs.getString("categoryName")); 
                 
                 // Solo se il campo gender esiste ed è usato correttamente come enum
                 product.setGender(ProductBean.ProductGender.valueOf(rs.getString("gender")));

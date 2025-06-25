@@ -27,22 +27,32 @@ public class ProductDetailsServlet extends HttpServlet {
         String productId = request.getParameter("id");
         ProductBean product = null;
 
-        if (productId != null && !productId.isEmpty()) {
+        /* if (productId != null && !productId.isEmpty()) {
             try {
                 ProductDAO dao = new ProductDAO();
                 product = dao.doRetrieveByKey(productId);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        } */
+        
+        try {
+            int id = Integer.parseInt(productId); // può lanciare solo NumberFormatException
+            ProductDAO dao = new ProductDAO();
+            product = dao.doRetrieveById(id);     // NON lancia SQLException
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
+
+
 
         if (product != null) {
             request.setAttribute("product", product);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("productDetails.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("infoProdotti.jsp");
             dispatcher.forward(request, response);
         } else {
             // prodotto non trovato: redirect o errore
-            response.sendRedirect("catalog.jsp");
+            response.sendRedirect("catalogo.jsp");
         }
     }
 

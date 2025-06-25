@@ -34,7 +34,7 @@
                 <div class="error-page-content-wrap">
                     <h2>Errore</h2>
                     <h3>
-                    	Siamo spiacenti ma la pagina che stai cercando non esiste, è stata rimossa, ha cambiato nome oppure lo è
+                    	Siamo spiacenti ma la pagina che stai cercando non esiste, è stata rimossa, ha cambiato nome oppure è
                         temporaneamente non disponibile.
                     </h3>    
                     <a href="HomePage.jsp" class="button">Ritorna alla home</a>

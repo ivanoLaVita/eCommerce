@@ -97,7 +97,7 @@
                             <span class="price">€ <%= String.format("%.2f", product.getPrice()) %></span>
 
                             <div class="product-actions">
-                                <a href="productDetail?id=<%= product.getId() %>" class="button-outline">Dettagli</a>
+                               <a href="productDetails?id=<%= product.getId() %>" class="button-outline">Dettagli</a>
                                 <form action="cart" method="post" style="display: inline;">
                                     <input type="hidden" name="action" value="add">
                                     <input type="hidden" name="productId" value="<%= product.getId() %>">

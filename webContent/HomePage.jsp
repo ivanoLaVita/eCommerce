@@ -89,7 +89,7 @@
     <%
         if (products != null && !products.isEmpty()) {
             for (ProductBean product : products) {
-                if (product.getId() >= 1 && product.getId() <= 3) {
+                if (product.getId() == 1 || product.getId() == 3 || product.getId() == 6 ) {
     %>
         <div class="product-item">
             <a href="productDetail?id=<%= product.getId() %>" class="product-link">
@@ -108,7 +108,7 @@
             <span class="price">€ <%= String.format("%.2f", product.getPrice()) %></span>
 
             <div class="product-actions">
-                <a href="productDetail?id=<%= product.getId() %>" class="button-outline">Dettagli</a>
+                               <a href="productDetails?id=<%= product.getId() %>" class="button-outline">Dettagli</a>
                 <form action="cart" method="post" style="display: inline;">
                     <input type="hidden" name="mode" value="add">
                     <input type="hidden" name="productId" value="<%= product.getId() %>">
