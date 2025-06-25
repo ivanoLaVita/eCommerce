@@ -91,11 +91,12 @@
                 <td><%= product.getName() %></td>
                 <td>€ <%= String.format("%.2f", product.getPrice()) %></td>
                 <td>
-                    <input type="number" id="qty-<%= productId %>" value="<%= quantity %>" min="1" onchange="updateQuantity(<%= productId %>)">
+                    <input type="number" id="qty-<%= productId %>" value="<%= quantity %>" min="1"
+       					onchange="updateQuantity(<%= productId %>)" class="cart-qty-input">
                 </td>
                 <td>€ <%= String.format("%.2f", subtotal) %></td>
                 <td>
-                    <button onclick="removeItem(<%= productId %>)">Rimuovi</button>
+                    <button onclick="removeItem(<%= productId %>)" class="button-remove">Rimuovi</button>
                 </td>
             </tr>
             <%

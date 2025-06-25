@@ -1318,3 +1318,37 @@ a.product-link:hover img {
 .product-item * {
     transition: transform 0.3s ease, opacity 0.3s ease, color 0.3s ease;
 }
+
+/* Input quantità nel carrello */
+.cart-table input[type="number"] {
+    width: 70px;
+    padding: 6px 10px;
+    font-size: 0.95em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cart-table input[type="number"]:focus {
+    border-color: #bfa046;
+    box-shadow: 0 0 6px rgba(191, 160, 70, 0.4);
+    outline: none;
+}
+
+/* Pulsante Rimuovi */
+.button-remove {
+    background: linear-gradient(to right, #999, #ccc); /* argento */
+    color: #000;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-remove:hover {
+    background: linear-gradient(to right, #ccc, #999);
+    transform: translateY(-2px);
+}
