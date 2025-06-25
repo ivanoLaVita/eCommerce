@@ -58,7 +58,7 @@
                         <% } else { %>
                         <li><a class="button" href="memberArea.jsp">Ordini</a></li>
                         <% } %>
-                        <li><a class="button" href="ordine.jsp?idOrdine=<%= idOrdine %>" class="active">Dettagli Ordine</a></li>
+                        
                     </ul>
                 </div>
             </div>
