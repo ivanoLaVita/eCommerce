@@ -1653,3 +1653,196 @@ a.product-link:hover img {
 .add-to-cart-form button:hover {
     background-color: #a88d5e;
 }
+
+/* Stile per visualizzaOrdine.jsp */
+
+.order-detail-wrapper {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.order-detail-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.order-detail-header h1 {
+    font-size: 2.8em;
+    color: #bfa046;
+    margin-bottom: 10px;
+}
+
+.order-detail-header .breadcrumb {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.order-detail-header .breadcrumb li {
+    margin: 0 5px;
+}
+
+.order-detail-header .breadcrumb li a {
+    color: #5a3c3c;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.order-detail-header .breadcrumb li a.active {
+    font-weight: bold;
+    color: #bfa046;
+}
+
+.order-detail-header .breadcrumb li:not(:last-child)::after {
+    content: ' / ';
+    margin-left: 5px;
+    color: #999;
+}
+
+
+.order-items-section {
+    background-color: #fff;
+    border: 1px solid #e2d9c7;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.order-table th, .order-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.order-table th {
+    background-color: #f7f5f0;
+    color: #a68b00;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.order-table td {
+    color: #333;
+}
+
+.order-table .pro-thumbnail img {
+    max-width: 80px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.order-table .pro-title a {
+    color: #5a3c3c;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.order-table .pro-title a:hover {
+    color: #bfa046;
+    text-decoration: underline;
+}
+
+.order-table .pro-price,
+.order-table .pro-quantity {
+    font-weight: bold;
+    color: #bfa046;
+}
+
+.cart-calculator-wrapper {
+    background-color: #fdf8f0;
+    border: 1px solid #e2d9c7;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    width: 100%;
+    max-width: 400px; /* Adjust as needed */
+    margin-left: auto; /* Aligns to the right */
+}
+
+.cart-calculator-wrapper h3 {
+    font-size: 2em;
+    color: #bfa046;
+    margin-bottom: 25px;
+    text-align: center;
+    border-bottom: 2px solid #e2d9c7;
+    padding-bottom: 15px;
+}
+
+.cart-calculate-items table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-calculate-items table tr td {
+    padding: 10px 0;
+    border-bottom: 1px dashed #e2d9c7;
+    color: #555;
+}
+
+.cart-calculate-items table tr:last-child td {
+    border-bottom: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.cart-calculate-items table tr td:last-child {
+    text-align: right;
+    color: #bfa046;
+}
+
+/* Responsive adjustments for order detail */
+@media (max-width: 768px) {
+    .order-table, .order-table thead, .order-table tbody, .order-table th, .order-table td, .order-table tr {
+        display: block;
+    }
+    .order-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    .order-table tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    .order-table td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+    .order-table td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #555;
+    }
+    .order-table td.pro-thumbnail:before { content: "Immagine:"; }
+    .order-table td.pro-title:before { content: "Prodotto:"; }
+    .order-table td.pro-price:before { content: "Prezzo:"; }
+    .order-table td.pro-quantity:before { content: "Quantità:"; }
+
+    .cart-calculator-wrapper {
+        margin-right: auto; /* Center on small screens */
+    }
+}

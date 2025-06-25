@@ -82,13 +82,13 @@ DROP TABLE IF EXISTS inserimento;
 CREATE TABLE inserimento (
 id				int				NOT NULL AUTO_INCREMENT,
 prodottoId     	int             NOT NULL,
-ordersId       	int             NOT NULL,
+ordineId       	int             NOT NULL,
 quantita       	int             NOT NULL,
 immagine      	varchar(1000)   DEFAULT NULL,
 nome           	varchar(100)    NOT NULL,
 costo          	int             NOT NULL,
-PRIMARY KEY (id, ordersId),
-FOREIGN KEY (ordersId) REFERENCES orders(id) ON UPDATE CASCADE ON DELETE CASCADE
+PRIMARY KEY (id, ordineId),
+FOREIGN KEY (ordineId) REFERENCES orders(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
 INSERT INTO users (email, username, password, firstname, lastname, admin) VALUES
@@ -136,7 +136,7 @@ INSERT INTO orders (id, date, totalCost, userEmail) VALUES
 
 
 -- Insert values into 'inserimento' table
-INSERT INTO inserimento (id, prodottoId, ordersId, quantita, immagine, nome, costo) VALUES
+INSERT INTO inserimento (id, prodottoId, ordineId, quantita, immagine, nome, costo) VALUES
 (1, 1, 1, 1, 'assets/img/collana1.jpg', 'Collana Infinity', 130),
 (2, 2, 1, 1, 'assets/img/collana2.jpg', 'Collana Mesmera', 300),
 (3, 12, 1, 1, 'assets/img/orecchini3.jpg', 'Orecchini pendenti Mesmera', 130),
