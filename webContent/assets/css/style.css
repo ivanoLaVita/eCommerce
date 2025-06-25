@@ -1352,3 +1352,28 @@ a.product-link:hover img {
     background: linear-gradient(to right, #ccc, #999);
     transform: translateY(-2px);
 }
+
+.category-select {
+    appearance: none;
+    background-color: #ffffff;
+    border: 1px solid #bfa046;
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-size: 1em;
+    font-family: 'Cormorant Garamond', serif;  /* ✅ font raffinato */
+    text-transform: uppercase;                 /* ✅ tutte le lettere in maiuscolo */
+    letter-spacing: 0.5px;
+    color: #5a3c3c;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%235a3c3c" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-select:focus {
+    border-color: #a98e36;
+    outline: none;
+    box-shadow: 0 0 6px rgba(191, 160, 70, 0.3);
+}
+
