@@ -20,7 +20,7 @@
         <nav class="main-nav">
             <ul>
                 <li><a href="<%= request.getContextPath() %>/HomePage.jsp">Home</a></li>
-                <li><a href="#">Collezioni</a></li>
+                <li><a href="catalogo.jsp">Collezioni</a></li>
                 <li><a href="#">Novità</a></li>
                 <li><a href="#">Chi Siamo</a></li>
                 <li><a href="#">Contatti</a></li>

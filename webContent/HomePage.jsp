@@ -41,7 +41,7 @@
     <section class="hero-section">
         <h1>Esplora la Bellezza Senza Tempo</h1>
         <p>Scopri la nostra esclusiva collezione di gioielli, pensati per ogni momento speciale.</p>
-        <a href="#" class="button-primary">Scopri la Collezione</a>
+        <a href="catalogo.jsp" class="button-primary">Scopri la Collezione</a>
     </section>
 
     <section class="featured-products">

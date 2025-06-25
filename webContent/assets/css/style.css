@@ -1127,3 +1127,194 @@ form.form input[type="submit"]:hover,
 .cart-actions button:hover {
     background-color: #8c7300;
 }
+
+/* =================================
+   Catalog Page Styles
+   ================================= */
+
+.catalog-page-content {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.catalog-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.catalog-header h1 {
+    font-size: 2.8em;
+    color: #bfa046;
+    margin-bottom: 10px;
+}
+
+.catalog-header p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+/* --- Filter and Search Bar --- */
+.filter-bar-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+}
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap; /* Per la responsività */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.filter-bar .form-group-search,
+.filter-bar .form-group-category {
+    flex-grow: 1;
+}
+
+.filter-bar .search-field,
+.filter-bar .category-select {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-bar .search-field:focus,
+.filter-bar .category-select:focus {
+    border-color: #bfa046;
+    outline: none;
+    box-shadow: 0 0 5px rgba(191, 160, 70, 0.5);
+}
+
+.filter-bar .button-primary {
+    padding: 12px 30px;
+    flex-shrink: 0; /* Impedisce al bottone di rimpicciolirsi */
+}
+
+/* Stili per la griglia dei prodotti (riutilizza e adatta da .product-grid) */
+#product-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* Stili per il singolo prodotto (riutilizza e adatta da .product-item) */
+.product-item .product-meta {
+    font-size: 0.85em;
+    color: #777;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.product-item .product-description {
+    font-size: 0.9em;
+    color: #666;
+    max-height: 4.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 15px;
+}
+
+.product-item .product-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-item .product-actions .button-outline,
+.product-item .product-actions .add-to-cart-btn {
+    padding: 8px 12px;
+    font-size: 0.85em;
+    flex: 1; /* Occupa lo spazio disponibile in modo equo */
+}
+
+/* Messaggio di "Nessun Risultato" */
+.no-results {
+    grid-column: 1 / -1; /* Occupa tutta la larghezza della griglia */
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #fdfdfd;
+    border: 1px dashed #ddd;
+    border-radius: 8px;
+    color: #888;
+}
+
+.no-results p {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Link del prodotto che avvolge l'immagine */
+a.product-link {
+    display: block;
+    margin-bottom: 15px;
+}
+
+a.product-link img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+a.product-link:hover img {
+    transform: scale(1.05);
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .catalog-header h1 {
+        font-size: 2.2em;
+    }
+}
+
+/* === FIX: Ingrandimento prodotto e descrizione fluida === */
+.product-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, height 0.3s ease;
+    position: relative;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
+}
+
+.product-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+/* Rimuoviamo altezza fissa e permettiamo espansione */
+.product-item .product-description {
+    max-height: 4.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: max-height 0.3s ease;
+}
+
+.product-item:hover .product-description {
+    max-height: 1000px;
+    overflow: visible;
+}
+
+/* Transizione fluida anche per elementi interni */
+.product-item * {
+    transition: transform 0.3s ease, opacity 0.3s ease, color 0.3s ease;
+}
