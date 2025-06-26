@@ -220,6 +220,33 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
 
         return product;
     }
+    
+    public synchronized List<ProductBean> doRetrieveByNameLike(String name) throws SQLException {
+        List<ProductBean> products = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE LOWER(name) LIKE LOWER(?)";
+
+        try {
+            con = DriverManagerConnectionPool.getConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, "%" + name + "%");  // cerca anche parzialmente
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ProductBean p = extractProductFromResultSet(rs);
+                products.add(p);
+            }
+        } finally {
+            if (ps != null) ps.close();
+            DriverManagerConnectionPool.releaseConnection(con);
+        }
+
+        return products;
+    }
+
 
     /*
      * Cerca prodotti per nome, categoria o genere (ricerca parziale e case-insensitive)
