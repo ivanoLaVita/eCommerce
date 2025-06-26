@@ -3,19 +3,20 @@ $(document).ready(function () {
     let usernameValidator = /^[a-zA-Z0-9_.]{4,15}$/;
     let nameValidator = /^[a-zA-Z]{3,}$/;
 
-    let validEmail = true;
+    //let validEmail = true;
     let validUsername = true;
     let validPwdCheck = true;
     let validName = true;
     let validSurname = true;
 
-    let slideEmail = 0;
+    //let slideEmail = 0;
     let slideUsername = 0;
     let slidePwd = 0;
     let slideNome = 0;
     let slideSurname = 0;
 
-    // Validate email
+   /*
+	 // Validate email
     $("#emailNuovo").keyup(function () {
         let email = $(this).val();
 
@@ -51,7 +52,7 @@ $(document).ready(function () {
             }
             $("#error-email").text("Please enter a valid email address");
         }
-    });
+    });*/
 
     // Validate username
     $("#usernameNuovo").keyup(function () {
@@ -172,7 +173,7 @@ $(document).ready(function () {
 
     // Submit only if all fields are valid
     $("#modificaInfoBtn").click(function (event) {
-        if (validEmail && validPwdCheck && validUsername && validName && validSurname) {
+        if (validPwdCheck && validUsername && validName && validSurname) {
             $("#modificaInfo").submit();
         } else {
             event.preventDefault();
