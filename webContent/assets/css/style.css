@@ -326,7 +326,7 @@ a:hover {
 }
 
 /* .social-icons img:hover {
-    filter: invert(70%) sepia(20%) saturate(1000%) hue-rotate(300deg) brightness(120%) contrast(100%); /* A light gold/brown tint 
+    filter: invert(70%) sepia(20%) saturate(1000%) hue-rotate(300deg) brightness(120%) contrast(100%); /* A light gold/brown tint
 } */
 
 
@@ -1374,7 +1374,7 @@ a.product-link:hover img {
 .category-select:focus {
     border-color: #a98e36;
     outline: none;
-    box-shadow: 0 0 6px rgba(191, 160, 70, 0.3);
+    box-shadow: 0 0 6px rgba(191, 160, 70, 0.5);
 }
 
 
@@ -1845,4 +1845,34 @@ a.product-link:hover img {
     .cart-calculator-wrapper {
         margin-right: auto; /* Center on small screens */
     }
+}
+
+	/* Stile elegante per i <select> */
+.styled-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #bfa046; /* Gold border */
+  border-radius: 8px;
+  background-color: #fefaf2; /* Light gold background */
+  font-size: 1rem;
+  font-family: 'Cormorant Garamond', serif; /* Elegant font */
+  color: #3d2c2c; /* Dark brown for text */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"><path d="M0 3h10L5 8z" fill="%233d2c2c"/></svg>'); /* Arrow matching text color */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 0.5px; /* Spacing for elegance */
+  cursor: pointer;
+}
+
+.styled-select:focus {
+  border-color: #a98e36; /* Darker gold on focus */
+  outline: none;
+  background-color: #fff; /* White background on focus for clarity */
+  box-shadow: 0 0 8px rgba(191, 160, 70, 0.3); /* Gold shadow on focus */
 }

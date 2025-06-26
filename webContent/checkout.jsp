@@ -55,7 +55,7 @@
         <!-- Indirizzo di fatturazione -->
         <div class="section">
             <label for="addressId">Seleziona un indirizzo:</label>
-            <select name="addressId" id="addressId" required>
+            <select name="addressId" id="addressId" class="styled-select" required>
                 <%
                     AddressDAO addressDAO = new AddressDAO();
                     List<AddressBean> addresses = addressDAO.doRetrieveByEmail(user.getEmail());
@@ -84,7 +84,7 @@
         <!-- Metodo di pagamento -->
         <div class="section">
             <label for="paymentId">Metodo di pagamento:</label>
-            <select name="paymentId" id="paymentId" required>
+            <select name="paymentId" id="paymentId" class="styled-select" required>
                 <%
                     PaymentMethodDAO payDAO = new PaymentMethodDAO();
                     List<PaymentMethodBean> methods = payDAO.doRetrieveByEmail(user.getEmail());
@@ -106,7 +106,7 @@
             <div id="newPaymentForm" style="display:none; margin-top:20px;">
                 <div class="single-input-item">
                     <label>Tipo:</label>
-                    <select name="newPaymentType">
+                    <select name="newPaymentType" class="styled-select">
                         <option value="CARD">Carta</option>
                         <option value="IBAN">IBAN</option>
                     </select>
