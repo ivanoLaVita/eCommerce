@@ -19,7 +19,7 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
         Connection con = null;
         PreparedStatement ps = null;
 
-        String query = "INSERT INTO " + TABLE_NAME + " (id, name, description, quantity, price, gender, image, categoryName) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO " + TABLE_NAME + " (id, name, description, quantity, price, gender, image, categoryName) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             con = DriverManagerConnectionPool.getConnection();

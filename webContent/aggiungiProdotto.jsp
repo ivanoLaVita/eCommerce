@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="meta description">
     <title>Aggiungi Prodotto</title> 
-    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon"/>
+    
     
     <!--== Google Fonts ==-->
     <link rel="stylesheet" type="text/css"
@@ -18,62 +18,43 @@
 
     <!--=== Main Style CSS ===-->
     <link href="assets/css/style.css" rel="stylesheet">
-    
 </head>
 <body>
 
 <jsp:include page="fragments/Header.jsp" />
 
 <!--== Page Content Wrapper Start ==-->
-<div id="page-content-wrapper" class="p-9">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 m-auto">
-                <div class="login-register-wrapper">
-                    <div class="tab-content" id="login-reg-tabcontent">
-                        <div class="tab-pane fade show active" id="register" role="tabpanel">
-                            <div class="login-reg-form-wrap">
-                                <form action="adminEditProduct" method="get">
-                                <input required type="hidden" name="mode" value="add">
-	                                <div class="single-input-item">
-	                                        <input type="text" placeholder="ID" id="id" name="id" required>
-	                                </div> 
-                                    <div class="single-input-item">
-                                        <input type="text" placeholder="Nome" id="name" name="name" required>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <textarea placeholder="Descrizione" id="description" name="description" required></textarea>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <input type="number" placeholder="Quantità" id="quantity" name="quantity" required>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <input type="number" placeholder="Costo" id="price" name="price" required>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <select class="form-control" id="gender" name="gender" required>
-                                            <option value="M">Maschile</option>
-                                            <option value="F">Femminile</option>
-                                        </select>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <input type="text" placeholder="Immagine URL" id="image" name="image" required>
-                                    </div>
-                                    
-                                    <div class="single-input-item">
-                                        <input type="text" placeholder="Categoria" id="category" name="category" required>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <button class="btn-login" type="submit">Aggiungi Prodotto</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="admin-form-container">
+    <h2>AGGIUNGI PRODOTTO</h2>
+    <form action="adminEditProduct" method="get">
+        <input type="hidden" name="mode" value="add">
+
+        <label for="name">Nome</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="description">Descrizione</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <label for="quantity">Quantità</label>
+        <input type="number" id="quantity" name="quantity" required>
+
+        <label for="price">Costo</label>
+        <input type="number" step="0.01" id="price" name="price" required>
+
+        <label for="gender">Sesso</label>
+        <select id="gender" name="gender" required>
+            <option value="M">Maschile</option>
+            <option value="F">Femminile</option>
+        </select>
+
+        <label for="image">Immagine URL</label>
+        <input type="text" id="image" name="image" required>
+
+        <label for="category">Categoria</label>
+        <input type="text" id="category" name="category" required>
+
+        <button type="submit">Aggiungi Prodotto</button>
+    </form>
 </div>
 <!--== Page Content Wrapper End ==-->
 

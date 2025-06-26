@@ -128,11 +128,11 @@ INSERT INTO product (id, name, description, quantity, price, gender, image, cate
 -- Insert values into 'ordine' table
 -- Insert values into 'ordine' table
 INSERT INTO orders (id, date, totalCost, userEmail) VALUES
-(1, '2023-01-10', 560.00, 'mario@gmail.com'),  -- Collana Infinity + Collana Mesmera + Orecchini pendenti Mesmera
-(2, '2023-02-15', 1600.00, 'luigi@gmail.com'),  -- 2 * Collana Gema + Orecchini a lobo Constella
-(3, '2023-03-20', 240.00, 'musano@gmail.com'),  -- Anello Vittore + Orecchini a lobo Matrix
-(4, '2023-04-25', 340.00, 'ivano@gmail.com'),  -- Anello Hyperbola + Bracciale Mesmera
-(5, '2023-05-30', 660.00, 'mario@gmail.com');   -- Anello Cocktail Lucent + Bracciale Angelic + Bracciale Millenia
+(1, '2025-01-10', 560.00, 'mario@gmail.com'),  -- Collana Infinity + Collana Mesmera + Orecchini pendenti Mesmera
+(2, '2025-02-15', 1600.00, 'luigi@gmail.com'),  -- 2 * Collana Gema + Orecchini a lobo Constella
+(3, '2025-03-20', 240.00, 'musano@gmail.com'),  -- Anello Vittore + Orecchini a lobo Matrix
+(4, '2025-04-25', 340.00, 'ivano@gmail.com'),  -- Anello Hyperbola + Bracciale Mesmera
+(5, '2025-05-30', 660.00, 'mario@gmail.com');   -- Anello Cocktail Lucent + Bracciale Angelic + Bracciale Millenia
 
 
 -- Insert values into 'inserimento' table

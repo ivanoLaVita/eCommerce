@@ -1881,3 +1881,147 @@ a.product-link:hover img {
     background-color: #f8f9fa; /* Sfondo leggero per l'area di contenuto */
     /* padding: 50px 0; */ /* Spaziatura verticale */
 }
+
+.admin-form-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+}
+
+.admin-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    color: #333;
+}
+
+.admin-form-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #555;
+}
+
+.admin-form-container input,
+.admin-form-container select,
+.admin-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 16px;
+    font-size: 14px;
+    background-color: #fafafa;
+}
+
+.admin-form-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #d1b77f;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-form-container button:hover {
+    background-color: #d1b77f;
+}
+
+.myaccount-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.myaccount-content .form-group {
+    margin-bottom: 16px;
+}
+
+.myaccount-content label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.myaccount-content input[type="text"],
+.myaccount-content input[type="date"] {
+    padding: 8px 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+}
+
+.myaccount-content button {
+    padding: 10px 18px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #d1b77f;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.myaccount-content button:hover {
+    background-color: #a78967;
+}
+
+.myaccount-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
+
+.myaccount-table th,
+.myaccount-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+.myaccount-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #222;
+}
+
+.myaccount-table td {
+    color: #444;
+}
+
+.myaccount-table .btn-info,
+.myaccount-table .btn-danger {
+    padding: 6px 10px;
+    border-radius: 8px;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.myaccount-table .btn-info {
+    background-color: #5bc0de;
+}
+
+.myaccount-table .btn-info:hover {
+    background-color: #31b0d5;
+}
+
+.myaccount-table .btn-danger {
+    background-color: #d9534f;
+}
+
+.myaccount-table .btn-danger:hover {
+    background-color: #c9302c;
+}
