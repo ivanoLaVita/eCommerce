@@ -19,7 +19,7 @@ function updateCart(input, productId) {
 
     $.ajax({
         type: "GET",
-        url: "cart", // ✅ aggiornato
+        url: "cart", 
         data: formData,
         dataType: "html",
         success: function(data) {
@@ -61,7 +61,7 @@ function proseguiOrdine() {
 
     $.ajax({
         type: "GET",
-        url: "order", // ✅ aggiornato
+        url: "order", 
         data: formData,
         dataType: "html",
         success: function(data) {
