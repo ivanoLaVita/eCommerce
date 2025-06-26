@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="fragments/Header.jsp" %>
+<jsp:include page="fragments/Header.jsp" />
+<link rel="stylesheet" href="assets/css/style.css">
 
 <%
     String target = (String) request.getAttribute("target");
@@ -79,4 +80,4 @@
     </form>
 </div>
 
-<%@ include file="fragments/Footer.jsp" %>
+<jsp:include page="fragments/Footer.jsp" />
