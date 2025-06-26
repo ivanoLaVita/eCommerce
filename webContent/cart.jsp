@@ -134,6 +134,7 @@
 </div>
 
 <%@ include file="fragments/Footer.jsp" %>
+<script src = "js/updateCart.js"></script>
 </body>
 <script src = "js/updateCart.js"></script>
 </html>

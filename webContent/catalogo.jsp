@@ -124,7 +124,6 @@
     </main>
 
     <jsp:include page="fragments/Footer.jsp" />
-
+     <script src="js/search.js"></script>
 </body>
- <script src="js/search.js"></script>
 </html>

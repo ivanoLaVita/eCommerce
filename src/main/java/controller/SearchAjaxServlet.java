@@ -32,7 +32,7 @@ public class SearchAjaxServlet extends HttpServlet {
 
         try {
             ProductDAO dao = new ProductDAO();
-            List<ProductBean> results = dao.doRetrieveByNameLike(query); // metodo da creare nel DAO
+            List<ProductBean> results = dao.searchBy(query);
 
             PrintWriter out = response.getWriter();
             out.print("[");

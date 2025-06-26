@@ -220,7 +220,7 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
 
         return product;
     }
-    
+   /* 
     public synchronized List<ProductBean> doRetrieveByNameLike(String name) throws SQLException {
         List<ProductBean> products = new ArrayList<>();
         Connection con = null;
@@ -245,7 +245,7 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
         }
 
         return products;
-    }
+    }*/
 
 
     /*
