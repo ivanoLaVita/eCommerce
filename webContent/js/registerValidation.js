@@ -25,19 +25,19 @@ $(document).ready(function(){
         validatePassword();
     });
     
-    $("#passwordCheck").keyup(function () {
+    $("#passwordConfirm").keyup(function () {
         validatePasswordMatch();
     });
     
-    $("#nome").keyup(function () {
+    $("#firstName").keyup(function () {
         validateName();
     });
     
-    $("#cognome").keyup(function () {
+    $("#lastName").keyup(function () {
         validateSurname();
     });
     
-    $("#registrazione").submit(function(event) {
+    $(".register-form").submit(function(event) {
         validateAllFields(event);
     });
 
@@ -95,7 +95,7 @@ $(document).ready(function(){
         if(username.match(usernameValidator)){
             $.ajax({
                 type: "POST",
-                url: "RegistrationServlet", // 
+                url: "RegistrationServlet",
                 data: {
                     mode: "checkUsername",
                     username: username,
@@ -164,7 +164,7 @@ $(document).ready(function(){
     
     function validatePasswordMatch() {
         let pwd = $("#password").val();
-        let pwdCheck = $("#passwordCheck").val();
+        let pwdCheck = $("#passwordConfirm").val();
         let slidePwd = 0;
         
         if(pwdCheck === pwd){
@@ -179,7 +179,7 @@ $(document).ready(function(){
     }
     
     function validateName() {
-        let nome = $("#nome").val();
+        let nome = $("#firstName").val();
         let slideNome = 0;
         
         if(nome.match(nameValidator)){
@@ -214,7 +214,7 @@ $(document).ready(function(){
     }
     
     function validateSurname() {
-        let cognome = $("#cognome").val();
+        let cognome = $("#lastName").val();
         let slideSurname = 0;
         
         if(cognome.match(nameValidator)){
