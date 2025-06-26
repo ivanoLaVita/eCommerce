@@ -2188,3 +2188,96 @@ a.product-link:hover img {
 #ibanField, #cardField {
     margin-top: 10px;
 }
+
+
+/* === Responsive layout: tablets (≤ 992px) === */
+@media (max-width: 992px) {
+  .container, .section {
+    padding: 20px;
+  }
+
+  .form-container {
+    width: 90%;
+  }
+
+  .cart-table td,
+  .cart-table th {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .title, h2, h3 {
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  .styled-select {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .single-input-item input,
+  .single-input-item select {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  button.button,
+  .button-secondary,
+  .button-primary {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px;
+    margin-top: 10px;
+  }
+}
+
+/* === Responsive layout: smartphones (≤ 768px) === */
+@media (max-width: 768px) {
+  .cart-table img {
+    width: 60px;
+    height: auto;
+  }
+
+  .cart-table th, .cart-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .myaccount-content {
+    padding: 15px;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .form-container h2 {
+    font-size: 1.4em;
+  }
+
+  .form-container form label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .form-container form input,
+  .form-container form select {
+    font-size: 14px;
+    padding: 8px;
+    width: 100%;
+  }
+
+  #newAddressForm,
+  #newPaymentForm {
+    margin-top: 15px;
+  }
+
+  .button,
+  .button-secondary,
+  .button-primary {
+    width: 100%;
+    padding: 10px;
+  }
+}
