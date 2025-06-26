@@ -216,7 +216,7 @@ public class OrderDAO extends AbstractDAO<OrderBean> {
                 order.setId(rs.getInt("id"));
                 order.setDate(rs.getString("date"));
                 order.setTotalCost(rs.getDouble("totalCost"));
-                order.setUserEmail(rs.getString("userId"));
+                order.setUserEmail(rs.getString("userEmail"));
                 orders.add(order);
             }
         } finally {

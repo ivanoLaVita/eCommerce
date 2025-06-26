@@ -40,11 +40,11 @@ public class ProductEditAdminServlet extends HttpServlet {
                 String id = request.getParameter("productId");
                 ProductBean product = productDAO.doRetrieveByKey(id);
                 request.setAttribute("product", product);
-                pathForward = "editProduct.jsp";
+                pathForward = "modificaProdotto.jsp";
 
             } else if ("add".equalsIgnoreCase(mode)) {
                 ProductBean product = new ProductBean();
-
+                
                 product.setId(Integer.parseInt(request.getParameter("id")));
                 product.setName(request.getParameter("name"));
                 product.setDescription(request.getParameter("description"));

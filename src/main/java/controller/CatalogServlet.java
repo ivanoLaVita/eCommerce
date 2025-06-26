@@ -46,10 +46,10 @@ public class CatalogServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        String targetPage = "/catalog.jsp";
+        String targetPage = "/catalogo.jsp";
 
         if ("home".equalsIgnoreCase(mode)) {
-            targetPage = "/homePage.jsp";
+            targetPage = "/HomePage.jsp";
         }
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(targetPage);
@@ -74,7 +74,7 @@ public class CatalogServlet extends HttpServlet {
                 dispatcher.forward(request, response);
             } else {
                 // Altrimenti restituiamo la pagina intera
-                RequestDispatcher dispatcher = request.getRequestDispatcher("catalog.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
                 dispatcher.forward(request, response);
             }
 

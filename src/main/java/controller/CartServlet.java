@@ -124,10 +124,11 @@ public class CartServlet extends HttpServlet {
             session.setAttribute("cartSize", cartSize);
 
             // Solo l'aggiunta esegue il redirect
+            String referer = request.getHeader("referer");
             if ("add".equalsIgnoreCase(mode)) {
-                response.sendRedirect(request.getContextPath() + "/HomePage.jsp");
+            	response.sendRedirect(referer);
             }
-
+         
         } catch (SQLException | NumberFormatException e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore nella gestione del carrello.");
