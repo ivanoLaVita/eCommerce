@@ -13,16 +13,14 @@
 if (request.getSession().getAttribute("admin") != Boolean.TRUE)
     response.sendRedirect("catalogo?mode=home");
 
-List<ProductBean> prodotti = (List<ProductBean>) session.getAttribute("prodotti");
-if (prodotti == null) {
-    ProductDAO prodottoDAO = new ProductDAO();
-    try {
-        prodotti = prodottoDAO.doRetrieveAll("id");
-        session.setAttribute("prodotti", prodotti);
-    } catch (SQLException e) {
-        e.printStackTrace();
-        request.setAttribute("errorMessage", "Errore nel recupero dei prodotti");
-    }
+// Carica sempre i prodotti dal database
+List<ProductBean> prodotti = null;
+ProductDAO prodottoDAO = new ProductDAO();
+try {
+    prodotti = prodottoDAO.doRetrieveAll("id");
+} catch (SQLException e) {
+    e.printStackTrace();
+    request.setAttribute("errorMessage", "Errore nel recupero dei prodotti");
 }
 %>
 
