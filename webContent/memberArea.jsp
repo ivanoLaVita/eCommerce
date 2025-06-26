@@ -42,53 +42,61 @@
         <div class="row">
             <div class="col-lg-12">
 	<div class="tab-pane fade" id="orders" role="tabpanel">
-        <div class="myaccount-content">
-        <h3>Metodo di Pagamento</h3>
-        <form action="info" method="get">
-            <input type="hidden" name="mode" value="add">
-            <input type="hidden" name="target" value="metodoPagamento">
-            <button class="button">Aggiungi Metodo di Pagamento</button>
-        </form>
+<div class="myaccount-content">
+    <h3>Metodo di Pagamento</h3>
+    <form action="info" method="get">
+        <input type="hidden" name="mode" value="add">
+        <input type="hidden" name="target" value="metodoPagamento">
+        <button class="button">Aggiungi Metodo di Pagamento</button>
+    </form>
 
-        <div class="myaccount-table table-responsive text-center">
-            <table class="table table-bordered">
-                <thead class="thead-light">
-                    <tr>
-                        <th>Tipo</th>
-                        <th>Numero carta</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%
-                        PaymentMethodDAO metodoDiPagamentoDAO = new PaymentMethodDAO();
-                        List<PaymentMethodBean> metodiDiPagamento = null;
+    <div class="myaccount-table table-responsive text-center">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Tipo</th>
+                    <th>Dati</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    PaymentMethodDAO metodoDiPagamentoDAO = new PaymentMethodDAO();
+                    List<PaymentMethodBean> metodiDiPagamento = null;
 
-                        try {
-                            metodiDiPagamento = metodoDiPagamentoDAO.doRetrieveByEmail(userEmail);
-                        } catch (Exception e) {
-                            out.println("Errore: " + e.getMessage());
+                    try {
+                        metodiDiPagamento = metodoDiPagamentoDAO.doRetrieveByEmail(userEmail);
+                    } catch (Exception e) {
+                        out.println("Errore: " + e.getMessage());
+                    }
+
+                    if (metodiDiPagamento != null && !metodiDiPagamento.isEmpty()) {
+                        for (PaymentMethodBean metodo : metodiDiPagamento) {
+                            String tipo = metodo.getType();
+                            String dati = "";
+
+                            if ("CARD".equalsIgnoreCase(tipo)) {
+                                dati = metodo.getCardNumber() != null ? metodo.getCardNumber() : "N/D";
+                            } else if ("IBAN".equalsIgnoreCase(tipo)) {
+                                dati = metodo.getIban() != null ? metodo.getIban() : "N/D";
+                            }
+                %>
+                <tr>
+                    <td><%= tipo %></td>
+                    <td><%= dati %></td>
+                </tr>
+                <%
                         }
-
-                        if (metodiDiPagamento != null && !metodiDiPagamento.isEmpty()) {
-                            for (PaymentMethodBean metodo : metodiDiPagamento) {
-                                if (metodo.getType().equals("IBAN")) {
-                                    continue; // ignora IBAN
-                                }
-                    %>
-                    <tr>
-                        <td><%= metodo.getType() %></td>
-                        <td><%= metodo.getCardNumber() %></td>
-                    </tr>
-                    <%       }
-                        } else { %>
-                    <tr>
-                        <td colspan="2">Nessun metodo di pagamento trovato per l'email <%= userEmail %>.</td>
-                    </tr>
-                    <% } %>
-                </tbody>
-            </table>
-        </div>
+                    } else {
+                %>
+                <tr>
+                    <td colspan="2">Nessun metodo di pagamento trovato per l'email <%= userEmail %>.</td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
     </div>
+</div>
+
 
     <div class="tab-pane fade" id="orders" role="tabpanel">
         <div class="myaccount-content">
