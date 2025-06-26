@@ -67,7 +67,7 @@
 </div>
 <!--== Page Title Area End ==-->
 
-<div id="page-content-wrapper" class="p-9">
+<div id="page-content-order" class="p-9">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">

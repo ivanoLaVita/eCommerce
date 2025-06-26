@@ -19,19 +19,20 @@ public class ProductDAO extends AbstractDAO<ProductBean> {
         Connection con = null;
         PreparedStatement ps = null;
 
-        String query = "INSERT INTO " + TABLE_NAME + " (name, description, quantity, price, gender, image, categoryName) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO " + TABLE_NAME + " (id, name, description, quantity, price, gender, image, categoryName) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(query);
-
-            ps.setString(1, product.getName());
-            ps.setString(2, product.getDescription());
-            ps.setInt(3, product.getQuantity());
-            ps.setDouble(4, product.getPrice());
-            ps.setString(5, product.getGender().toString());
-            ps.setString(6, product.getImage());
-            ps.setString(7, product.getCategoryName());
+            
+            ps.setInt(1, product.getId());
+            ps.setString(2, product.getName());
+            ps.setString(3, product.getDescription());
+            ps.setInt(4, product.getQuantity());
+            ps.setDouble(5, product.getPrice());
+            ps.setString(6, product.getGender().toString());
+            ps.setString(7, product.getImage());
+            ps.setString(8, product.getCategoryName());
 
             ps.executeUpdate();
             con.commit();

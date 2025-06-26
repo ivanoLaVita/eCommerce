@@ -1876,3 +1876,8 @@ a.product-link:hover img {
   background-color: #fff; /* White background on focus for clarity */
   box-shadow: 0 0 8px rgba(191, 160, 70, 0.3); /* Gold shadow on focus */
 }
+
+#page-content-order {
+    background-color: #f8f9fa; /* Sfondo leggero per l'area di contenuto */
+    /* padding: 50px 0; */ /* Spaziatura verticale */
+}

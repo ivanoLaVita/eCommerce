@@ -89,8 +89,8 @@ if (prodotti == null) {
                                     <%
 									Boolean isLoggedIn = (Boolean) session.getAttribute("logged");
 							        if (isLoggedIn != null && isLoggedIn) {
-							            String nome = (String) session.getAttribute("nome");
-							            String cognome = (String) session.getAttribute("cognome");
+							            String nome = (String) session.getAttribute("firstName");
+							            String cognome = (String) session.getAttribute("lastName");
 							            out.println("<p>Bentornato, " + nome + " " + cognome + "!</p>");
 							        } else {
 							            out.println("<p>Perfavore <a href='loginPage.jsp'>login</a> per continuare.</p>");
@@ -99,9 +99,8 @@ if (prodotti == null) {
 									%>
                                     </div>
 
-                                     <p class="mb-0">Dalla dashboard del tuo account. puoi facilmente controllare e visualizzare il tuo
-                                        ordini recenti, gestisci i tuoi indirizzi di spedizione e fatturazione e modifica i tuoi
-                                        password e dettagli dell'account.
+                                     <p class="mb-0">Dalla dashboard del tuo account. puoi facilmente controllare e visualizzare gli
+                                        ordini e i prodotti nel catalogo.
                                      </p>
                                 </div>
                             </div>
@@ -213,18 +212,13 @@ if (prodotti == null) {
 
                      <!-- Single Tab Content End -->
 
-                  
-                      
-
-                   
-                    
                      <!-- Single Tab Content Start -->                       
 					 <div class="tab-pane fade" id="products" role="tabpanel">
 									    <div class="myaccount-content">
 									        <h3>Gestisci Prodotti</h3>
 									        
 									        
-									        <a href="aggiungiProdottoForm.jsp" class="btn btn-primary mb-3">Aggiungi Prodotto</a>
+									        <a href="aggiungiProdotto.jsp" class="btn btn-primary mb-3">Aggiungi Prodotto</a>
 									        
 									
 									        <div class="myaccount-table table-responsive text-center">
@@ -258,8 +252,8 @@ if (prodotti == null) {
 									                        <td><%= prodotto.getGender() %></td>
 									                        <td><%= prodotto.getCategoryName() %></td>
 									                        <td>
-									                            <a href="adminEditProduct?mode=edit&prodotto=<% out.println(prodotto.getId());%>" class="btn btn-info btn-sm">Modifica</a>
-									                            <a href="adminEditProduct?mode=delete&prodotto=<%= prodottoBean.getId() %>" class="btn btn-danger btn-sm">Elimina</a>
+									                            <a href="adminEditProduct?mode=edit&productId=<%= prodotto.getId() %>" class="btn btn-info btn-sm">Modifica</a>
+																<a href="adminEditProduct?mode=delete&productId=<%= prodotto.getId() %>" class="btn btn-danger btn-sm">Elimina</a>
 									                        </td>
 									                    </tr>
 									                    <%

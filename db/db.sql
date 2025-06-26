@@ -25,7 +25,7 @@ CREATE TABLE category (
 -- PRODUCT
 DROP TABLE IF EXISTS product;
 CREATE TABLE product (
-    id           INT             NOT NULL AUTO_INCREMENT,
+    id           INT             NOT NULL,
     name         VARCHAR(100)    NOT NULL,
     description  VARCHAR(500)    NOT NULL,
     quantity     INT             NOT NULL,
