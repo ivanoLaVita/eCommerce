@@ -19,22 +19,43 @@ public class PaymentMethodDAO extends AbstractDAO<PaymentMethodBean> {
         Connection con = null;
         PreparedStatement ps = null;
 
-        String query = "INSERT INTO " + TABLE_NAME + " (type, iban, cardNumber, userEmail) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO " + TABLE_NAME + 
+            " (type, iban, cardNumber, userEmail) VALUES (?, ?, ?, ?)";
 
         try {
             con = DriverManagerConnectionPool.getConnection();
             ps = con.prepareStatement(query);
-            ps.setString(1, method.getType().toString());
-            ps.setString(2, method.getIban());
-            ps.setString(3, method.getCardNumber());
+
+            ps.setString(1, method.getType());
+
+            // Attenzione: vanno gestiti NULL correttamente
+            if ("IBAN".equalsIgnoreCase(method.getType())) {
+                ps.setString(2, method.getIban());
+                ps.setNull(3, java.sql.Types.VARCHAR); // cardNumber null
+            } else if ("CARD".equalsIgnoreCase(method.getType())) {
+                ps.setNull(2, java.sql.Types.VARCHAR); // iban null
+                ps.setString(3, method.getCardNumber());
+            } else {
+                // tipo non valido
+                throw new SQLException("Tipo di pagamento non valido: " + method.getType());
+            }
+
             ps.setString(4, method.getUserEmail());
+
             ps.executeUpdate();
             con.commit();
+
         } finally {
-            if (ps != null) ps.close();
-            DriverManagerConnectionPool.releaseConnection(con);
+            try {
+                if (ps != null) ps.close();
+            } finally {
+                DriverManagerConnectionPool.releaseConnection(con);
+            }
         }
     }
+
+
+
 
     /*
      * Elimina un metodo di pagamento dal database usando l'ID come chiave

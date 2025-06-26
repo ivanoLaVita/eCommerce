@@ -10,6 +10,8 @@ import java.sql.SQLException;
 
 import model.AddressBean;
 import model.AddressDAO;
+import model.PaymentMethodBean;
+import model.PaymentMethodDAO;
 import model.UsersBean;
 import model.UsersDAO;
 import utils.PasswordUtils;
@@ -69,7 +71,6 @@ public class EditInfoServlet extends HttpServlet {
         try {
             if ("update".equalsIgnoreCase(mode) && "utente".equalsIgnoreCase(target)) {
                 // Modifica utente
-                String utenteEmail = request.getParameter("utente");
                 String firstName = request.getParameter("nomeNuovo");
                 String lastName = request.getParameter("cognomeNuovo");
                 String username = request.getParameter("usernameNuovo");
@@ -77,7 +78,7 @@ public class EditInfoServlet extends HttpServlet {
                 String passwordCheck = request.getParameter("passwordCheck");
 
                 UsersDAO dao = new UsersDAO();
-                UsersBean user = dao.doRetrieveByEmail(utenteEmail);
+                UsersBean user = dao.doRetrieveByEmail(email);
                 if (user == null) {
                     session.setAttribute("error", "Utente non trovato.");
                     response.sendRedirect("memberArea.jsp");
@@ -99,10 +100,8 @@ public class EditInfoServlet extends HttpServlet {
 
                 boolean updated = dao.doUpdate(user);
                 if (updated) {
-                    UsersBean updatedUser = dao.doRetrieveByEmail(utenteEmail);
-                    session.setAttribute("user", updatedUser);
+                    session.setAttribute("user", dao.doRetrieveByEmail(email));
                     session.setAttribute("message", "Dati aggiornati correttamente.");
-                    session.removeAttribute("error");
                 } else {
                     session.setAttribute("error", "Errore durante l'aggiornamento.");
                 }
@@ -111,38 +110,78 @@ public class EditInfoServlet extends HttpServlet {
                 return;
             }
 
-            if ("add".equalsIgnoreCase(mode) && "indirizzo".equalsIgnoreCase(target)) {
-                // Aggiunta indirizzo
-                String street = request.getParameter("street");
-                String streetNumber = request.getParameter("streetNumber");
-                String city = request.getParameter("city");
-                String province = request.getParameter("province");
-                String postalCode = request.getParameter("postalCode");
+            if ("add".equalsIgnoreCase(mode)) {
+                if ("indirizzo".equalsIgnoreCase(target)) {
+                    // Aggiunta indirizzo
+                    String street = request.getParameter("street");
+                    String streetNumber = request.getParameter("streetNumber");
+                    String city = request.getParameter("city");
+                    String province = request.getParameter("province");
+                    String postalCode = request.getParameter("postalCode");
 
-                AddressBean address = new AddressBean();
-                address.setUserEmail(email); // Collegato all'utente loggato
-                address.setStreet(street);
-                address.setStreetNumber(streetNumber);
-                address.setCity(city);
-                address.setProvince(province);
-                address.setPostalCode(postalCode);
+                    AddressBean address = new AddressBean();
+                    address.setUserEmail(email);
+                    address.setStreet(street);
+                    address.setStreetNumber(streetNumber);
+                    address.setCity(city);
+                    address.setProvince(province);
+                    address.setPostalCode(postalCode);
 
-                AddressDAO addrDAO = new AddressDAO();
-                addrDAO.doSave(address); // metodo void
+                    AddressDAO addrDAO = new AddressDAO();
+                    addrDAO.doSave(address);
 
-                session.setAttribute("message", "Indirizzo aggiunto con successo!");
-                response.sendRedirect("memberArea.jsp");
-                return;
+                    session.setAttribute("message", "Indirizzo aggiunto con successo!");
+                    response.sendRedirect("memberArea.jsp");
+                    return;
+                }
+
+                if ("metodoPagamento".equalsIgnoreCase(target)) {
+                    // Aggiunta metodo di pagamento
+                    String tipo = request.getParameter("type");
+                    String iban = request.getParameter("iban");
+                    String cardNumber = request.getParameter("cardNumber");
+                 
+                    PaymentMethodBean metodo = new PaymentMethodBean();
+                    metodo.setUserEmail(email);
+                    metodo.setType(tipo);
+
+                    if (tipo.equals("IBAN")) {
+                        if (iban == null || iban.trim().isEmpty()) {
+                            session.setAttribute("error", "IBAN non valido.");
+                            response.sendRedirect("info?mode=add&target=metodoPagamento");
+                            return;
+                        }
+                        metodo.setIban(iban);
+
+                    } else if (tipo.equals("CARD")) {
+                        if (cardNumber == null || cardNumber.trim().isEmpty()) {
+                            session.setAttribute("error", "Numero carta non valido.");
+                            response.sendRedirect("info?mode=add&target=metodoPagamento");
+                            return;
+                        }
+                        metodo.setCardNumber(cardNumber);
+                    }
+
+                    PaymentMethodDAO metodoDAO = new PaymentMethodDAO();
+                    metodoDAO.doSave(metodo);
+
+                    session.setAttribute("message", "Metodo di pagamento aggiunto con successo!");
+                    response.sendRedirect("memberArea.jsp");
+                    return;
+                }
             }
 
+            // Se non entra in nessuna condizione valida
             session.setAttribute("error", "Richiesta non valida.");
             response.sendRedirect("memberArea.jsp");
 
         } catch (Exception e) {
             e.printStackTrace();
-            session.setAttribute("error", "Eccezione: " + e.getMessage());
+            session.setAttribute("error", "Errore interno: " + e.getMessage());
             response.sendRedirect("memberArea.jsp");
         }
     }
+
+
 
 }
