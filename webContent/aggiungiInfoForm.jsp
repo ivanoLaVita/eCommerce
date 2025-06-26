@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="fragments/Header.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="fragments/Header.jsp" />
+<link rel="stylesheet" href="assets/css/style.css">
 
 <%
     String target = (String) request.getAttribute("target");
@@ -48,12 +48,13 @@
 
             <label for="postalCode">CAP:</label>
             <input type="text" name="postalCode" id="postalCode" required>
+
         <% } else if ("metodoPagamento".equals(target)) { %>
             <label for="type">Tipo di pagamento:</label>
             <select name="type" id="type" required onchange="toggleFields()">
                 <option value="">-- Seleziona --</option>
-                <option value="iban">IBAN</option>
-                <option value="carta">Carta</option>
+                <option value="IBAN">IBAN</option>
+                <option value="CARD">Carta</option>
             </select>
 
             <div id="ibanField" style="display:none;">
@@ -62,15 +63,15 @@
             </div>
 
             <div id="cardField" style="display:none;">
-                <label for="carta">Numero Carta:</label>
-                <input type="text" name="carta" id="carta">
+                <label for="cardNumber">Numero Carta:</label>
+                <input type="text" name="cardNumber" id="cardNumber">
             </div>
 
             <script>
                 function toggleFields() {
                     var tipo = document.getElementById("type").value;
-                    document.getElementById("ibanField").style.display = tipo === "iban" ? "block" : "none";
-                    document.getElementById("cardField").style.display = tipo === "carta" ? "block" : "none";
+                    document.getElementById("ibanField").style.display = tipo === "IBAN" ? "block" : "none";
+                    document.getElementById("cardField").style.display = tipo === "CARD" ? "block" : "none";
                 }
             </script>
         <% } %>
@@ -79,4 +80,4 @@
     </form>
 </div>
 
-<%@ include file="fragments/Footer.jsp" %>
+<jsp:include page="fragments/Footer.jsp" />

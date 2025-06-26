@@ -3,9 +3,10 @@
 <%@ page import="java.util.*, model.*" %>
 <%@ include file="fragments/Header.jsp" %>
 <link rel="stylesheet" href="assets/css/style.css">
+
 <%
-    //UsersBean user = (UsersBean) session.getAttribute("user");
     Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
+    //UsersBean user = (UsersBean) session.getAttribute("user");
     double totalCost = 0;
     ProductDAO productDAO = new ProductDAO();
 %>
@@ -68,17 +69,12 @@
                     }
                 %>
             </select>
-            <button type="button" class="button-secondary" onclick="toggleAddressForm()">Aggiungi nuovo indirizzo</button>
 
-            <div id="newAddressForm" style="display:none; margin-top:20px;">
-                <div class="single-input-item">
-                    <label>Città:</label><input type="text" name="newCity">
-                    <label>Provincia:</label><input type="text" name="newProvince">
-                    <label>CAP:</label><input type="text" name="newPostalCode">
-                    <label>Via:</label><input type="text" name="newStreet">
-                    <label>Civico:</label><input type="text" name="newStreetNumber">
-                </div>
-            </div>
+            <!-- ✅ Bottone per aggiungere nuovo indirizzo -->
+            <button type="button" class="button-secondary"
+                onclick="window.location.href='info?mode=add&target=indirizzo'">
+                Inserisci nuovo indirizzo
+            </button>
         </div>
 
         <!-- Metodo di pagamento -->
@@ -90,7 +86,7 @@
                     List<PaymentMethodBean> methods = payDAO.doRetrieveByEmail(user.getEmail());
                     for (PaymentMethodBean method : methods) {
                         String desc = method.getType().toString();
-                        if (method.getType().toString().equals("CARD")) {
+                        if (method.getType().equalsIgnoreCase("CARD")) {
                             desc += " - " + method.getCardNumber();
                         } else {
                             desc += " - " + method.getIban();
@@ -101,36 +97,17 @@
                     }
                 %>
             </select>
-            <button type="button" class="button-secondary" onclick="togglePaymentForm()">Aggiungi nuovo metodo</button>
 
-            <div id="newPaymentForm" style="display:none; margin-top:20px;">
-                <div class="single-input-item">
-                    <label>Tipo:</label>
-                    <select name="newPaymentType" class="styled-select">
-                        <option value="CARD">Carta</option>
-                        <option value="IBAN">IBAN</option>
-                    </select>
-                    <label>Numero Carta:</label><input type="text" name="newCardNumber">
-                    <label>IBAN:</label><input type="text" name="newIban">
-                </div>
-            </div>
+            <!-- ✅ Bottone per aggiungere nuovo metodo -->
+            <button type="button" class="button-secondary"
+                onclick="window.location.href='info?mode=add&target=metodoPagamento'">
+                Inserisci nuovo metodo
+            </button>
         </div>
 
         <input type="hidden" name="totalCost" value="<%=totalCost%>" />
         <input type="submit" class="button-primary" value="Conferma ordine" />
     </form>
 </div>
-
-<script>
-function toggleAddressForm() {
-    const form = document.getElementById('newAddressForm');
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
-}
-
-function togglePaymentForm() {
-    const form = document.getElementById('newPaymentForm');
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
-}
-</script>
 
 <%@ include file="fragments/Footer.jsp" %>
