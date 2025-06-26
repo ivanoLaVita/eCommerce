@@ -112,7 +112,7 @@
                                 </tr>
                                 <tr>
                                     <td>Totale</td>
-                                    <td id="netto">$<%= ordine.getTotalCost() %></td>
+                                    <td id="netto">$<%= ordine.getTotalCost() + 10 %></td>
                                 </tr>
                             </table>
                         </div>
