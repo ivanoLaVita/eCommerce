@@ -28,6 +28,9 @@
     <h2>AGGIUNGI PRODOTTO</h2>
     <form action="adminEditProduct" method="get">
         <input type="hidden" name="mode" value="add">
+        
+        <label for="Id">ID</label>
+	    <input type="text" id="id" name="id" required>
 
         <label for="name">Nome</label>
         <input type="text" id="name" name="name" required>
