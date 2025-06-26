@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, model.ProductBean, model.ProductDAO" %>
+<%@ page import="java.util.*, model.ProductBean, model.ProductDAO, model.UsersBean" %>
 <%@ include file="fragments/Header.jsp" %>
 
 <!DOCTYPE html>
@@ -111,7 +111,22 @@
 
         <div class="cart-actions">
             <button onclick="resetCart()">Svuota Carrello</button>
-            <a href="checkout.jsp" class="btn-acquista">Procedi al pagamento</a>
+            <%
+                // Verifica se l'utente è loggato
+                // Assumi che l'attributo di sessione "userLoggedIn" sia impostato a true quando l'utente effettua il login
+                // Esempio: session.setAttribute("userLoggedIn", true); in fase di login
+                UsersBean user = (UsersBean) session.getAttribute("user");
+                
+                if (user != null) {
+            %>
+                <a href="checkout.jsp" class="btn-acquista">Procedi al pagamento</a>
+            <%
+                } else {
+            %>
+                <a href="login.jsp" class="btn-acquista">Accedi per continuare</a>
+            <%
+                }
+            %>
         </div>
     <%
         }
