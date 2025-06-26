@@ -8,6 +8,7 @@
 
     Boolean logged = (Boolean) session.getAttribute("logged");
     if (logged == null) logged = false;
+    
 %>
 
 <header class="main-header">
@@ -35,7 +36,7 @@
                 <a href="<%= request.getContextPath() %>/logout" class="button-secondary">Logout</a>
             <% } %>
             <a href="<%= request.getContextPath() %>/cart.jsp" class="cart-icon">
-                🛒 <span class="cart-count"><%= session.getAttribute("cartSize") %></span>
+                🛒 <span class="cart-count"><%= cartSize %></span>
             </a>
         </div>
     </div>
