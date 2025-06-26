@@ -119,4 +119,5 @@
 
 <%@ include file="fragments/Footer.jsp" %>
 </body>
+<script src = js/cart.js></script>
 </html>

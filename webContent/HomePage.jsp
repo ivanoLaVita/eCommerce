@@ -103,4 +103,5 @@
 <jsp:include page="fragments/Footer.jsp" />
 
 </body>
+<script src = js/addedToCart.js ></script>
 </html>

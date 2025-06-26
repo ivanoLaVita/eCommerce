@@ -51,4 +51,5 @@
 
     <jsp:include page="fragments/Footer.jsp" />
 </body>
+<script src = js/registerValidation.js></script>
 </html>
