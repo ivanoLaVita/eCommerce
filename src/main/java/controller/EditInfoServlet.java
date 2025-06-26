@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import model.UsersBean;
 import model.UsersDAO;
 import utils.PasswordUtils;
@@ -12,7 +14,7 @@ import utils.PasswordUtils;
 @WebServlet("/info")
 public class EditInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

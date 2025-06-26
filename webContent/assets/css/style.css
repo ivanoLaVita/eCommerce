@@ -2097,3 +2097,8 @@ a.product-link:hover img {
 #page-content-modProd {
     background-color: #f8f9fa;
 }
+
+.cart-summary {
+    text-align: right;
+    margin-top: 1em;
+}
