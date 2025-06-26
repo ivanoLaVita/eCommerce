@@ -4,7 +4,7 @@
 <%@ include file="fragments/Header.jsp" %>
 <link rel="stylesheet" href="assets/css/style.css">
 <%
-    UsersBean user = (UsersBean) session.getAttribute("user");
+    //UsersBean user = (UsersBean) session.getAttribute("user");
     Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
     double totalCost = 0;
     ProductDAO productDAO = new ProductDAO();

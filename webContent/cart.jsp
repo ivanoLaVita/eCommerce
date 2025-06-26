@@ -115,7 +115,7 @@
                 // Verifica se l'utente è loggato
                 // Assumi che l'attributo di sessione "userLoggedIn" sia impostato a true quando l'utente effettua il login
                 // Esempio: session.setAttribute("userLoggedIn", true); in fase di login
-                UsersBean user = (UsersBean) session.getAttribute("user");
+                //UsersBean user = (UsersBean) session.getAttribute("user");
                 
                 if (user != null) {
             %>
