@@ -1,122 +1,72 @@
 package controller;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-import model.OrderBean;
-import model.OrderDAO;
-import model.OrderItemBean;
-import model.OrderItemDAO;
-import model.ProductBean;
-import model.ProductDAO;
+import jakarta.servlet.http.*;
+import model.*;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.sql.Date;
 import java.time.LocalDate;
-//import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @WebServlet("/OrdineServlet")
 public class OrderServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
-    public OrderServlet() {
-        super();
-    }
-
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        UsersBean user = (UsersBean) session.getAttribute("user");
+        Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
 
-        response.setContentType("text/plain");
-
-        if (request.getSession().getAttribute("logged") == null) {
-            request.getSession().setAttribute("error", "You must be logged in to place an order.");
-            response.getWriter().print("login.jsp");
-        } else {
-            request.getSession().setAttribute("totalCost", request.getParameter("totalCost"));
-            response.getWriter().print("checkout.jsp");
+        if (user == null || cart == null || cart.isEmpty()) {
+            response.sendRedirect("login.jsp");
+            return;
         }
-    }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        try {
+            double totalCost = Double.parseDouble(request.getParameter("totalCost"));
+            int addressId = Integer.parseInt(request.getParameter("addressId"));
+            int paymentId = Integer.parseInt(request.getParameter("paymentId"));
 
-        String redirectPath = null;
-
-        if (request.getSession().getAttribute("logged") == null) {
-            redirectPath = "login.jsp";
-        } else {
-            String userEmail = (String) request.getSession().getAttribute("userEmail");
-            String costString = (String) request.getSession().getAttribute("totalCost");
-            if (costString == null) costString = "0";
-            costString = costString.replace(",", ".");
-            double totalCost = Double.parseDouble(costString);
-
+            // 1. Inserimento ordine
             OrderDAO orderDAO = new OrderDAO();
+            OrderBean ordine = new OrderBean();
+            ordine.setUserEmail(user.getEmail());
+            ordine.setDate(LocalDate.now().toString());
+            ordine.setTotalCost(totalCost);
+            orderDAO.doSave(ordine);
+
+            // 2. Recupero ID ordine appena salvato
+            List<OrderBean> orders = orderDAO.doRetrieveByEmail(user.getEmail());
+            OrderBean lastOrder = orders.get(orders.size() - 1);
+            int orderId = lastOrder.getId();
+
+            // 3. Inserimento prodotti nel carrello nella tabella inserimento
             ProductDAO productDAO = new ProductDAO();
-            OrderItemDAO orderItemDAO = new OrderItemDAO();
+            InserimentoDAO inserimentoDAO = new InserimentoDAO();
+            for (Map.Entry<Integer, Integer> entry : cart.entrySet()) {
+                int productId = entry.getKey();
+                int quantity = entry.getValue();
+                ProductBean p = productDAO.doRetrieveById(productId);
 
-            try {
-                // Salva l'ordine
-                OrderBean order = new OrderBean();
-                order.setUserEmail(userEmail);
-                order.setTotalCost(totalCost);
-                order.setDate(LocalDate.now().toString());
-                orderDAO.doSave(order);
+                InserimentoBean ins = new InserimentoBean();
+                ins.setOrdineId(orderId);
+                ins.setProdottoId(productId);
+                ins.setQuantita(quantity);
+                ins.setNome(p.getName());
+                ins.setCosto((int) p.getPrice());
+                ins.setImmagine(p.getImage());
 
-                // Recupera l'ultimo ordine per l'utente (potresti usare getGeneratedKeys)
-                List<OrderBean> userOrders = orderDAO.doRetrieveByEmail(userEmail);
-                int orderId = userOrders.get(userOrders.size() - 1).getId();
-
-                // Salva i dettagli degli item dell’ordine
-                Map<String, Integer> cart = (Map<String, Integer>) request.getSession().getAttribute("cart");
-                if (cart != null) {
-                    for (Map.Entry<String, Integer> entry : cart.entrySet()) {
-                        String productId = entry.getKey();
-                        int quantity = entry.getValue();
-
-                        ProductBean product = productDAO.doRetrieveByKey(productId);
-                        if (product != null) {
-                            // salva inserimento
-                            OrderItemBean item = new OrderItemBean();
-                            item.setOrderId(orderId);
-                            item.setProductId(product.getId());
-                            item.setQuantity(quantity);
-                            item.setName(product.getName());
-                            item.setPrice(product.getPrice());
-                            item.setImage(product.getImage());
-                            orderItemDAO.doSave(item);
-
-                            // aggiorna quantità prodotto
-                            product.setQuantity(product.getQuantity() - quantity);
-                            productDAO.doUpdate(product);
-                        }
-                    }
-                }
-
-                // Pulisce sessione
-                request.getSession().removeAttribute("cart");
-                request.getSession().removeAttribute("totalCost");
-                response.sendRedirect("homePage.jsp");
-                return;
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                request.getSession().setAttribute("error", "Order processing error.");
-                redirectPath = "error.jsp";
+                inserimentoDAO.doSave(ins);
             }
-        }
 
-        if (redirectPath != null) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher(redirectPath);
-            dispatcher.forward(request, response);
+            // 4. Svuota il carrello e reindirizza
+            session.removeAttribute("cart");
+            response.sendRedirect("memberArea.jsp?success=order");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("errorPage.jsp?msg=Errore durante l'elaborazione dell'ordine");
         }
     }
 }
