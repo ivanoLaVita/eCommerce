@@ -272,4 +272,6 @@
 </div>
 <!--== Page Content Wrapper End ==-->
 <%@ include file="fragments/Footer.jsp" %>
-<script src = js/updateInfo></script>
+
+<script src ="js/updateInfo.js"></script>
+

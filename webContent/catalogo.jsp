@@ -58,6 +58,7 @@
             <form id="filter-form" action="<%= request.getContextPath() %>/catalog" method="post" class="filter-bar">
                 <div class="form-group-search">
                     <input type="search" id="search-input" name="search" placeholder="Cerca per nome..." class="search-field">
+                    <div id="searchResults"></div>
                 </div>
                 <div class="form-group-category">
                     <select id="category-select" name="category" class="category-select">
@@ -125,4 +126,5 @@
     <jsp:include page="fragments/Footer.jsp" />
 
 </body>
+ <script src="js/search.js"></script>
 </html>
